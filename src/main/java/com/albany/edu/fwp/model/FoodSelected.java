@@ -8,7 +8,7 @@ public class FoodSelected {
 	private long selectionId;	
     private int numberOfPlates;
     private String submitDateTime;
-    private int foodItemId;
+    private FoodItems foodItems;
     private Student student;    
     
  
@@ -38,12 +38,12 @@ public class FoodSelected {
         this.submitDateTime = submitDateTime;
     }
  
-    public float getFoodItemId() {
-        return foodItemId;
+    public FoodItems getFoodItems() {
+        return foodItems;
     }
  
-    public void setFoodItemId(int foodItemId) {
-        this.foodItemId = foodItemId;
+    public void setFoodItems(FoodItems foodItems) {
+        this.foodItems = foodItems;
     }
     
     public Student getStudent() {

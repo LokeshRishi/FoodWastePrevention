@@ -16,8 +16,8 @@
         <property name="submitDateTime" type="string">
         	<column name="SubmissionDate" length="10" not-null="true"/>
         </property>
-        <property name="foodItemId" type="java.lang.Integer">
-        	<column name="FoodItemID" length="11" not-null="true"/>
-        </property>
+        <many-to-one name="foodItems" class="com.albany.edu.fwp.model.FoodItems" fetch="select">
+            <column name="FoodItemID" not-null="true" />
+        </many-to-one> 
     </class> 
 </hibernate-mapping>

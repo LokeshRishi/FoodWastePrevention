@@ -8,7 +8,7 @@
         http://www.springframework.org/schema/tx/spring-tx.xsd">
         
     <bean id="studentActionBean" class="com.albany.edu.fwp.action.StudentAction">
-        <property name="studentDAO" ref="studentDAO" />
+        <property name="foodItemsDAO" ref="foodItemsDAO" />
     </bean>
     <bean id="managerActionBean" class="com.albany.edu.fwp.action.ManagerAction">
         <property name="studentDAO" ref="studentDAO" />
@@ -21,11 +21,17 @@
         <property name="studentDAO" ref="studentDAO" />
     </bean>
  
+	<bean id="foodItemsDAO" class="com.albany.edu.fwp.dao.FoodItemsDAOImpl">
+        <constructor-arg>
+            <ref bean="sessionFactory" />
+        </constructor-arg>
+    </bean> 
     <bean id="studentDAO" class="com.albany.edu.fwp.dao.StudentDAOImpl">
         <constructor-arg>
             <ref bean="sessionFactory" />
         </constructor-arg>
     </bean>
+    
  
     <bean id="sessionFactory"
         class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">

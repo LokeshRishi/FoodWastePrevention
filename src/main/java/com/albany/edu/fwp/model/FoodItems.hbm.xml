@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.albany.edu.fwp.model">
+    <class name="FoodItems" table="FoodItems">
+        <id name="foodItemId" type="java.lang.Integer" column="FoodItemID">
+        </id>
+        <property name="foodItemName" type="string">
+        	<column name="FoodItem_Name" length="100" not-null="true"/>
+        </property>
+        <property name="quadId" type="java.lang.Integer">
+        	<column name="Quad_ID" length="11" not-null="true"/>
+        </property>
+        <property name="relativeAmount" type="java.lang.Integer">
+        	<column name="Relative_Amount" length="11" not-null="true"/>
+        </property>
+        <property name="relativeServingPlates" type="java.lang.Integer">
+        	<column name="Relative_Serving_Plates" length="11" not-null="true"/>
+        </property>
+        <property name="imageId" type="java.lang.Integer">
+        	<column name="Image_ID" length="11" not-null="true"/>
+        </property>
+        <property name="calories" type="java.lang.Integer">
+        	<column name="Calories" length="11" not-null="true"/>
+        </property>
+        <property name="mealCourseId" type="java.lang.Integer">
+        	<column name="MealCourseID" length="11" not-null="true"/>
+        </property>
+        <property name="isSelectedInMenu" type="java.lang.Boolean">
+        	<column name="IsSelectedInMenu" length="11" not-null="true" default="false"/>
+        </property>
+        <set name="foodSelections" table="FoodSelected"
+				inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="FoodItemID" not-null="true" />
+            </key>
+            <one-to-many class="com.albany.edu.fwp.model.FoodSelected" />
+        </set>
+    </class> 
+</hibernate-mapping>

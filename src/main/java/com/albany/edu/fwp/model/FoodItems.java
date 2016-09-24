@@ -6,14 +6,14 @@ import java.util.Set;
 public class FoodItems {
     private int foodItemId;
     private String foodItemName;    
-    private int quadId;
     private int relativeAmount;
     private int relativeServingPlates;
-    private int imageId;
     private int calories;
-    private int mealCourseId;
     private boolean isSelectedInMenu;
     private Set<FoodSelected> foodSelections =	new HashSet<FoodSelected>(0);
+    private Images images;
+    private QuadInfo quadInfo;
+    private MealCourse mealCourse;
     
     
     
@@ -32,13 +32,13 @@ public class FoodItems {
 	public void setFoodItemName(String foodItemName) {
 		this.foodItemName = foodItemName;
 	}
-
-	public int getQuadId() {
-		return quadId;
+	
+	public QuadInfo getQuadInfo() {
+		return quadInfo;
 	}
 
-	public void setQuadId(int quadId) {
-		this.quadId = quadId;
+	public void setQuadInfo(QuadInfo quadInfo) {
+		this.quadInfo = quadInfo;
 	}
 
 	public int getRelativeAmount() {
@@ -56,14 +56,15 @@ public class FoodItems {
 	public void setRelativeServingPlates(int relativeServingPlates) {
 		this.relativeServingPlates = relativeServingPlates;
 	}
-
-	public int getImageId() {
-		return imageId;
+	
+	public Images getImages() {
+		return images;
 	}
 
-	public void setImageId(int imageId) {
-		this.imageId = imageId;
+	public void setImages(Images images) {
+		this.images = images;
 	}
+
 
 	public int getCalories() {
 		return calories;
@@ -72,13 +73,13 @@ public class FoodItems {
 	public void setCalories(int calories) {
 		this.calories = calories;
 	}
-
-	public int getMealCourseId() {
-		return mealCourseId;
+	
+	public MealCourse getMealCourse() {
+		return mealCourse;
 	}
 
-	public void setMealCourseId(int mealCourseId) {
-		this.mealCourseId = mealCourseId;
+	public void setMealCourse(MealCourse mealCourse) {
+		this.mealCourse = mealCourse;
 	}
    
     
@@ -97,6 +98,8 @@ public class FoodItems {
 	public void setIsSelectedInMenu(boolean isSelectedInMenu) {
 		this.isSelectedInMenu = isSelectedInMenu;
 	}
+
+	
 
 	
 }

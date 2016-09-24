@@ -1,0 +1,42 @@
+INSERT INTO quadinfo VALUES 
+(10,"Indian"),
+(20,"Dutch"),
+(30,"Colonial"),
+(40,"State");
+
+INSERT INTO mealcourse VALUES 
+(111,"Breakfast"),
+(222,"Lunch"),
+(333,"Dinner");
+
+INSERT INTO images VALUES 
+(100,"image1"),
+(200,"image2"),
+(300,"image3"),
+(400,"image4");
+
+INSERT INTO fooditems VALUES 
+(1,"Pasta",10,1,4,100,45,111,0),
+(2,"Pizza",10,1,4,100,75,111,1),
+(3,"Mac n Cheese",10,1,4,100,45,111,0),
+(4,"Cheese Burger",10,1,4,100,45,111,1),
+(5,"Ham Burger",10,1,4,100,45,111,0),
+(6,"Fries",10,1,4,100,45,111,1),
+(7,"Wedges",20,1,4,200,45,222,0),
+(8,"Pork Liom",20,1,4,200,45,222,1),
+(9,"Jerk Chicken",20,1,4,200,45,222,1),
+(10,"Beef Sloppy Joe",20,1,4,200,45,222,0),
+(11,"Orzo",20,1,4,200,45,222,1),
+(12,"Jasmine Rice",20,1,4,200,45,222,0),
+(13,"Zitti",30,1,4,300,45,333,1),
+(14,"Corns",30,1,4,300,45,333,0),
+(15,"Peas",30,1,4,300,45,333,1),
+(16,"Broccoli",30,1,4,300,45,333,0),
+(17,"Oat Meal",30,1,4,300,45,333,1),
+(18,"Turkey Sausage",30,1,4,300,45,333,0),
+(19,"Bacon",40,1,4,400,45,333,1),
+(20,"Wedges",40,1,4,400,45,333,0),
+(21,"Quesdilla",40,1,4,400,45,333,1),
+(22,"Cheese Toast",40,1,4,400,45,333,0),
+(23,"BBQ Chicken",40,1,4,400,45,333,1),
+(24,"Curry Chicken",40,1,4,400,45,333,0);

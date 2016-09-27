@@ -482,7 +482,7 @@
                 </div>
                 <!-- /Quad Section -->
                 </div>
-                <input type="button" value="Submit" class="btn btn-lg btn-block btn-warning" onclick="location.href='student_edit.jsp';" style="max-width: 265px; margin: 0 auto;">
+                <input type="button" value="Submit" class="btn btn-lg btn-block btn-warning" onclick="location.href='studentedit';" style="max-width: 265px; margin: 0 auto;">
             </form>
         </div>
     </div>

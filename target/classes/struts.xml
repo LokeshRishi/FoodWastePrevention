@@ -36,11 +36,9 @@
 			<result name="success">/WEB-INF/views/SetConfigurations.jsp</result>
 		</action>
 		
-		<action name="urlTagAction3" class="studentActionBean">
+		<action name="studentedit" class="studentActionBean">
             <result name="success">/WEB-INF/views/student_edit.jsp</result>
         </action>
 
-        
-         
     </package>
 </struts>

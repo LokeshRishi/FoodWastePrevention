@@ -10,9 +10,6 @@
     <mapping resource="com/albany/edu/fwp/model/Student.hbm.xml" />
     <mapping resource="com/albany/edu/fwp/model/FoodItems.hbm.xml" />
     <mapping resource="com/albany/edu/fwp/model/FoodSelected.hbm.xml" />
-    <mapping resource="com/albany/edu/fwp/model/Images.hbm.xml" />
-    <mapping resource="com/albany/edu/fwp/model/MealCourse.hbm.xml" />
-    <mapping resource="com/albany/edu/fwp/model/QuadInfo.hbm.xml" />
     
   </session-factory>
 </hibernate-configuration>

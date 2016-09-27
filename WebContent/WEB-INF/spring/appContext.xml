@@ -9,8 +9,6 @@
         
     <bean id="studentActionBean" class="com.albany.edu.fwp.action.StudentAction">
         <property name="foodItemsDAO" ref="foodItemsDAO" />
-        <property name="quadInfoDAO" ref="quadInfoDAO" />
-        <property name="mealCourseDAO" ref="mealCourseDAO" />
     </bean>
     <bean id="managerActionBean" class="com.albany.edu.fwp.action.ManagerAction">
         <property name="studentDAO" ref="studentDAO" />
@@ -24,40 +22,16 @@
     </bean>
  
 	<bean id="foodItemsDAO" class="com.albany.edu.fwp.dao.FoodItemsDAOImpl">
-        <constructor-arg index="0">
+        <constructor-arg>
             <ref bean="sessionFactory" />
         </constructor-arg>
-        <constructor-arg index="1">
-            <ref bean="quadInfoDAO" />
-        </constructor-arg>
-        <constructor-arg index="2">
-            <ref bean="mealCourseDAO" />
-        </constructor-arg>
-        <constructor-arg index="3">
-            <ref bean="imagesDAO" />
-        </constructor-arg>
-        
     </bean> 
     <bean id="studentDAO" class="com.albany.edu.fwp.dao.StudentDAOImpl">
         <constructor-arg>
             <ref bean="sessionFactory" />
         </constructor-arg>
     </bean>
-    <bean id="quadInfoDAO" class="com.albany.edu.fwp.dao.QuadInfoDAOImpl">
-        <constructor-arg>
-            <ref bean="sessionFactory" />
-        </constructor-arg>
-    </bean>
-    <bean id="mealCourseDAO" class="com.albany.edu.fwp.dao.MealCourseDAOImpl">
-        <constructor-arg>
-            <ref bean="sessionFactory" />
-        </constructor-arg>
-    </bean>
-    <bean id="imagesDAO" class="com.albany.edu.fwp.dao.ImagesDAOImpl">
-        <constructor-arg>
-            <ref bean="sessionFactory" />
-        </constructor-arg>
-    </bean>
+    
  
     <bean id="sessionFactory"
         class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
@@ -81,7 +55,7 @@
         <property name="driverClassName" value="com.mysql.jdbc.Driver" />
         <property name="url" value="jdbc:mysql://localhost:3306/fwp" />
         <property name="username" value="root" />
-        <property name="password" value="ellar" />
+        <property name="password" value="test123" />
     </bean>
  
     <tx:annotation-driven />

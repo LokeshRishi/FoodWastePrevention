@@ -8,25 +8,25 @@
         </id>
         <property name="foodItemName" type="string">
         	<column name="FoodItem_Name" length="100" not-null="true"/>
-        </property>  
-        <many-to-one name="quadInfo" class="com.albany.edu.fwp.model.QuadInfo" fetch="select">
-            <column name="Quad_ID" not-null="true" />
-        </many-to-one>       
+        </property>
+        <property name="quadId" type="java.lang.Integer">
+        	<column name="Quad_ID" length="11" not-null="true"/>
+        </property>
         <property name="relativeAmount" type="java.lang.Integer">
         	<column name="Relative_Amount" length="11" not-null="true"/>
         </property>
         <property name="relativeServingPlates" type="java.lang.Integer">
         	<column name="Relative_Serving_Plates" length="11" not-null="true"/>
-        </property>  
-        <many-to-one name="images" class="com.albany.edu.fwp.model.Images" fetch="select">
-            <column name="Image_ID" not-null="true" />
-        </many-to-one>       
+        </property>
+        <property name="imageId" type="java.lang.Integer">
+        	<column name="Image_ID" length="11" not-null="true"/>
+        </property>
         <property name="calories" type="java.lang.Integer">
         	<column name="Calories" length="11" not-null="true"/>
         </property>
-         <many-to-one name="mealCourse" class="com.albany.edu.fwp.model.MealCourse" fetch="select">
-            <column name="MealCourse_ID" not-null="true" />
-        </many-to-one> 
+        <property name="mealCourseId" type="java.lang.Integer">
+        	<column name="MealCourseID" length="11" not-null="true"/>
+        </property>
         <property name="isSelectedInMenu" type="java.lang.Boolean">
         	<column name="IsSelectedInMenu" length="11" not-null="true" default="false"/>
         </property>
@@ -37,8 +37,5 @@
             </key>
             <one-to-many class="com.albany.edu.fwp.model.FoodSelected" />
         </set>
-        
-       
-        
     </class> 
 </hibernate-mapping>

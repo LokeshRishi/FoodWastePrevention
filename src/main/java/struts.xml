@@ -21,25 +21,6 @@
         <action name="login" class="loginActionBean">
             <result name="success">/WEB-INF/views/login.jsp</result>
         </action>
-        <action name="addmanager" class="adminActionBean">
-            <result name="success">/WEB-INF/views/AddManager.jsp</result>
-        </action>
-        <action name="urlTagAction"	class="adminActionBean" >
-			<result name="success">/WEB-INF/views/AddManager.jsp</result>
-		</action>
-		
-		<action name="urlTagAction1" class="adminActionBean" >
-			<result name="success">/WEB-INF/views/ViewQuads.jsp</result>
-		</action>
-		
-		<action name="urlTagAction2" class="adminActionBean" >
-			<result name="success">/WEB-INF/views/SetConfigurations.jsp</result>
-		</action>
-		
-		<action name="urlTagAction3" class="studentActionBean">
-            <result name="success">/WEB-INF/views/student_edit.jsp</result>
-        </action>
-        
          
     </package>
 </struts>

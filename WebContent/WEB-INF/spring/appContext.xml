@@ -81,7 +81,7 @@
         <property name="driverClassName" value="com.mysql.jdbc.Driver" />
         <property name="url" value="jdbc:mysql://localhost:3306/fwp" />
         <property name="username" value="root" />
-        <property name="password" value="ellar" />
+        <property name="password" value="test123" />
     </bean>
  
     <tx:annotation-driven />

@@ -59,7 +59,7 @@ body {
 </style>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Course Description</title>
+<title>Admin Panel</title>
 </head>
 <body>
  
@@ -103,15 +103,7 @@ document.getElementById("frame2").style.marginLeft = "0";
 document.body.style.backgroundColor = "white"; 
 }
  
-function Chemisrty() {
-	document.getElementById('frame2').src = 'AddManager.jsp';
-}
-function Json() {
-	document.getElementById('frame2').src = 'ViewQuads.jsp';
-}
-function Physics() {
-	document.getElementById('frame2').src = 'SetConfigurations.jsp';
-}
+
 
 </script>
 

@@ -40,23 +40,23 @@ public class StudentAction extends ActionSupport {
     public String execute() {
     	listFoodItems = foodItemsDAO.list();
 		System.out.println("listFoodItems: " + listFoodItems);    		
-		for (FoodItems foodItem : listFoodItems){
-		    System.out.println("Quad Ids: "+ foodItem.getImages().getImageId());
-		}
-		
-		listQuad = quadInfoDAO.list();
-		for (QuadInfo quad : listQuad){
-			quadNames.add(quad.getQuadName());
-		}
-		
-		listMealCourse = mealCourseDAO.list();
-		for (MealCourse mealCourse : listMealCourse){
-			mealCourseNames.add(mealCourse.getMealCourseName());
-		}
-    	allFoodItems = foodItemsDAO.getAllFoodItemsMap();     
-    	for (List foodItem : allFoodItems.get("Indian").get("Breakfast")){
-		    System.out.println("Quad Ids: "+ foodItem);
-		}
+//		for (FoodItems foodItem : listFoodItems){
+//		    System.out.println("Quad Ids: "+ foodItem.getImages().getImageId());
+//		}
+//		
+//		listQuad = quadInfoDAO.list();
+//		for (QuadInfo quad : listQuad){
+//			quadNames.add(quad.getQuadName());
+//		}
+//		
+//		listMealCourse = mealCourseDAO.list();
+//		for (MealCourse mealCourse : listMealCourse){
+//			mealCourseNames.add(mealCourse.getMealCourseName());
+//		}
+//    	allFoodItems = foodItemsDAO.getAllFoodItemsMap();     
+//    	for (List foodItem : allFoodItems.get("Indian").get("Breakfast")){
+//		    System.out.println("Quad Ids: "+ foodItem);
+//		}
         return SUCCESS;
     }
 

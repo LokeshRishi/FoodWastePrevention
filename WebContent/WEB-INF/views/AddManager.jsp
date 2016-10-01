@@ -15,7 +15,7 @@ ManagerID:<input type="text" name="managerid">
 <br/><br/>
 Quad:<input type="text" name="managerquad">
 <br/><br/>
-Name:<input type="text" name="manageremail">
+Quad ID:<input type="text" name="manageremail">
 <br/><br/>
 <input type="submit" value="Add Manager">
 </body>

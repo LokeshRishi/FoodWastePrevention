@@ -59,7 +59,7 @@ body {
 </style>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Admin Panel</title>
+<title>Course Description</title>
 </head>
 <body>
  
@@ -73,9 +73,8 @@ body {
 </div>
  
 <div id="main">
-  <h2>Course Description</h2>
-  <p>Click For Options</p>
-  <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; open</span> 
+  <h2>System Admin</h2>
+  <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span> 
 </div>
  
 <div id="h_iframe1">
@@ -103,7 +102,15 @@ document.getElementById("frame2").style.marginLeft = "0";
 document.body.style.backgroundColor = "white"; 
 }
  
-
+function Chemisrty() {
+	document.getElementById('frame2').src = 'AddManager.jsp';
+}
+function Json() {
+	document.getElementById('frame2').src = 'ViewQuads.jsp';
+}
+function Physics() {
+	document.getElementById('frame2').src = 'SetConfigurations.jsp';
+}
 
 </script>
 

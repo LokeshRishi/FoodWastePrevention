@@ -9,17 +9,27 @@
 <body>
 <h1>VIEW QUADS</h1>
 <hr>
-<form action="ViewQuads.jsp">
-	<select name="quads">
-	<option>Indian Quad</option>
-	<option>State Quad</option>
-	<option>Dutch Quad</option>
-	<option>Colonial Quad</option>
-	</select>
-	<br/><br/>
-	<input type="submit" value="View Quads">
-	<br/><br/>
-	The Selected QuaD is:${param.quads}
+<form action="urlTagAction1">
+	<select name="quads" id="mySelect"  onchange="copy();">
+		<option>Indian Quad</option>
+		<option>State Quad</option>
+		<option>Dutch Quad</option>
+		<option>Colonial Quad</option>
+		</select>
+		<br/><br/>
+		<!-- <input type="submit" value="View"> -->
+		<br/><br/>
+	</select>	
+	<div id="label"></div>
 </form>
+
+<script>
+
+
+function copy() { document.getElementById("label").innerHTML=document.getElementById("mySelect").value
+}
+
+</script>
+
 </body>
 </html>

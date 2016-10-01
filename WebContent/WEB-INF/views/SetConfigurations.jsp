@@ -9,9 +9,9 @@
 <body>
 <h1>SET CONFIGURATIONS</h1>
 <hr>
-Set Student Configuration:<input type="text" name="managerquad">
+Food Selection Deadline:<input type="time" name="managerquad">
 <br/><br/>
-Set Manager configuration:<input type="text" name="manageremail">
+Food Uploading Deadline:<input type="time" name="manageremail">
 <br/><br/>
 <input type="submit" value="Set Config">
 

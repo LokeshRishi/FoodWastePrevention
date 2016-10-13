@@ -67,3 +67,13 @@ INSERT INTO fooditems VALUES
 (21,"Quesdilla",40,1,4,20,45,333,1),
 (22,"Cheese Toast",40,1,4,28,45,222,1),
 (23,"BBQ Chicken",40,1,4,5,45,333,1);
+
+
+
+
+Commands for Demo only
+insert into quadinfo values(50,"Alumini");
+insert into fooditems values(24,"Pasta",50,1,4,9,45,111,1);
+
+delete from fooditems where fooditemid=24;
+delete from quadinfo where quad_id=50;

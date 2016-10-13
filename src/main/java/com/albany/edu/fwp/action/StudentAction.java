@@ -23,8 +23,8 @@ public class StudentAction extends ActionSupport {
     private List<FoodItems> listFoodItems;
     private List<QuadInfo> listQuad;
     private List<MealCourse> listMealCourse;
-    private List<String> quadNames = new ArrayList<String>();
-    private List<String> mealCourseNames = new ArrayList<String>();
+    private List<String> quadNames;
+    private List<String> mealCourseNames;
     private HashMap<String, HashMap<String, List<List<String>>>> allFoodItems;
  
     public void setFoodItemsDAO(FoodItemsDAO foodItemsDAO) {
@@ -38,32 +38,36 @@ public class StudentAction extends ActionSupport {
 	}
  
     public String execute() {
-    	listFoodItems = foodItemsDAO.list();
-		System.out.println("listFoodItems: " + listFoodItems);    		
+//    	listFoodItems = foodItemsDAO.list();
+//		System.out.println("listFoodItems: " + listFoodItems);    		
 //		for (FoodItems foodItem : listFoodItems){
 //		    System.out.println("Quad Ids: "+ foodItem.getImages().getImageId());
 //		}
-//		
-//		listQuad = quadInfoDAO.list();
-//		for (QuadInfo quad : listQuad){
-//			quadNames.add(quad.getQuadName());
-//		}
-//		
-//		listMealCourse = mealCourseDAO.list();
-//		for (MealCourse mealCourse : listMealCourse){
-//			mealCourseNames.add(mealCourse.getMealCourseName());
-//		}
-//    	allFoodItems = foodItemsDAO.getAllFoodItemsMap();     
-//    	for (List foodItem : allFoodItems.get("Indian").get("Breakfast")){
-//		    System.out.println("Quad Ids: "+ foodItem);
-//		}
+		
+		listQuad = quadInfoDAO.list();
+		quadNames = new ArrayList<String>();
+			for (QuadInfo quad : listQuad){
+				quadNames.add(quad.getQuadName());
+			}
+		
+		
+		listMealCourse = mealCourseDAO.list();
+		mealCourseNames = new ArrayList<String>();
+			for (MealCourse mealCourse : listMealCourse){
+				mealCourseNames.add(mealCourse.getMealCourseName());
+			}
+		
+    	allFoodItems = foodItemsDAO.getAllFoodItemsMap();     
+    	for (List foodItem : allFoodItems.get("Indian").get("Breakfast")){
+		    System.out.println("Quad Ids: "+ foodItem);
+		}
         return SUCCESS;
     }
 
     
-	public List<FoodItems> getListFoodItems() {
-		return listFoodItems;
-	}
+//	public List<FoodItems> getListFoodItems() {
+//		return listFoodItems;
+//	}
 	
 	public List<String> getQuadNames() {
 		  return quadNames;

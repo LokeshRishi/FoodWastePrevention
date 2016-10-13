@@ -1,3 +1,7 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib  prefix="s" uri="/struts-tags" %>   
+<%@taglib  prefix="bean" uri="http://struts.apache.org/tags-bean" %>
+<%@taglib prefix="logic" uri="http://struts.apache.org/tags-logic" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -87,6 +91,26 @@
             </div>
         </div>
     </header>
+    
+        
+
+	
+	<!-- 
+	 <s:iterator value="quadNames" var="quadName" status="stat">
+         <s:property value="quadName" />
+     
+     
+	     <s:iterator value="mealCourseNames" var="mealCourseName" status="stat">
+	          <s:property value="mealCourseName"  />
+	          
+			   	 <s:iterator value="allFoodItems[#quadName][#mealCourseName]" var="myvar" status="stat">
+			        <s:property value="#myvar[0]" />
+			        <s:property value="#myvar[1]" />
+			   	 </s:iterator>			   	  
+			   	 		   	 
+   	 	 </s:iterator> 
+   	 </s:iterator>
+   	 -->
 
     <!-- Portfolio Grid Section -->
     <section id="portfolio">
@@ -97,392 +121,63 @@
                     <hr class="star-primary">
                 </div>
             </div>
+            
             <div class="row">
-            
-
             <form id="foodSelector">
-                <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
-            
-                <!-- Quad Section -->
-                <div class="panel price panel-red">
-                    <div class="panel-heading  text-center">
-                        <h3>Indian Quad</h3>
-                    </div>
-                    <div class="panel-body text-center">
-                        <p class="lead" style="font-size:40px"><strong>$10 off!</strong></p>
-                    </div>
-                    <ul class="list-group list-group-flush text-center">
-                    
-                    <li class="list-group-item" data-toggle="tooltip" data-placement="left" title="Breakfast">
-                        <div class="btn-group hover_img">
-                            <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
-                                Burger<span><img src="/foodwasteprevention/resources/img/burger.png" alt="image" height="100" /></span> <span class="caret"></span>
-                            </button>
-
-                             <ul class="dropdown-menu" role="menu">
-                                <li class="dropdown-plus-title">
-                                    piece(s)
-                                    <b class="pull-right glyphicon glyphicon-chevron-up"></b>
-                                </li>
-                                <li><input type="radio" name="radioB" value="radio1" /><label id="dropdown-label">1</label></li>
-                                <li><input type="radio" name="radioB" value="radio2" /><label id="dropdown-label">2</label></li>
-                                <li><input type="radio" name="radioB" value="radio3" /><label id="dropdown-label">4</label></li>
-                                <li><input type="radio" name="radioB" value="radio4" /><label id="dropdown-label">6</label></li>
-                            </ul>
-                        </div>
-
-                        <div class="btn-group hover_img">
-                            <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
-                                Pasta<span><img src="/foodwasteprevention/resources/img/pasta.png" alt="image" height="100" /></span><span class="caret"></span>
-                            </button>
-                             <ul class="dropdown-menu" role="menu">
-                                <li class="dropdown-plus-title">
-                                    scoop(s)
-                                    <b class="pull-right glyphicon glyphicon-chevron-up"></b>
-                                </li>
-                                <li><input type="radio" name="radioB" value="radio1" /><label id="dropdown-label">1</label></li>
-                                <li><input type="radio" name="radioB" value="radio2" /><label id="dropdown-label">2</label></li>
-                                <li><input type="radio" name="radioB" value="radio3" /><label id="dropdown-label">4</label></li>
-                                <li><input type="radio" name="radioB" value="radio4" /><label id="dropdown-label">6</label></li>
-                            </ul>
-                        </div>
-
-                        <div class="btn-group hover_img">
-                            <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
-                                Corns<span><img src="/foodwasteprevention/resources/img/corn.png" alt="image" height="100" /></span><span class="caret"></span>
-                            </button>
-                             <ul class="dropdown-menu" role="menu">
-                                <li class="dropdown-plus-title">
-                                    scoop(s)
-                                    <b class="pull-right glyphicon glyphicon-chevron-up"></b>
-                                </li>
-                                <li><input type="radio" name="radioB" value="radio1" /><label id="dropdown-label">1</label></li>
-                                <li><input type="radio" name="radioB" value="radio2" /><label id="dropdown-label">2</label></li>
-                                <li><input type="radio" name="radioB" value="radio3" /><label id="dropdown-label">4</label></li>
-                                <li><input type="radio" name="radioB" value="radio4" /><label id="dropdown-label">6</label></li>
-                            </ul>
-                        </div>
-
-                    </li>
-
-                    <li class="list-group-item"  data-toggle="tooltip" data-placement="left" title="Lunch">
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
-                                Spaghetti <span class="caret"></span>
-                            </button>
-                             <ul class="dropdown-menu" role="menu">
-                                <li class="dropdown-plus-title">
-                                    scoop(s)
-                                    <b class="pull-right glyphicon glyphicon-chevron-up"></b>
-                                </li>
-                                <li><input type="radio" name="radioL" value="radio1" /><label id="dropdown-label">1</label></li>
-                                <li><input type="radio" name="radioL" value="radio2" /><label id="dropdown-label">2</label></li>
-                                <li><input type="radio" name="radioL" value="radio3" /><label id="dropdown-label">4</label></li>
-                                <li><input type="radio" name="radioL" value="radio4" /><label id="dropdown-label">6</label></li>
-                            </ul>
-                        </div>
-                    </li>
-
-                    <li class="list-group-item" data-toggle="tooltip" data-placement="left" title="Dinner">
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
-                                Oats <span class="caret"></span>
-                            </button>
-                             <ul class="dropdown-menu" role="menu">
-                                <li class="dropdown-plus-title">
-                                    scoop(s)
-                                    <b class="pull-right glyphicon glyphicon-chevron-up"></b>
-                                </li>
-                                <li><input type="radio" name="radioD" value="radio1" /><label id="dropdown-label">1</label></li>
-                                <li><input type="radio" name="radioD" value="radio2" /><label id="dropdown-label">2</label></li>
-                                <li><input type="radio" name="radioD" value="radio3" /><label id="dropdown-label">4</label></li>
-                                <li><input type="radio" name="radioD" value="radio4" /><label id="dropdown-label">6</label></li>
-                            </ul>
-                        </div>
-                    </li>
-
-                    </ul>
-                    <div class="panel-footer">
-                        <!-- <a class="btn btn-lg btn-block btn-danger" href="#">Confirm </a> -->
-                    </div>
-                </div>
-                <!-- /Quad Section -->
-            </div>
-                    
-                    
-                <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
-            
-                <!-- Quad Section -->
-                <div class="panel price panel-blue">
-                    <div class="panel-heading arrow_box text-center">
-                    <h3>Dutch Quad</h3>
-                    </div>
-                    <div class="panel-body text-center">
-                        <p class="lead" style="font-size:40px"><strong>$20 off!</strong></p>
-                    </div>
-                    <ul class="list-group list-group-flush text-center">
-                    <li class="list-group-item"  data-toggle="tooltip" data-placement="left" title="Breakfast">
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
-                                Pizza <span class="caret"></span>
-                            </button>
-                             <ul class="dropdown-menu" role="menu">
-                                <li class="dropdown-plus-title">
-                                    piece(s)
-                                    <b class="pull-right glyphicon glyphicon-chevron-up"></b>
-                                </li>
-                                <li><input type="radio" name="radioB" value="radio1" /><label id="dropdown-label">1</label></li>
-                                <li><input type="radio" name="radioB" value="radio2" /><label id="dropdown-label">2</label></li>
-                                <li><input type="radio" name="radioB" value="radio3" /><label id="dropdown-label">4</label></li>
-                                <li><input type="radio" name="radioB" value="radio4" /><label id="dropdown-label">6</label></li>
-                            </ul>
-                        </div>
-                    </li>
-
-                    <li class="list-group-item" data-toggle="tooltip" data-placement="left" title="Lunch">
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
-                                Peas <span class="caret"></span>
-                            </button>
-                             <ul class="dropdown-menu" role="menu">
-                                <li class="dropdown-plus-title">
-                                    scoop(s)
-                                    <b class="pull-right glyphicon glyphicon-chevron-up"></b>
-                                </li>
-                                <li><input type="radio" name="radioL" value="radio1" /><label id="dropdown-label">1</label></li>
-                                <li><input type="radio" name="radioL" value="radio2" /><label id="dropdown-label">2</label></li>
-                                <li><input type="radio" name="radioL" value="radio3" /><label id="dropdown-label">4</label></li>
-                                <li><input type="radio" name="radioL" value="radio4" /><label id="dropdown-label">6</label></li>
-                            </ul>
-                        </div>
-                    </li>
-
-                    <li class="list-group-item" data-toggle="tooltip" data-placement="left" title="Dinner">
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
-                                BBQ Chicken <span class="caret"></span>
-                            </button>
-                             <ul class="dropdown-menu" role="menu">
-                                <li class="dropdown-plus-title">
-                                    scoop(s)
-                                    <b class="pull-right glyphicon glyphicon-chevron-up"></b>
-                                </li>
-                                <li><input type="radio" name="radioD" value="radio1" /><label id="dropdown-label">1</label></li>
-                                <li><input type="radio" name="radioD" value="radio2" /><label id="dropdown-label">2</label></li>
-                                <li><input type="radio" name="radioD" value="radio3" /><label id="dropdown-label">4</label></li>
-                                <li><input type="radio" name="radioD" value="radio4" /><label id="dropdown-label">6</label></li>
-                            </ul>
-                        </div>
-                    </li>
-
-                    </ul>
-                    <div class="panel-footer">
-                        <!-- <a class="btn btn-lg btn-block btn-info" href="#">Confirm</a> -->
-                    </div>
-                </div>
-                <!-- /Quad Section --> 
-            </div>
-
-                    
-
-            <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
-            
-                <!-- Quad Section -->
-                <div class="panel price panel-green">
-                    <div class="panel-heading arrow_box text-center">
-                    <h3>Colonial Quad</h3>
-                    </div>
-                    <div class="panel-body text-center">
-                        <p class="lead" style="font-size:40px"><strong>$0 off!</strong></p>
-                    </div>
-                    <ul class="list-group list-group-flush text-center">
-                    <li class="list-group-item" data-toggle="tooltip" data-placement="left" title="Breakfast">
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
-                                Wedges <span class="caret"></span>
-                            </button>
-                             <ul class="dropdown-menu" role="menu">
-                                <li class="dropdown-plus-title">
-                                    scoop(s)
-                                    <b class="pull-right glyphicon glyphicon-chevron-up"></b>
-                                </li>
-                                <li><input type="radio" name="radioB" value="radio1" /><label id="dropdown-label">1</label></li>
-                                <li><input type="radio" name="radioB" value="radio2" /><label id="dropdown-label">2</label></li>
-                                <li><input type="radio" name="radioB" value="radio3" /><label id="dropdown-label">4</label></li>
-                                <li><input type="radio" name="radioB" value="radio4" /><label id="dropdown-label">6</label></li>
-                            </ul>
-                        </div>
-                    </li>
-
-                    <li class="list-group-item" data-toggle="tooltip" data-placement="left" title="Lunch">
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
-                                Spaghetti <span class="caret"></span>
-                            </button>
-                             <ul class="dropdown-menu" role="menu">
-                                <li class="dropdown-plus-title">
-                                    scoop(s)
-                                    <b class="pull-right glyphicon glyphicon-chevron-up"></b>
-                                </li>
-                                <li><input type="radio" name="radioL" value="radio1" /><label id="dropdown-label">1</label></li>
-                                <li><input type="radio" name="radioL" value="radio2" /><label id="dropdown-label">2</label></li>
-                                <li><input type="radio" name="radioL" value="radio3" /><label id="dropdown-label">4</label></li>
-                                <li><input type="radio" name="radioL" value="radio4" /><label id="dropdown-label">6</label></li>
-                            </ul>
-                        </div>
-
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
-                                Lasagna <span class="caret"></span>
-                            </button>
-                             <ul class="dropdown-menu" role="menu">
-                                <li class="dropdown-plus-title">
-                                    scoop(s)
-                                    <b class="pull-right glyphicon glyphicon-chevron-up"></b>
-                                </li>
-                                <li><input type="radio" name="radioL" value="radio1" /><label id="dropdown-label">1</label></li>
-                                <li><input type="radio" name="radioL" value="radio2" /><label id="dropdown-label">2</label></li>
-                                <li><input type="radio" name="radioL" value="radio3" /><label id="dropdown-label">4</label></li>
-                                <li><input type="radio" name="radioL" value="radio4" /><label id="dropdown-label">6</label></li>
-                            </ul>
-                        </div>
-
-                    </li>
-
-                    <li class="list-group-item" data-toggle="tooltip" data-placement="left" title="Dinner">
-                        <div class="btn-group hover_img">
-                            <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
-                                Fries<span><img src="/foodwasteprevention/resources/img/fries.png" alt="image" height="100" /></span><span class="caret"></span>
-                            </button>
-                             <ul class="dropdown-menu" role="menu">
-                                <li class="dropdown-plus-title">
-                                    bag(s)
-                                    <b class="pull-right glyphicon glyphicon-chevron-up"></b>
-                                </li>
-                                <li><input type="radio" name="radioD" value="radio1" /><label id="dropdown-label">1</label></li>
-                                <li><input type="radio" name="radioD" value="radio2" /><label id="dropdown-label">2</label></li>
-                                <li><input type="radio" name="radioD" value="radio3" /><label id="dropdown-label">4</label></li>
-                                <li><input type="radio" name="radioD" value="radio4" /><label id="dropdown-label">6</label></li>
-                            </ul>
-                        </div>
-                    </li>
-
-                    </ul>
-                    <div class="panel-footer">
-                        <!-- <a class="btn btn-lg btn-block btn-success" href="#">Confirm</a> -->
-                    </div>
-                </div>
-                <!-- /Quad Section -->
-                
-                
-                </div>
-            
-                <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
-            
-                <!-- Quad Section -->
-                <div class="panel price panel-grey">
-                    <div class="panel-heading arrow_box text-center">
-                    <h3>State Quad</h3>
-                    </div>
-                    <div class="panel-body text-center">
-                        <p class="lead" style="font-size:40px"><strong>$3 off!</strong></p>
-                    </div>
-                    <ul class="list-group list-group-flush text-center">
-                    <li class="list-group-item" data-toggle="tooltip" data-placement="left" title="Breakfast">
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                                Zitti <span class="caret"></span>
-                            </button>
-                             <ul class="dropdown-menu" role="menu">
-                                <li class="dropdown-plus-title">
-                                    scoop(s)
-                                    <b class="pull-right glyphicon glyphicon-chevron-up"></b>
-                                </li>
-                                <li><input type="radio" name="radioB" value="radio1" /><label id="dropdown-label">1</label></li>
-                                <li><input type="radio" name="radioB" value="radio2" /><label id="dropdown-label">2</label></li>
-                                <li><input type="radio" name="radioB" value="radio3" /><label id="dropdown-label">4</label></li>
-                                <li><input type="radio" name="radioB" value="radio4" /><label id="dropdown-label">6</label></li>
-                            </ul>
-                        </div>
-                    </li>
-
-                    <li class="list-group-item" data-toggle="tooltip" data-placement="left" title="Lunch">
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                                Orzo <span class="caret"></span>
-                            </button>
-                             <ul class="dropdown-menu" role="menu">
-                                <li class="dropdown-plus-title">
-                                    scoop(s)
-                                    <b class="pull-right glyphicon glyphicon-chevron-up"></b>
-                                </li>
-                                <li><input type="radio" name="radioL" value="radio1" /><label id="dropdown-label">1</label></li>
-                                <li><input type="radio" name="radioL" value="radio2" /><label id="dropdown-label">2</label></li>
-                                <li><input type="radio" name="radioL" value="radio3" /><label id="dropdown-label">4</label></li>
-                                <li><input type="radio" name="radioL" value="radio4" /><label id="dropdown-label">6</label></li>
-                            </ul>
-                        </div>
-                    </li>
-
-                    <li class="list-group-item">
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                                Pasta <span class="caret"></span>
-                            </button>
-                             <ul class="dropdown-menu" role="menu">
-                                <li class="dropdown-plus-title">
-                                    Scoop(s)
-                                    <b class="pull-right glyphicon glyphicon-chevron-up"></b>
-                                </li>
-                                <li><input type="radio" name="radioL" value="radio1" /><label id="dropdown-label">1</label></li>
-                                <li><input type="radio" name="radioL" value="radio2" /><label id="dropdown-label">2</label></li>
-                                <li><input type="radio" name="radioL" value="radio3" /><label id="dropdown-label">4</label></li>
-                                <li><input type="radio" name="radioL" value="radio4" /><label id="dropdown-label">6</label></li>
-                            </ul>
-                        </div>
-
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                                Burger <span class="caret"></span>
-                            </button>
-                             <ul class="dropdown-menu" role="menu">
-                                <li class="dropdown-plus-title">
-                                    piece(s)
-                                    <b class="pull-right glyphicon glyphicon-chevron-up"></b>
-                                </li>
-                                <li><input type="radio" name="radioD" value="radio1" /><label id="dropdown-label">1</label></li>
-                                <li><input type="radio" name="radioD" value="radio2" /><label id="dropdown-label">2</label></li>
-                                <li><input type="radio" name="radioD" value="radio3" /><label id="dropdown-label">4</label></li>
-                                <li><input type="radio" name="radioD" value="radio4" /><label id="dropdown-label">6</label></li>
-                            </ul>
-                        </div>
-
-                        <div class="btn-group hover_img">
-                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                                Oats<span><img src="/foodwasteprevention/resources/img/oats.png" alt="image" height="100" /></span><span class="caret"></span>
-                            </button>
-                             <ul class="dropdown-menu" role="menu">
-                                <li class="dropdown-plus-title">
-                                    scoop(s)
-                                    <b class="pull-right glyphicon glyphicon-chevron-up"></b>
-                                </li>
-                                <li><input type="radio" name="radioD" value="radio1" /><label id="dropdown-label">1</label></li>
-                                <li><input type="radio" name="radioD" value="radio2" /><label id="dropdown-label">2</label></li>
-                                <li><input type="radio" name="radioD" value="radio3" /><label id="dropdown-label">4</label></li>
-                                <li><input type="radio" name="radioD" value="radio4" /><label id="dropdown-label">6</label></li>
-                            </ul>
-                        </div>
-
-                    </li>
-
-                    </ul>
-                    <div class="panel-footer">
-                        <!-- <a class="btn btn-lg btn-block btn-primary" href="#">Confirm</a> -->
-                    </div>
-                </div>
-                <!-- /Quad Section -->
-                </div>
-                <input type="button" value="Submit" class="btn btn-lg btn-block btn-warning" onclick="location.href='studentedit';" style="max-width: 265px; margin: 0 auto;">
+            		<s:iterator value="quadNames" var="quadName" status="stat">
+	                <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">	            
+	                <!-- Quad Section -->	                
+	                <div class="panel price panel-red">
+	                    <div class="panel-heading  text-center">
+	                        <h3><s:property value="quadName" /></h3>
+	                    </div>
+	                    <div class="panel-body text-center">
+	                        <p class="lead" style="font-size:40px"><strong>$10 off!</strong></p>
+	                    </div>
+	                    <ul class="list-group list-group-flush text-center">	                    	
+		                    <s:iterator value="mealCourseNames" var="mealCourseName" status="stat">
+		                    	<li class="list-group-item" data-toggle="tooltip" data-placement="left" title=<s:property value="mealCourseName"/>>
+		                    	<s:if test="%{allFoodItems[#quadName][#mealCourseName].isEmpty()}">			                    	
+				                        <p class="lead" style="font-size:20px"><strong>Sorry! No ${mealCourseName}</strong></p>				                    
+		                    	</s:if>
+		                    	<s:else>
+			                    
+			                        <s:iterator value="allFoodItems[#quadName][#mealCourseName]" var="myvar" status="stat">
+				                        <div class="btn-group hover_img">
+				                            <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
+				                            	<s:property value="#myvar[0]" /><span><img src=<s:property value="#myvar[1]"/> alt="image" height="100" /></span> <span class="caret"></span>
+				                            </button>
+				
+				                             <ul class="dropdown-menu" role="menu">
+				                                <li class="dropdown-plus-title">
+				                                    piece(s)
+				                                    <b class="pull-right glyphicon glyphicon-chevron-up"></b>
+				                                </li>
+				                                <li><input type="radio" name="radioB" value="radio1" /><label id="dropdown-label">1</label></li>
+				                                <li><input type="radio" name="radioB" value="radio2" /><label id="dropdown-label">2</label></li>
+				                                <li><input type="radio" name="radioB" value="radio3" /><label id="dropdown-label">4</label></li>
+				                                <li><input type="radio" name="radioB" value="radio4" /><label id="dropdown-label">6</label></li>
+				                            </ul>
+				                        </div>
+			                        </s:iterator>	
+			                    </s:else>    
+			                    </li>
+			                    
+		                    </s:iterator>
+		                   
+	                    </ul>
+	                    <div class="panel-footer">
+	                        <!-- <a class="btn btn-lg btn-block btn-danger" href="#">Confirm </a> -->
+	                    </div>
+	                </div>
+	                <!-- /Quad Section -->
+	            </div>
+	            </s:iterator>
+	            <div class="row">
+	            	<div class="col-lg-12 text-center">
+	             		<input type="button" value="Submit" class="btn btn-lg btn-block btn-warning" onclick="location.href='studentedit';" style="max-width: 265px; margin: 0 auto;">
+	             	</div>
+	            </div>
             </form>
         </div>
     </div>

@@ -59,7 +59,7 @@ body {
 </style>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Course Description</title>
+<title>Admin</title>
 </head>
 <body>
  
@@ -78,7 +78,7 @@ body {
 </div>
  
 <div id="h_iframe1">
-<iframe name="frame1" src="http://ellar.kissr.com/#" width="100%" style="height: 100vh;"></iframe>
+<iframe name="frame1" src="http://www.albany.edu/myualbany/" width="100%" style="height: 100vh;"></iframe>
 </div>
 
  <!-- <div id="h_iframe2">  -->

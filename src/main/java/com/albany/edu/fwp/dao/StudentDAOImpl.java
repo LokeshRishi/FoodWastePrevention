@@ -35,7 +35,27 @@ public class StudentDAOImpl implements StudentDAO {
     }
 
     @Transactional
-	public void insert() {
+	public void insert(Student student) {
+    	// Creating Random Student Id. Its just for completing the slow.
+    	Random RANDOM = new SecureRandom();
+    	String letters = "abcdefghjkmnpqrstuvwxyzABCDEFGHJKMNPQRSTUVWXYZ23456789+@";
+        String id = "";
+        for (int i=0; i<8; i++)
+        {
+            int index = (int)(RANDOM.nextDouble()*letters.length());
+            id += letters.substring(index, index+1);
+        }
+        
+		// TODO Auto-generated method stub
+		//Student student = new Student();
+		//student.setName("Amit");
+		//student.setStudentEmail("asingh7@albany.edu");
+		//student.setStudentId(id);
+		//student.setYear(Integer.valueOf(1));
+		sessionFactory.getCurrentSession().save(student);
+		
+	}
+    public void insert() {
     	// Creating Random Student Id. Its just for completing the slow.
     	Random RANDOM = new SecureRandom();
     	String letters = "abcdefghjkmnpqrstuvwxyzABCDEFGHJKMNPQRSTUVWXYZ23456789+@";

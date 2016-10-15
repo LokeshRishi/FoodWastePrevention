@@ -28,6 +28,7 @@
 			<result name="success">/WEB-INF/views/AddManager.jsp</result>
 		</action>
 		
+<<<<<<< HEAD
 		<action name="urlTagAction1" class="adminActionBean" >
 			<result name="success">/WEB-INF/views/ViewQuads.jsp</result>
 		</action>
@@ -44,6 +45,22 @@
 		<action name="studentedit" class="studentActionBean">
             <result name="success">/WEB-INF/views/student_edit.jsp</result>
         </action>
+=======
+		 <action name="urlTagAction1"	class="adminActionBean" >
+			<result name="success">/WEB-INF/views/ViewQuads.jsp</result>
+		</action>
+		
+		 <action name="urlTagAction2"	class="adminActionBean" >
+			<result name="success">/WEB-INF/views/SetConfigurations.jsp</result>
+		</action>
+		
+		<action name="selectaction"	class="selectActionBean" >
+			<result name="success">/WEB-INF/views/test.jsp</result>
+		</action>
+		
+
+		
+>>>>>>> refs/remotes/origin/admin
         
         <action name="manageredit" class="managerActionBean">
            <result name="success">/WEB-INF/views/manager_edit.jsp</result>

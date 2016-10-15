@@ -41,7 +41,7 @@
 
 </head>
 
-<body id="page-top" class="index">
+<body id="page-top" class="index" onLoad="checkRefresh();">
 
     <!-- Navigation -->
     <nav id="mainNav" class="navbar navbar-default navbar-fixed-top navbar-custom">
@@ -135,8 +135,8 @@
 	                        <p class="lead" style="font-size:40px"><strong>$10 off!</strong></p>
 	                    </div>
 	                    <ul class="list-group list-group-flush text-center">	                    	
-		                    <s:iterator value="mealCourseNames" var="mealCourseName" status="stat">
-		                    	<li class="list-group-item" data-toggle="tooltip" data-placement="left" title=<s:property value="mealCourseName"/>>
+		                    <s:iterator value="mealCourseNames" var="mealCourseName" status="stat">		                    	
+		                    	<li id=${quadName}${mealCourseName} class="list-group-item" data-toggle="tooltip" data-placement="left" title=<s:property value="mealCourseName"/>>
 		                    	<s:if test="%{allFoodItems[#quadName][#mealCourseName].isEmpty()}">			                    	
 				                        <p class="lead" style="font-size:20px"><strong>Sorry! No ${mealCourseName}</strong></p>				                    
 		                    	</s:if>
@@ -145,19 +145,22 @@
 			                        <s:iterator value="allFoodItems[#quadName][#mealCourseName]" var="myvar" status="stat">
 				                        <div class="btn-group hover_img">
 				                            <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
-				                            	<s:property value="#myvar[0]" /><span><img src=<s:property value="#myvar[1]"/> alt="image" height="100" /></span> <span class="caret"></span>
+				                            	<s:property value="#myvar[0]"/>(<s:property value="#myvar[2]" />)<span><img src=<s:property value="#myvar[1]"/> alt="image" height="100" /></span> <span class="caret"></span>
 				                            </button>
 				
-				                             <ul class="dropdown-menu" role="menu">
+				                             <ul id="test" class="dropdown-menu" role="menu">
 				                                <li class="dropdown-plus-title">
 				                                    piece(s)
 				                                    <b class="pull-right glyphicon glyphicon-chevron-up"></b>
 				                                </li>
-				                                <li><input type="radio" name="radioB" value="radio1" /><label id="dropdown-label">1</label></li>
-				                                <li><input type="radio" name="radioB" value="radio2" /><label id="dropdown-label">2</label></li>
-				                                <li><input type="radio" name="radioB" value="radio3" /><label id="dropdown-label">4</label></li>
-				                                <li><input type="radio" name="radioB" value="radio4" /><label id="dropdown-label">6</label></li>
-				                            </ul>
+				                                <li><input type="radio" id=${myvar[2]} name=<s:property value="#myvar[3]"/> value=1 onclick="evalGroup('${quadName}${mealCourseName}','${mealCourseName}','${myvar[3]}',${myvar[2]})" /><label id="dropdown-label">1</label></li>
+				                                <li><input type="radio" id=${myvar[2]}  name=<s:property value="#myvar[3]"/> value=2 onclick="evalGroup('${quadName}${mealCourseName}','${mealCourseName}','${myvar[3]}',${myvar[2]})" /><label id="dropdown-label">2</label></li>
+				                                <li><input type="radio" id=${myvar[2]} name=<s:property value="#myvar[3]"/> value=4 onclick="evalGroup('${quadName}${mealCourseName}','${mealCourseName}','${myvar[3]}',${myvar[2]})" /><label id="dropdown-label">4</label></li>
+				                                <li><input type="radio" id=${myvar[2]} name=<s:property value="#myvar[3]"/> value=6 onclick="evalGroup('${quadName}${mealCourseName}','${mealCourseName}','${myvar[3]}',${myvar[2]})" /><label id="dropdown-label">6</label></li>
+				                                
+				                             </ul>
+				                            
+				                            
 				                        </div>
 			                        </s:iterator>	
 			                    </s:else>    
@@ -211,9 +214,9 @@
                     <hr class="star-primary">
                 </div>
             </div>
-            <div class="row">
+            <div id=loadCalorie class="row">
                 
-                <h2 class="col-lg-12 text-center">1005</h2>
+                <h2 class="col-lg-12 text-center">0</h2>
 
             </div>
         </div>
@@ -289,8 +292,56 @@
     <script src="/foodwasteprevention/resources/js/freelancer.js"></script>
 
 	<script>
+	var arrMap = [];
+	function evalGroup(quadAndMealCourse,mealcourse,foodItem,calorie)
+	{   
+		var hash = "#"
+		var isMealCoursePresent = false;
+		var isFoodItemFromSameQuadAndMealCourse = false;
+		if(arrMap.length==0){
+			arrMap.push({"quadAndMealCourse":quadAndMealCourse, "mealcourse":mealcourse})
+		}else{
+			for(i=0;i<arrMap.length;i++){
+				if(arrMap[i].mealcourse == mealcourse && arrMap[i].quadAndMealCourse !=quadAndMealCourse){					
+					var parent = hash.concat(arrMap[i].quadAndMealCourse)
+					var radio = parent.concat(" :radio")
+					//alert (radio)
+					$(radio).each(function(){$(this).prop('checked', false);});
+					//alert("Mealcourse is already added " + arrMap[i].quadAndMealCourse + ":"  + arrMap[i].mealcourse);
+					arrMap[i].mealcourse = mealcourse
+					arrMap[i].quadAndMealCourse = quadAndMealCourse				    
+				    isMealCoursePresent=true
+				}
+				if(arrMap[i].mealcourse == mealcourse && arrMap[i].quadAndMealCourse ==quadAndMealCourse){
+				    //alert("FoodItem From Same Quad And MealCourse");
+				    isFoodItemFromSameQuadAndMealCourse=true
+				}
+			}
+			if(!isMealCoursePresent && !isFoodItemFromSameQuadAndMealCourse ){
+				arrMap.push({"quadAndMealCourse":quadAndMealCourse, "mealcourse":mealcourse})
+			}
+		}
+			
+		var inst = "+"
+		for(i=0;i<arrMap.length;i++){
+			inst = inst + arrMap[i].quadAndMealCourse + ":"  + arrMap[i].mealcourse +"+"
+		}
+		var cal=0
+		var calFoodItemIntoQuantity=0
+		$('input:radio:checked').each(function(){			
+			calFoodItemIntoQuantity=$(this).attr('id')*$(this).val()
+			cal=cal+calFoodItemIntoQuantity			
+			;});
+		//alert(cal)
+		$("div#loadCalorie h2").html(cal)
+	}
+	
+	function checkRefresh(){
+		$('input:radio').each(function(){$(this).prop('checked', false);});
+	}
+	
 	$(document).ready(function(){
-	    $('[data-toggle="tooltip"]').tooltip();   
+	    $('[data-toggle="tooltip"]').tooltip(); 
 	});
 	</script>
 

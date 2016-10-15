@@ -58,11 +58,13 @@ public class FoodItemsDAOImpl implements FoodItemsDAO {
 	        		query = sessionFactory.getCurrentSession().createQuery(hql.replaceAll("<quadId>", Integer.toString(quad.getQuadId())).replaceAll("<mealCourseId>", Integer.toString(mealCourse.getMealCourseId())));
 	        		foodItems = (List<FoodItems>)query.list();
 	        		for (FoodItems foodItem : foodItems){	        			
-		        		List<String> foodItemsAndImage = new ArrayList<String>();
-	        			foodItemsAndImage.add(foodItem.getFoodItemName());
-	        			foodItemsAndImage.add(imagesDAO.imagePath(foodItem.getImages().getImageId()));
+		        		List<String> foodItemsImageAndCalorie = new ArrayList<String>();
+		        		foodItemsImageAndCalorie.add(foodItem.getFoodItemName());
+		        		foodItemsImageAndCalorie.add(imagesDAO.imagePath(foodItem.getImages().getImageId()));
+		        		foodItemsImageAndCalorie.add(Integer.toString(foodItem.getCalories()));
+		        		foodItemsImageAndCalorie.add(Integer.toString(foodItem.getFoodItemId()));
 	        			System.out.println("------->"+foodItem.getFoodItemName()+ "  "+imagesDAO.imagePath(foodItem.getImages().getImageId()));
-	        			quadFoodItemsPerMealCourseList.add(foodItemsAndImage);
+	        			quadFoodItemsPerMealCourseList.add(foodItemsImageAndCalorie);
 	        		}	        		
 	        		quadFoodItemsPerMealCourseMap.put(mealCourse.getMealCourseName(), quadFoodItemsPerMealCourseList);	        		
 	        	}

@@ -27,13 +27,20 @@
         <action name="urlTagAction"	class="adminActionBean" >
 			<result name="success">/WEB-INF/views/AddManager.jsp</result>
 		</action>
-		        <action name="urlTagAction1"	class="adminActionBean" >
+		
+		 <action name="urlTagAction1"	class="adminActionBean" >
 			<result name="success">/WEB-INF/views/ViewQuads.jsp</result>
 		</action>
 		
-		        <action name="urlTagAction2"	class="adminActionBean" >
+		 <action name="urlTagAction2"	class="adminActionBean" >
 			<result name="success">/WEB-INF/views/SetConfigurations.jsp</result>
 		</action>
+		
+		<action name="selectaction"	class="selectActionBean" >
+			<result name="success">/WEB-INF/views/test.jsp</result>
+		</action>
+		
+
 		
         
          

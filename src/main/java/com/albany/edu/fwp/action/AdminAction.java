@@ -21,8 +21,8 @@ public class AdminAction extends ActionSupport {
     }
  
     public String execute() {
-    	studentDAO.insert();
-        listStudent = studentDAO.list();
+    	//studentDAO.insert();
+        //listStudent = studentDAO.list();
         return SUCCESS;
     }
  

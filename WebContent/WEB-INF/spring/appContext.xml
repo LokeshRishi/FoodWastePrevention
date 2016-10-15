@@ -22,6 +22,18 @@
     <bean id="adminActionBean" class="com.albany.edu.fwp.action.AdminAction">
         <property name="studentDAO" ref="studentDAO" />
     </bean>
+    
+    <bean id="student" 
+    		class="com.albany.edu.fwp.model.Student">
+        
+    </bean>
+    
+    <bean id="selectActionBean" class="com.albany.edu.fwp.action.SelectAction">    
+    	<property name="studentDAO" ref="studentDAO" />
+    	<property name="student" ref="student" />
+    </bean> 
+    
+     
  
 	<bean id="foodItemsDAO" class="com.albany.edu.fwp.dao.FoodItemsDAOImpl">
         <constructor-arg index="0">
@@ -54,6 +66,12 @@
         </constructor-arg>
     </bean>
     <bean id="imagesDAO" class="com.albany.edu.fwp.dao.ImagesDAOImpl">
+        <constructor-arg>
+            <ref bean="sessionFactory" />
+        </constructor-arg>
+    </bean>
+    
+        <bean class="com.albany.edu.fwp.dao.ImagesDAOImpl">
         <constructor-arg>
             <ref bean="sessionFactory" />
         </constructor-arg>

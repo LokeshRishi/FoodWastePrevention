@@ -7,7 +7,16 @@ public class Student {
     private String studentId;
     private String name;
     private String studentEmail;
-    private int year;
+    private String password;
+    public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	private int year;
     private Set<FoodSelected> foodSelections =	new HashSet<FoodSelected>(0);
     
     

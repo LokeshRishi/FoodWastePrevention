@@ -11,6 +11,8 @@
         <property name="foodItemsDAO" ref="foodItemsDAO" />
         <property name="quadInfoDAO" ref="quadInfoDAO" />
         <property name="mealCourseDAO" ref="mealCourseDAO" />
+        <property name="studentDAO" ref="studentDAO" />
+        <property name="foodSelectedDAO" ref="foodSelectedDAO" />
     </bean>
     <bean id="managerActionBean" class="com.albany.edu.fwp.action.ManagerAction">
         <property name="studentDAO" ref="studentDAO" />
@@ -50,6 +52,11 @@
         </constructor-arg>
         
     </bean> 
+    <bean id="foodSelectedDAO" class="com.albany.edu.fwp.dao.FoodSelectedDAOImpl">
+        <constructor-arg>
+            <ref bean="sessionFactory" />
+        </constructor-arg>
+    </bean>
     <bean id="studentDAO" class="com.albany.edu.fwp.dao.StudentDAOImpl">
         <constructor-arg>
             <ref bean="sessionFactory" />

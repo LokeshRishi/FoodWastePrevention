@@ -9,6 +9,7 @@ import com.albany.edu.fwp.model.Student;
  
 public interface StudentDAO {
     List<Student> list();
+    Student getStudent(String studentId);
     void insert(Student student);
     void insert();
 }

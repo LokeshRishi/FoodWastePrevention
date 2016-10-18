@@ -6,6 +6,7 @@ import java.util.List;
 import com.albany.edu.fwp.model.FoodItems;
 
 public interface FoodItemsDAO {
+	FoodItems getFoodItem(String foodItemId);
 	List<FoodItems> list();
 	HashMap<String, HashMap<String, List<List<String>>>> getAllFoodItemsMap();
 //          Quand           MealCo  item      [itemName,Image]	

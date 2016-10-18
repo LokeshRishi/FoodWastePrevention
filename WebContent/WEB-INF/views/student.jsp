@@ -61,11 +61,11 @@
                         <a href="#page-top"></a>
                     </li>
                     <li class="page-scroll">
-                        <a href="#portfolio">Food Court</a>
-                    </li>
-                    <li class="page-scroll">
                         <a href="#about">Deadline Countdown</a>
                     </li>
+                    <li class="page-scroll">
+                        <a href="#portfolio">Food Court</a>
+                    </li>                    
                     <li class="page-scroll">
                         <a href="#contact">Calories Count</a>
                     </li>
@@ -111,6 +111,25 @@
    	 	 </s:iterator> 
    	 </s:iterator>
    	 -->
+   	 
+   	 <!-- About Section -->
+    <section class="success" id="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>Deadline Countdown</h2>
+                    <hr class="star-light">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="counter">
+                        <h3><div id="countdown"> </div></h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Portfolio Grid Section -->
     <section id="portfolio">
@@ -123,7 +142,7 @@
             </div>
             
             <div class="row">
-            <form id="foodSelector">
+            <form id="foodSelector" action="studentedit">
             		<s:iterator value="quadNames" var="quadName" status="stat">
 	                <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">	            
 	                <!-- Quad Section -->	                
@@ -178,7 +197,8 @@
 	            </s:iterator>
 	            <div class="row">
 	            	<div class="col-lg-12 text-center">
-	             		<input type="button" value="Submit" class="btn btn-lg btn-block btn-warning" onclick="location.href='studentedit';" style="max-width: 265px; margin: 0 auto;">
+	             		<!-- <input type="button" value="Submit" class="btn btn-lg btn-block btn-warning" onclick="location.href='studentedit';" style="max-width: 265px; margin: 0 auto;"> -->
+	             		<input type="submit" value="Submit" class="btn btn-lg btn-block btn-warning" style="max-width: 265px; margin: 0 auto;">
 	             	</div>
 	            </div>
             </form>
@@ -186,24 +206,7 @@
     </div>
     </section>
 
-    <!-- About Section -->
-    <section class="success" id="about">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2>Deadline Countdown</h2>
-                    <hr class="star-light">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <div class="counter">
-                        <h3><div id="countdown"> </div></h3>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    
 
     <!-- Contact Section -->
      <section id="contact">

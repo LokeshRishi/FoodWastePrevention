@@ -142,7 +142,7 @@
             </div>
             
             <div class="row">
-            <form id="foodSelector" action="studentedit">
+            <form id="foodSelector" action="student">
             		<s:iterator value="quadNames" var="quadName" status="stat">
 	                <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">	            
 	                <!-- Quad Section -->	                
@@ -341,6 +341,47 @@
 	
 	function checkRefresh(){
 		$('input:radio').each(function(){$(this).prop('checked', false);});
+		var str='<%=session.getAttribute("selectedFoodItemsIDAndQuantity")%>'
+		var strWithoutcurly1 = str.replace(new RegExp("{", 'g'), '');
+		var strWithoutcurly2 = strWithoutcurly1.replace(new RegExp("}", 'g'), '');
+		//alert(strWithoutcurly2)
+		var entries = strWithoutcurly2.split(", ");
+		var map = {};
+		for(var i=0; i < entries.length; i++){
+		    var tokens = entries[i].split("=");
+		    map[tokens[0]] = tokens[1];
+		}
+		var catchRadioButton = "input:radio[name=fooditemid][value=quantity]"
+		$.each(map, function(index,value){			
+			var catchRadioButtonReplaceFooditemid = catchRadioButton.replace("fooditemid", index)
+			var catchRadioButtonReplaceQuantity = catchRadioButtonReplaceFooditemid.replace("quantity", value)
+			 console.log(catchRadioButtonReplaceQuantity); 
+			 $(catchRadioButtonReplaceQuantity).prop('checked',true);
+			})
+			
+		var strQuadMealCourse='<%=session.getAttribute("selectedFoodItemsQuadAndMealCourse")%>'	
+		var strQuadMealCourseWithoutcurly1 = strQuadMealCourse.replace(new RegExp("{", 'g'), '');
+		var strQuadMealCourseWithoutcurly2 = strQuadMealCourseWithoutcurly1.replace(new RegExp("}", 'g'), '');
+		var entriesQuadMealCourse = strQuadMealCourseWithoutcurly2.split(", ");
+		var mapQuadMealCourse = {};
+		for(var i=0; i < entriesQuadMealCourse.length; i++){
+		    var tokensQuadMealCourse = entriesQuadMealCourse[i].split("=");
+		    mapQuadMealCourse[tokensQuadMealCourse[0]] = tokensQuadMealCourse[1];
+		}
+		 $.each(mapQuadMealCourse, function(id,val){
+		    	console.log(id+":"+val); 
+				arrMap.push({"quadAndMealCourse":id, "mealcourse":val})
+		    })
+		var cal=0
+		var calFoodItemIntoQuantity=0
+		$('input:radio:checked').each(function(){			
+			calFoodItemIntoQuantity=$(this).attr('id')*$(this).val()
+			cal=cal+calFoodItemIntoQuantity			
+			;});
+		//alert(cal)
+		$("div#loadCalorie h2").html(cal)
+			
+			
 	}
 	
 	$(document).ready(function(){

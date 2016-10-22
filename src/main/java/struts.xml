@@ -11,7 +11,8 @@
         </action>
         
         <action name="student" class="studentActionBean">
-            <result name="success">/WEB-INF/views/student.jsp</result>
+            <result name="firstchoice">/WEB-INF/views/student.jsp</result>
+            <result name="edit">/WEB-INF/views/student_edit.jsp</result>
         </action>
         
         <action name="manager" class="managerActionBean">
@@ -27,7 +28,7 @@
         <action name="urlTagAction"	class="adminActionBean" >
 			<result name="success">/WEB-INF/views/AddManager.jsp</result>
 		</action>
-		
+
 		<action name="urlTagAction1" class="adminActionBean" >
 			<result name="success">/WEB-INF/views/ViewQuads.jsp</result>
 		</action>
@@ -39,11 +40,7 @@
 		
 		<action name="urlTagAction3" class="adminActionBean" >
 			<result name="success">/WEB-INF/views/ViewQuads.jsp</result>
-		</action>
-		
-		<action name="studentedit" class="studentActionBean">
-            <result name="success">/WEB-INF/views/student_edit.jsp</result>
-        </action>
+		</action>		
         
 		 <action name="urlTagAction1"	class="adminActionBean" >
 			<result name="success">/WEB-INF/views/ViewQuads.jsp</result>

@@ -72,8 +72,16 @@ INSERT INTO fooditems VALUES
 
 
 Commands for Demo only
+insert into student values('as132736', 'Amit', 'asingh7@albany.edu', 1);
+ 
 insert into quadinfo values(50,"Alumini");
 insert into fooditems values(24,"Pasta",50,1,4,9,45,111,1);
 
 delete from fooditems where fooditemid=24;
 delete from quadinfo where quad_id=50;
+
+insert into mealcourse values (444, 'Snacks');
+insert into fooditems values(25,"Pasta",40,1,4,9,45,444,1);
+
+delete from fooditems where fooditemid=25;
+delete from mealcourse where mealcourse_id=444;

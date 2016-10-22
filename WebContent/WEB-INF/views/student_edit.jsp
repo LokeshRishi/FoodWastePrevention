@@ -1,3 +1,7 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib  prefix="s" uri="/struts-tags" %>   
+<%@taglib  prefix="bean" uri="http://struts.apache.org/tags-bean" %>
+<%@taglib prefix="logic" uri="http://struts.apache.org/tags-logic" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -51,11 +55,11 @@
                         <a href="#page-top"></a>
                     </li>
                     <li class="page-scroll">
-                        <a href="#portfolio">Order Modification</a>
-                    </li>
-                    <li class="page-scroll">
                         <a href="#about">Deadline Countdown</a>
                     </li>
+                    <li class="page-scroll">
+                        <a href="#portfolio">Order Modification</a>
+                    </li>                    
                     <li class="page-scroll">
                         <a href="#contact">Calories Count</a>
                     </li>
@@ -81,58 +85,16 @@
             </div>
         </div>
     </header>
-
-    <!-- Portfolio Grid Section -->
-    <section id="portfolio">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2>Time to Eat</h2>
-                    <hr class="star-primary">
-                </div>
-            </div>
-            <div class="row">
-            <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
-                <h3>Breakfast</h3>
-                 <ul class="list-group">
-                  <li class="list-group-item">Pasta <span class="badge">12</span></li>
-                  <li class="list-group-item">Wedges <span class="badge">5</span></li>
-                  <li class="list-group-item">BBQ Chicken <span class="badge">3</span></li>
-                </ul>
-            </div>
-
-            <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
-                <h3>Lunch</h3>
-                 <ul class="list-group">
-                  <li class="list-group-item">Mac n Cheese <span class="badge">1</span></li>
-                  <li class="list-group-item">Fries <span class="badge">8</span></li>
-                  <li class="list-group-item">Oats <span class="badge">1</span></li>
-                </ul>
-            </div>
-
-            <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
-                <h3>Snacks</h3>
-                 <ul class="list-group">
-                  <li class="list-group-item">Cheese Burger <span class="badge">100</span></li>
-                  <li class="list-group-item">Lasagna <span class="badge">9</span></li>
-                  <li class="list-group-item">Corns <span class="badge">41</span></li>
-                </ul>
-            </div>
-
-            <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
-                <h3>Dinner</h3>
-                 <ul class="list-group">
-                  <li class="list-group-item">Orzo <span class="badge">4</span></li>
-                  <li class="list-group-item">Bacon <span class="badge">5</span></li>
-                  <li class="list-group-item">Peas <span class="badge">4</span></li>
-                </ul>
-            </div>
-            <input type="edit" value="Edit" class="btn btn-lg btn-block btn-warning" onclick="location.href='student';" style="max-width: 265px; margin: 0 auto;">
-            </div>
-    </div>
-    </section>
-
-    <!-- About Section -->
+    
+    	  <!-- <s:iterator value="mealCourseNames" var="mealCourseName" status="stat">
+	          <s:property value="mealCourseName"  />	          
+			   	 <s:iterator value="selectedFoodItemsPerMealCourseMap[#mealCourseName]" var="myvar" status="stat">
+			        <s:property value="#myvar[1]" />
+			        <s:property value="#myvar[2]" />
+			   	 </s:iterator>			   	 		   	 
+   	 	 </s:iterator> --> 
+   	 	 
+   	 <!-- About Section -->
     <section class="success" id="about">
         <div class="container">
             <div class="row">
@@ -151,6 +113,39 @@
         </div>
     </section>
 
+    <!-- Portfolio Grid Section -->
+    <section id="portfolio">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>Time to Eat</h2>
+                    <hr class="star-primary">
+                </div>
+            </div>
+            <div class="row">
+	            <s:iterator value="mealCourseNames" var="mealCourseName" status="stat">
+	             <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3" style="width: 31%;">
+		          <h3><s:property value="mealCourseName" /></h3>  
+				  <s:if test="%{selectedFoodItemsPerMealCourseMap.containsKey(#mealCourseName)}">
+					<s:iterator value="selectedFoodItemsPerMealCourseMap[#mealCourseName]" var="myvar" status="stat">
+				   	 	<li class="list-group-item">${myvar[1]} <span class="badge"><s:property value="#myvar[2]" /></span></li>	
+						<div style="display: none;">${totCal=totCal+myvar[2]*myvar[3]}</div>
+						
+					</s:iterator>
+			       </s:if>	          	 					
+				   <s:else>
+						<li class="list-group-item">No Item Selected</li> 
+				   </s:else>
+				 </div> 				 
+	   	 	    </s:iterator>         
+            </div>
+            <br>
+            <input type="edit" value="Edit" class="btn btn-lg btn-block btn-warning" onclick="location.href='student?next=studentpage';" style="max-width: 265px; margin: 0 auto;">
+    </div>
+    </section>
+
+
+
     <!-- Contact Section -->
     <section id="contact">
         <div class="container">
@@ -162,7 +157,7 @@
             </div>
             <div class="row">
                 
-                <h2 class="col-lg-12 text-center">400</h2>
+                <h2 class="col-lg-12 text-center">${totCal}</h2>
 
             </div>
         </div>
@@ -237,6 +232,7 @@
 
     <!-- Theme JavaScript -->
     <script src="/foodwasteprevention/resources/js/freelancer.js"></script>
+   
 
 </body>
 

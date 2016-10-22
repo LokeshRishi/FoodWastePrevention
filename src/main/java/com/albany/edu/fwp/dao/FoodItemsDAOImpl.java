@@ -15,6 +15,7 @@ import com.albany.edu.fwp.model.FoodItems;
 import com.albany.edu.fwp.model.QuadInfo;
 import com.albany.edu.fwp.model.MealCourse;
 import com.albany.edu.fwp.model.Images;
+import com.albany.edu.fwp.model.Student;
 
 public class FoodItemsDAOImpl implements FoodItemsDAO {
 
@@ -29,6 +30,15 @@ public class FoodItemsDAOImpl implements FoodItemsDAO {
         this.quadInfoDAO = quadInfoDAO;
         this.mealCourseDAO = mealCourseDAO;
         this.imagesDAO = imagesDAO;
+    }
+    
+    @Transactional
+    public FoodItems getFoodItem(String foodItemId) {
+        @SuppressWarnings("unchecked")
+        String hql = "FROM FoodItems F WHERE F.foodItemId = '"+foodItemId+"'";
+        Query query = sessionFactory.getCurrentSession().createQuery(hql);
+        FoodItems foodItem = (FoodItems) query.list().get(0); 
+        return foodItem;
     }
     
     @Transactional

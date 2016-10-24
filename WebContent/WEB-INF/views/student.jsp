@@ -61,11 +61,11 @@
                         <a href="#page-top"></a>
                     </li>
                     <li class="page-scroll">
-                        <a href="#about">Deadline Countdown</a>
-                    </li>
-                    <li class="page-scroll">
                         <a href="#portfolio">Food Court</a>
                     </li>                    
+                    <li class="page-scroll">
+                        <a href="#about">Deadline Countdown</a>
+                    </li>
                     <li class="page-scroll">
                         <a href="#contact">Calories Count</a>
                     </li>
@@ -112,25 +112,6 @@
    	 </s:iterator>
    	 -->
    	 
-   	 <!-- About Section -->
-    <section class="success" id="about">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2>Deadline Countdown</h2>
-                    <hr class="star-light">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <div class="counter">
-                        <h3><div id="countdown"> </div></h3>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Portfolio Grid Section -->
     <section id="portfolio">
         <div class="container">
@@ -206,6 +187,24 @@
     </div>
     </section>
 
+    <!-- About Section -->
+    <section class="success" id="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>Deadline Countdown</h2>
+                    <hr class="star-light">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="counter">
+                        <h3><div id="countdown"> </div></h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
     
 
     <!-- Contact Section -->

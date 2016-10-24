@@ -1,6 +1,6 @@
 /**
- * Copyright CodeJava.net To Present
- * All rights reserved.
+ * Report Action class to generate Quad specific reports..
+ * FoodWastePrevention. All rights reserved.
  */
 package com.albany.edu.fwp.action;
  
@@ -95,14 +95,14 @@ public class ReportAction extends ActionSupport {
 		String jasperFile = ServletActionContext.getServletContext().getRealPath("/")+"report-src/report4.jasper";
 		String pdfFile = ServletActionContext.getServletContext().getRealPath("/")+"report-out/report.pdf";
 		System.out.println("------>"+pdfFile);
+
 		// params used for passing the parameter.
 		Map<String, Object> params = new HashMap<String,Object>();
-		//params.put("StudentID", 2);
+
+//		Integer quadId = (Integer) session.getAttribute("quadID");
+		params.put("quad_id", 20);
+
 		try {
-			// get database connection.
-			//connection = DBConnector.getConnection();
-			
- 
 			JasperPrint print = JasperFillManager.fillReport(jasperFile, params, connection);
 			JRExporter exporter = new net.sf.jasperreports.engine.export.JRPdfExporter();
 			exporter.setParameter(JRExporterParameter.OUTPUT_FILE_NAME,pdfFile);
@@ -114,14 +114,9 @@ public class ReportAction extends ActionSupport {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	
-		
         return SUCCESS;
     }
 
-    
-
-	
 	public List<String> getQuadNames() {
 		  return quadNames;
 	}
@@ -137,7 +132,4 @@ public class ReportAction extends ActionSupport {
     public HashMap<String, List<List<String>>> getSelectedFoodItemsPerMealCourseMap() {
         return selectedFoodItemsPerMealCourseMap;
     }
-    
-    
-
 }

@@ -16,6 +16,10 @@
             <result name="edit">/WEB-INF/views/student_edit.jsp</result>
         </action>
         
+        <action name="report" class="reportActionBean">
+            <result name="success">/WEB-INF/views/manager.jsp</result>
+        </action>
+        
         <action name="manager" class="managerActionBean">
             <result name="success">/WEB-INF/views/manager.jsp</result>
         </action>

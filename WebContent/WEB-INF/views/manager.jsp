@@ -163,7 +163,7 @@
                     <hr class="star-primary">
                 </div>
             </div>
-            <input type="download" value="Download" class="btn btn-lg btn-block btn-danger" style="max-width: 265px; margin: 0 auto;">
+            <input type="download" value="Download" class="btn btn-lg btn-block btn-danger" onclick="location.href='report'" style="max-width: 265px; margin: 0 auto;">
         </div>
     </section>
 

@@ -69,6 +69,8 @@ INSERT INTO fooditems VALUES
 (23,"BBQ Chicken",40,1,4,5,45,333,1);
 
 
+insert into student values('as132736', 'Amit', 'asingh7@albany.edu', 1);
+
 
 
 Commands for Demo only

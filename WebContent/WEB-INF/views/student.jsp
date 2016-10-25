@@ -124,10 +124,29 @@
             
             <div class="row">
             <form id="foodSelector" action="student">
+            		<s:set var="itr" value="0" />
             		<s:iterator value="quadNames" var="quadName" status="stat">
 	                <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">	            
 	                <!-- Quad Section -->	                
-	                <div class="panel price panel-red">
+	                <s:set var="itr" value="%{#itr+1}" />
+					<s:set var="itrmod" value="%{#itr%4}" />	
+					
+					<s:if test='%{#itrmod==1}'>
+					<div class="panel price panel-blue">
+					</s:if>
+					
+					<s:if test="%{#itrmod==2}">
+					<div class="panel price panel-red">
+					</s:if>
+					
+					<s:if test="%{#itrmod==3}">
+					<div class="panel price panel-grey">
+					</s:if>
+					
+					<s:if test="%{#itrmod==0}">
+					<div class="panel price panel-green">
+					</s:if>
+					
 	                    <div class="panel-heading  text-center">
 	                        <h3><s:property value="quadName" /></h3>
 	                    </div>

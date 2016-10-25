@@ -21,6 +21,8 @@
     <!-- Theme CSS -->
     <link href="/foodwasteprevention/resources/css/freelancer.css" rel="stylesheet">
 
+    <link href="/foodwasteprevention/resources/css/media.css" rel="stylesheet">
+
     <!-- Custom Fonts -->
     <link href="/foodwasteprevention/resources/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
@@ -43,6 +45,11 @@
 
 <body id="page-top" class="index" onLoad="checkRefresh();">
 
+<nav style="position:fixed;top:105px;box-shadow: 10px 10px 5px #888888;background-color:#18bc9c;padding:4px">
+ 	<h5 style="margin-left:1em">Food Selection Deadline</h5>
+ 	<div id="counter"> </div>
+</nav>
+
     <!-- Navigation -->
     <nav id="mainNav" class="navbar navbar-default navbar-fixed-top navbar-custom">
         <div class="container">
@@ -64,10 +71,10 @@
                         <a href="#portfolio">Food Court</a>
                     </li>                    
                     <li class="page-scroll">
-                        <a href="#about">Deadline Countdown</a>
+                        <a href="#about">Calories Count</a>
                     </li>
                     <li class="page-scroll">
-                        <a href="#contact">Calories Count</a>
+                        <a href="#contact">Contact Us</a>
                     </li>
                 </ul>
             </div>
@@ -164,7 +171,7 @@
 			                        <s:iterator value="allFoodItems[#quadName][#mealCourseName]" var="myvar" status="stat">
 				                        <div class="btn-group hover_img">
 				                            <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
-				                            	<s:property value="#myvar[0]"/>(<s:property value="#myvar[2]" />)<span><img src=<s:property value="#myvar[1]"/> alt="image" height="100" /></span> <span class="caret"></span>
+				                            	<s:property value="#myvar[0]"/><span><img src=<s:property value="#myvar[1]"/> alt="image" height="100" /></span> <span class="caret"></span>
 				                            </button>
 				
 				                             <ul id="test" class="dropdown-menu" role="menu">
@@ -211,37 +218,73 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2>Deadline Countdown</h2>
+                   <h2>Calories Count</h2>
                     <hr class="star-light">
                 </div>
             </div>
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <div class="counter">
-                        <h3><div id="countdown"> </div></h3>
-                    </div>
-                </div>
+            <div id=loadCalorie class="row">
+                <h2 class="col-lg-12 text-center">0</h2>
             </div>
         </div>
     </section>
     
 
     <!-- Contact Section -->
-     <section id="contact">
+    <section id="contact">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2>Calories Count</h2>
+                    <h2>Contact Us</h2>
                     <hr class="star-primary">
                 </div>
             </div>
-            <div id=loadCalorie class="row">
-                
-                <h2 class="col-lg-12 text-center">0</h2>
-
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <form name="sentMessage" id="contactForm" novalidate>
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label>Name</label>
+                                <input type="text" class="form-control" placeholder="Name" id="name" required data-validation-required-message="Please enter your name.">
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label>Email Address</label>
+                                <input type="email" class="form-control" placeholder="Email Address" id="email" required data-validation-required-message="Please enter your email address.">
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label>Phone Number</label>
+                                <input type="tel" class="form-control" placeholder="Phone Number" id="phone" required data-validation-required-message="Please enter your phone number.">
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label>Message</label>
+                                <textarea rows="5" class="form-control" placeholder="Message" id="message" required data-validation-required-message="Please enter a message."></textarea>
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        <br>
+                        <div id="success"></div>
+                        <div class="row">
+                            <div class="form-group col-xs-12">
+                                <button type="submit" class="btn btn-success btn-lg">Send</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
-    </section>
+</section>
+
+    
+    
+    
     <!-- Footer -->
     <footer class="text-center">
         <div class="footer-above">
@@ -311,6 +354,8 @@
 
     <!-- Theme JavaScript -->
     <script src="/foodwasteprevention/resources/js/freelancer.js"></script>
+
+    <script src="/foodwasteprevention/resources/js/jquery.countdown.js"></script>
 
 	<script>
 	var arrMap = [];
@@ -405,6 +450,14 @@
 	$(document).ready(function(){
 	    $('[data-toggle="tooltip"]').tooltip(); 
 	});
+	
+	$('#counter').countdown({
+	    image: "./resources/img/digits.png",
+	    format: "hh:mm:ss",
+	    endTime: new Date('10/25/16 18:59:59'),
+	    digitWidth: 33.51,
+	    digitHeight: 45
+	  });
 	</script>
 
 </body>

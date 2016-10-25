@@ -108,11 +108,11 @@ public class SelectAction extends ActionSupport{
 					comboMeals.add(eElement.getElementsByTagName("name").item(0).getTextContent());
 					comboMeals.add(eElement.getElementsByTagName("address").item(0).getTextContent());
 					comboMeals.add(eElement.getElementsByTagName("year").item(0).getTextContent());
-					student.setName(eElement.getElementsByTagName("name").item(0).getTextContent());
-					student.setStudentEmail(eElement.getElementsByTagName("address").item(0).getTextContent());
-					//student.setStudentId(eElement.getAttribute("id"));
-					student.setYear(Integer.parseInt((eElement.getElementsByTagName("year").item(0).getTextContent())));
-					//studentdao.insert(student);
+					student.setName(eElement.getElementsByTagName("name").item(0).getTextContent().toString());
+					student.setStudentEmail(eElement.getElementsByTagName("address").item(0).getTextContent().toString());
+					student.setStudentId(eElement.getAttribute("id"));
+					student.setYear(Integer.parseInt((eElement.getElementsByTagName("year").item(0).getTextContent()).toString()));
+					studentdao.insert(student);
 					System.out.println("comboMeals -------------> ");
 					TransformerFactory transformerFactory = TransformerFactory.newInstance();
 			        javax.xml.transform.Transformer transformer = transformerFactory.newTransformer();

@@ -435,6 +435,13 @@
 		    	console.log(id+":"+val); 
 				arrMap.push({"quadAndMealCourse":id, "mealcourse":val})
 		    })
+	    var resetRadio='<%=session.getAttribute("resetRadio")%>'  
+			//alert(resetRadio)
+			if(resetRadio=='true'){
+				$('input:radio').each(function(){			
+					$(this).prop('checked',false);});
+				//alert("reset")
+			}
 		var cal=0
 		var calFoodItemIntoQuantity=0
 		$('input:radio:checked').each(function(){			

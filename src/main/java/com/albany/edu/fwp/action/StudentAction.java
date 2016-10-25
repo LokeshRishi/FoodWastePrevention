@@ -99,10 +99,16 @@ public class StudentAction extends ActionSupport {
 			HashMap<String, String> selectedFoodItems = new HashMap<String, String>(); // Only purpose is to pre select radio buttons id student wants to edit his choices
 			HashMap<String, String> selectedFoodItemsQuadAndMealCourse = new HashMap<String, String>(); // Only purpose is to pre select radio buttons id student wants to edit his choices
 			QuadInfo quadInfo;
+			
+			if( listFoodSelected.isEmpty()){
+				session.setAttribute("resetRadio", "true");
+			}else{
+				session.setAttribute("resetRadio", "false");
+			}
+			
     	if( !listFoodSelected.isEmpty()	&& request.getParameterMap().isEmpty() )    	  
     	{
-    		System.out.println("Edit Page---------->");    		
-    		
+    		System.out.println("Edit Page---------->"); 
     		for (FoodSelected foodSelected : listFoodSelected){ 
     			List<String> foodItemsAndQuantity = new ArrayList<String>();   			
     			foodItems = foodItemsDAO.getFoodItem( Integer.toString(foodSelected.getFoodItems().getFoodItemId()));
@@ -129,7 +135,7 @@ public class StudentAction extends ActionSupport {
     		returnString="edit";
 		}
     	else if( !(request.getParameterMap().isEmpty()) && request.getParameter("next")==null )
-    	{			   		
+    	{		
     		if( !(listFoodSelected.isEmpty()) ){
     			foodSelectedDAO.deleteStudentSelection(student);
     		}    		
@@ -171,7 +177,7 @@ public class StudentAction extends ActionSupport {
     		returnString="edit";
 		}
     	
-    	else{			
+    	else{	    		
 	    	allFoodItems = foodItemsDAO.getAllFoodItemsMap();     
 	    	for (List foodItem : allFoodItems.get("Indian").get("Breakfast")){
 			    System.out.println("Quad Ids: "+ foodItem);

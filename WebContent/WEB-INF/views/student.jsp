@@ -74,7 +74,7 @@
                         <a href="#about">Calories Count</a>
                     </li>
                     <li class="page-scroll">
-                        <a href="#contact">Contact Us</a>
+                        <a href="#contact">Questions/Feedback</a>
                     </li>
                 </ul>
             </div>
@@ -234,7 +234,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2>Contact Us</h2>
+                    <h2>Questions/Feedback</h2>
                     <hr class="star-primary">
                 </div>
             </div>
@@ -250,8 +250,8 @@
                         </div>
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label>Email Address</label>
-                                <input type="email" class="form-control" placeholder="Email Address" id="email" required data-validation-required-message="Please enter your email address.">
+                                <label>Quad Email</label>
+                                <input type="email" class="form-control" placeholder="Quad Email" id="email" required data-validation-required-message="Please enter your email address.">
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
@@ -435,7 +435,7 @@
 		    	console.log(id+":"+val); 
 				arrMap.push({"quadAndMealCourse":id, "mealcourse":val})
 		    })
-	    var resetRadio='<%=session.getAttribute("resetRadio")%>'  
+		var resetRadio='<%=session.getAttribute("resetRadio")%>'  
 			//alert(resetRadio)
 			if(resetRadio=='true'){
 				$('input:radio').each(function(){			
@@ -462,7 +462,7 @@
 	    image: "./resources/img/digits.png",
 	    format: "hh:mm:ss",
 	    endTime: new Date('10/25/16 18:59:59'),
-	    digitWidth: 33.51,
+	    digitWidth: 33.99,
 	    digitHeight: 45
 	  });
 	</script>

@@ -67,7 +67,7 @@
                         <a href="#about">Cumulative Report</a>
                     </li>
                     <li class="page-scroll">
-                        <a href="#contact">Contact Us</a>
+                        <a href="#contact">Contact Admin</a>
                     </li>
                 </ul>
             </div>
@@ -160,7 +160,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2>Contact Us</h2>
+                    <h2>Contact Admin</h2>
                     <hr class="star-primary">
                 </div>
             </div>
@@ -176,8 +176,8 @@
                         </div>
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label>Email Address</label>
-                                <input type="email" class="form-control" placeholder="Email Address" id="email" required data-validation-required-message="Please enter your email address.">
+                                <label>Admin Email</label>
+                                <input type="email" class="form-control" placeholder="Admin Email" id="email" required data-validation-required-message="Please enter your email address.">
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
@@ -316,7 +316,7 @@
     	    image: "./resources/img/digits.png",
     	    format: "hh:mm:ss",
     	    endTime: new Date('10/25/16 23:59:59'),
-    	    digitWidth: 33.51,
+    	    digitWidth: 33.99,
     	    digitHeight: 45
     	  });
     	</script>

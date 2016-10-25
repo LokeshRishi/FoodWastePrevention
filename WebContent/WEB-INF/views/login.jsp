@@ -10,5 +10,13 @@
 </head>
 <body>
 <h2>Login Page</h2>
+<s:property value="%{err}"/>
+<s:form action="loginsubmit" method='post'>
+<s:textfield label='Username' key='sessionUID'/>
+<s:password label='Password' key='sessionPassword'/>
+<s:radio label="User Type" name='type' list="{'Manager','Student','Admin'}" key='type'/>
+<s:submit value="Submit" name='Submit'/>
+</s:form>
+
 </body>
 </html>

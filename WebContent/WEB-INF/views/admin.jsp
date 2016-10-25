@@ -79,7 +79,7 @@ body {
 </div>
  
 <div id="h_iframe1">
-<iframe name="frame1" src="http://www.albany.edu/myualbany/" width="100%" style="height: 100vh;"></iframe>
+<iframe name="frame1" src="http://ellar.kissr.com/" width="100%" style="height: 100vh;"></iframe>
 </div>
 
  <!-- <div id="h_iframe2">  -->

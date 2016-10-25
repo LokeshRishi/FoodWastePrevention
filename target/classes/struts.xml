@@ -12,7 +12,7 @@
         
         <action name="student" class="studentActionBean">
         	<result name="success">/WEB-INF/views/student.jsp</result>
-            <result name="firstchoice">/WEB-INF/views/student.jsp</result>
+        	<result name="firstchoice">/WEB-INF/views/student.jsp</result>
             <result name="edit">/WEB-INF/views/student_edit.jsp</result>
         </action>
         
@@ -27,11 +27,50 @@
         <action name="login" class="loginActionBean">
             <result name="success">/WEB-INF/views/login.jsp</result>
         </action>
-
+        
+        <action name="loginsubmit" class="loginActionBean" method="matchUIDandPassword">
+            <result name="managersuccess" type="redirectAction">
+                <param name='actionName'>manager</param>
+            </result>
+            <result name="studentsuccess" type="redirectAction">
+                <param name='actionName'>student</param>  
+            </result>
+            <result name="adminsuccess" type="redirectAction">
+                <param name='actionName'>admin</param>
+            </result>
+            <result name="newuserredirection" type="redirectAction">
+            	<param name='actionName'>changePassword</param>
+            	<param name='redirection'>${redirection}</param>
+            </result>
+            <result name="errorpage" type="redirectAction">
+            	<param name='actionName'>login</param>
+            	<param name='err'>${err}</param>
+            </result>       
+        </action>
+        
+        <action name="LoginChangePasswordSubmit" class="loginActionBean" method="newPassword">
+            <result name="managersuccess" type="redirectAction">
+                <param name='actionName'>manager</param>
+            </result>
+            <result name="studentsuccess" type="redirectAction">
+                <param name='actionName'>student</param>
+            </result>
+            <result name="adminsuccess" type="redirectAction">
+                <param name='actionName'>admin</param>
+            </result>
+            <result name="errorpage" type="redirectAction">
+            <param name='actionName'>changePassword</param>
+            <param name='err'>${err}</param>
+            </result>
+        </action>
+        
+        <action name="changePassword" class="loginActionBean" method='changePassword'>
+            <result name="success">/WEB-INF/views/LoginChangePassword.jsp</result>
+        </action>
+        
         <action name="addmanager" class="adminActionBean">
             <result name="success">/WEB-INF/views/AddManager.jsp</result>
         </action>
-
         <action name="urlTagAction"	class="adminActionBean" >
 			<result name="success">/WEB-INF/views/AddManager.jsp</result>
 		</action>
@@ -39,7 +78,7 @@
 		<action name="urlTagAction1" class="adminActionBean" >
 			<result name="success">/WEB-INF/views/ViewQuads.jsp</result>
 		</action>
-				
+		
 		<action name="urlTagAction2" class="adminActionBean" >
 			<result name="success">/WEB-INF/views/SetConfigurations.jsp</result>
 		</action>
@@ -67,6 +106,5 @@
         <action name="manageredit" class="managerActionBean">
            <result name="success">/WEB-INF/views/manager_edit.jsp</result>
         </action>
-
     </package>
 </struts>

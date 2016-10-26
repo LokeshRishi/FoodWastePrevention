@@ -16,6 +16,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.Element;
 import java.io.File;
 
+import com.albany.edu.fwp.dao.AesEncryption;
 import com.albany.edu.fwp.dao.FoodItemsDAO;
 import com.albany.edu.fwp.dao.StudentDAO;
 import com.albany.edu.fwp.dao.studentXML;
@@ -30,6 +31,7 @@ public class SelectAction extends ActionSupport{
 	//private studentXML studentXML;
 	//private List<String> liststu;
 	private Student student;
+	private AesEncryption aesEncryption;
 	private StudentDAO studentdao;
 	private List<String> comboMeals = new ArrayList<String>();
 	
@@ -42,7 +44,11 @@ public class SelectAction extends ActionSupport{
 	public void setStudentDAO(StudentDAO studentdao){
 		this.studentdao=studentdao;
 	}
+	public void setAesEncryption(AesEncryption aesEncryption){
+		this.aesEncryption=aesEncryption;
+	}
 	
+
 	
 
 	public String execute() {
@@ -54,7 +60,8 @@ public class SelectAction extends ActionSupport{
 			Document doc = dBuilder.parse(fXmlFile);
 			create();
 			Document doc1 = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(new File("C:/Users/manish chandra/Documents/loginproject.xml"));
-			    
+			aesEncryption.setKey("fwp");
+			
 			
 			
 			//File login = new File("C:/Users/manish chandra/Documents/login1.xml");
@@ -97,8 +104,11 @@ public class SelectAction extends ActionSupport{
 					Element eachstudent=doc1.createElement("eachstudent");
 					Element username=doc1.createElement("username");
 					username.setTextContent(eElement.getAttribute("id"));
-					Element password=doc1.createElement("password");
-					password.setTextContent(eElement.getElementsByTagName("name").item(0).getTextContent());
+					aesEncryption.encrypt((eElement.getElementsByTagName("name").item(0).getTextContent()).trim());
+					Element password=doc1.createElement("password");					
+					//password.setTextContent(AesEncryptionImpl.encrypt(eElement.getElementsByTagName("name").item(0).getTextContent()));
+					password.setTextContent(aesEncryption.getEncryptedString());
+					////password.setTextContent(eElement.getElementsByTagName("name").item(0).getTextContent());
 					eachstudent.appendChild(username);
 					eachstudent.appendChild(password);
 					studenttag.appendChild(eachstudent);

@@ -42,7 +42,11 @@
     <bean id="selectActionBean" class="com.albany.edu.fwp.action.SelectAction">    
     	<property name="studentDAO" ref="studentDAO" />
     	<property name="student" ref="student" />
+    	<property name="AesEncryption" ref="AesEncryption" />
     </bean> 
+    
+    <bean id="AesEncryption" class="com.albany.edu.fwp.dao.AesEncryptionImpl">      	
+    </bean>  
     
      
  

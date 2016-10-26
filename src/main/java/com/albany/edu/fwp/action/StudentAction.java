@@ -78,7 +78,7 @@ public class StudentAction extends ActionSupport {
     	
     	String returnString="";
     	session = ServletActionContext.getRequest().getSession();
-    	session.setAttribute("studentId", "as132736");
+    	//session.setAttribute("studentId", "as132736");
     	request = ServletActionContext.getRequest();
     	String studentId=session.getAttribute("studentId").toString(); 
     	student = studentDAO.getStudent(studentId);

@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@taglib  prefix="s" uri="/struts-tags" %> 
+<%@taglib  prefix="s" uri="/struts-tags" %>   
 <%@taglib  prefix="bean" uri="http://struts.apache.org/tags-bean" %>
-<%@taglib  prefix="logic" uri="http://struts.apache.org/tags-logic" %>
+<%@taglib prefix="logic" uri="http://struts.apache.org/tags-logic" %>
+<!DOCTYPE html>
+<html lang="en">
     
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -11,12 +13,9 @@
 </head>
 <body>
 <!--<s:form action="selectaction" >-->
-<h2>Simple Iterator</h2>
+<h2>${result}</h2>
 <div align="center">
 
-<s:iterator value="comboMeals" status="stat">
-   <s:property />
-</s:iterator>
 </div>
 <!--</s:form>-->
 </body>

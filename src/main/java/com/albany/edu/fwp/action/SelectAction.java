@@ -2,6 +2,7 @@ package com.albany.edu.fwp.action;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerConfigurationException;
@@ -10,10 +11,13 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.parsers.DocumentBuilder;
+
+import org.apache.struts2.ServletActionContext;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Node;
 import org.w3c.dom.Element;
+
 import java.io.File;
 
 import com.albany.edu.fwp.dao.AesEncryption;
@@ -28,16 +32,12 @@ import com.opensymphony.xwork2.ActionSupport;
 import javassist.convert.Transformer;
 
 public class SelectAction extends ActionSupport{
-	//private studentXML studentXML;
-	//private List<String> liststu;
+	
 	private Student student;
 	private AesEncryption aesEncryption;
 	private StudentDAO studentdao;
-	private List<String> comboMeals = new ArrayList<String>();
+	private String result;
 	
-	//public void setstudentXML(studentXML studentXML) {
-		//this.studentXML = studentXML;
-	//}
 	public void setStudent(Student student){
 		this.student=student;
 	}
@@ -49,99 +49,71 @@ public class SelectAction extends ActionSupport{
 	}
 	
 
-	
-
 	public String execute() {
-		//liststu=studentXML.list();
 		try {
-			File fXmlFile = new File("C:/Users/manish chandra/Documents/student.xml");
+			String studentonboarding = ServletActionContext.getServletContext().getRealPath("/")+"xml/studentonboarding.xml"; 
+			String login = ServletActionContext.getServletContext().getRealPath("/")+"xml/login.xml"; 
+			File fXmlFile = new File(studentonboarding);
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 			Document doc = dBuilder.parse(fXmlFile);
-			create();
-			Document doc1 = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(new File("C:/Users/manish chandra/Documents/loginproject.xml"));
-			aesEncryption.setKey("fwp");
+			create(login);
+			Document doc1 = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(new File(login));
+			//aesEncryption.setKey("fwp");
 			
-			
-			
-			//File login = new File("C:/Users/manish chandra/Documents/login1.xml");
-			//Document doc1 = dBuilder.parse(login);
-			
-
 			//optional, but recommended
 			//read this - http://stackoverflow.com/questions/13786607/normalization-in-dom-parsing-with-java-how-does-it-work
 			doc.getDocumentElement().normalize();
 			doc1.getDocumentElement().normalize();
 			
-
-			//System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
-
 			NodeList nList = doc.getElementsByTagName("studentid");
-			//NodeList nList1 = doc1.getElementsByTagName("eachstudent");
-
-			//System.out.println("----------------------------");
-
 			for (int temp = 0; temp < nList.getLength(); temp++) {
-
 				Node nNode = nList.item(temp);
-			
-				
-
-				//System.out.println("\nCurrent Element :" + nNode.getNodeName());
-
 				if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-
 					Element eElement = (Element) nNode;
-
 					System.out.println("studentid : " + eElement.getAttribute("id"));
-					System.out.println("First Name : " + eElement.getElementsByTagName("name").item(0).getTextContent());
-					//System.out.println("Last Name : " + eElement.getElementsByTagName("lastname").item(0).getTextContent());
-					System.out.println("Nick Name : " + eElement.getElementsByTagName("address").item(0).getTextContent());
-					System.out.println("Salary : " + eElement.getElementsByTagName("year").item(0).getTextContent());
+					System.out.println("Name : " + eElement.getElementsByTagName("name").item(0).getTextContent());
+					System.out.println("Address : " + eElement.getElementsByTagName("address").item(0).getTextContent());
+					System.out.println("Year : " + eElement.getElementsByTagName("year").item(0).getTextContent());
 					
 					Element dataTag=doc1.getDocumentElement();
 					Element studenttag=(Element) dataTag.getElementsByTagName("student").item(0);
 					Element eachstudent=doc1.createElement("eachstudent");
 					Element username=doc1.createElement("username");
 					username.setTextContent(eElement.getAttribute("id"));
-					aesEncryption.encrypt((eElement.getElementsByTagName("name").item(0).getTextContent()).trim());
-					Element password=doc1.createElement("password");					
-					//password.setTextContent(AesEncryptionImpl.encrypt(eElement.getElementsByTagName("name").item(0).getTextContent()));
-					password.setTextContent(aesEncryption.getEncryptedString());
-					////password.setTextContent(eElement.getElementsByTagName("name").item(0).getTextContent());
+					Element password=doc1.createElement("password");
+					//aesEncryption.encrypt((eElement.getElementsByTagName("name").item(0).getTextContent()).trim());						
+					//password.setTextContent(aesEncryption.getEncryptedString());
+					password.setTextContent((eElement.getElementsByTagName("name").item(0).getTextContent()).trim()); //uncomment above 2 lines and comment this line to enable encryption
 					eachstudent.appendChild(username);
 					eachstudent.appendChild(password);
-					studenttag.appendChild(eachstudent);
+					studenttag.appendChild(eachstudent);					
 					
-					//comboMeals = new ArrayList<String>();
-					comboMeals.add(eElement.getAttribute("id"));
-					comboMeals.add(eElement.getElementsByTagName("name").item(0).getTextContent());
-					comboMeals.add(eElement.getElementsByTagName("address").item(0).getTextContent());
-					comboMeals.add(eElement.getElementsByTagName("year").item(0).getTextContent());
 					student.setName(eElement.getElementsByTagName("name").item(0).getTextContent().toString());
 					student.setStudentEmail(eElement.getElementsByTagName("address").item(0).getTextContent().toString());
 					student.setStudentId(eElement.getAttribute("id"));
 					student.setYear(Integer.parseInt((eElement.getElementsByTagName("year").item(0).getTextContent()).toString()));
 					studentdao.insert(student);
-					System.out.println("comboMeals -------------> ");
+					result="Onboarding Student xml processed. Students are loaded in Database.";
 					TransformerFactory transformerFactory = TransformerFactory.newInstance();
 			        javax.xml.transform.Transformer transformer = transformerFactory.newTransformer();
 			        DOMSource source = new DOMSource(doc1);
-			        StreamResult result = new StreamResult(new File("C:/Users/manish chandra/Documents/loginproject.xml"));
+			        StreamResult result = new StreamResult(new File(login));
 			        transformer.transform(source, result);
 				}
 			}
-		} catch (Exception e) {
+		} catch (Exception e) 
+		{
+					result="Student onboarding xml failed to be processed.";
 					e.printStackTrace();
-				    }
-		//return comboMeals;
+		}
 		
 		return SUCCESS;
 	}
 
-	private void create() throws ParserConfigurationException, TransformerException {
+	private void create(String login) throws ParserConfigurationException, TransformerException {
 		// TODO Auto-generated method stub
-		File f = new File("C:/Users/manish chandra/Documents/loginproject.xml");
+		File f = new File(login);
 		if(!f.exists()&&!f.isDirectory()){
 		DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
@@ -152,26 +124,14 @@ public class SelectAction extends ActionSupport{
         
         Element students = doccreate.createElement("student");
         rootElement.appendChild(students);
-        //Element Username = doccreate.createElement("UserName");
-        //students.appendChild(Username);
-        //Element Pass = doccreate.createElement("Password");
-        //students.appendChild(Pass);
         Element manager = doccreate.createElement("manager");
         rootElement.appendChild(manager);
-        //Element Username = doccreate.createElement("UserName");
-       // manager.appendChild(Username);
-        //Element Pass = doccreate.createElement("Password");
-        //manager.appendChild(Pass);
         Element admin = doccreate.createElement("admin");
         rootElement.appendChild(admin);
-        //Element Username = doccreate.createElement("UserName");
-        //admin.appendChild(Username);
-        //Element Pass = doccreate.createElement("Password");
-        //admin.appendChild(Pass);
         TransformerFactory transformerFactory = TransformerFactory.newInstance();
         javax.xml.transform.Transformer transformer = transformerFactory.newTransformer();
         DOMSource source = new DOMSource(doccreate);
-        StreamResult result = new StreamResult(new File("C:/Users/manish chandra/Documents/loginproject.xml"));
+        StreamResult result = new StreamResult(new File(login));
         transformer.transform(source, result);
 		}
 		
@@ -179,7 +139,7 @@ public class SelectAction extends ActionSupport{
 	public String display() {
 		return NONE;
 	}
-	public List<String> getComboMeals() {
-		return comboMeals;
+	public String getResult() {
+		return result;
 	}
 }

@@ -25,9 +25,11 @@ public class LoginAction extends ActionSupport{
 	private String err;
 	
 	//Remove this///
-	private final static String xmlfile="C:\\Users\\shilp_000\\Desktop\\SET\\LoginData.xml";
+	
+	private  String xmlfile;
 	
     public String execute() {
+    	xmlfile=ServletActionContext.getServletContext().getRealPath("/")+"xml/login.xml";
     	return SUCCESS;
     }
     
@@ -35,6 +37,7 @@ public class LoginAction extends ActionSupport{
     	NodeList loginList=null;
 	    try
 	    {
+	    	System.out.println("--->"+xmlfile);
 	    	File loginFile = new File(xmlfile);
 	    	DocumentBuilderFactory logindbf = DocumentBuilderFactory.newInstance();
 	    	DocumentBuilder logindb = logindbf.newDocumentBuilder();
@@ -97,6 +100,7 @@ public class LoginAction extends ActionSupport{
     	    	NodeList loginList=null;
     		    try
     		    {
+    		    	System.out.println("--->"+xmlfile);
     		    	File loginFile = new File(xmlfile);
     		    	DocumentBuilderFactory logindbf = DocumentBuilderFactory.newInstance();
     		    	DocumentBuilder logindb = logindbf.newDocumentBuilder();

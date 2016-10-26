@@ -58,6 +58,7 @@ public class SelectAction extends ActionSupport{
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 			Document doc = dBuilder.parse(fXmlFile);
 			create(login);
+			
 			Document doc1 = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(new File(login));
 			//aesEncryption.setKey("fwp");
 			
@@ -65,6 +66,7 @@ public class SelectAction extends ActionSupport{
 			//read this - http://stackoverflow.com/questions/13786607/normalization-in-dom-parsing-with-java-how-does-it-work
 			doc.getDocumentElement().normalize();
 			doc1.getDocumentElement().normalize();
+			
 			
 			NodeList nList = doc.getElementsByTagName("studentid");
 			for (int temp = 0; temp < nList.getLength(); temp++) {
@@ -76,18 +78,22 @@ public class SelectAction extends ActionSupport{
 					System.out.println("Address : " + eElement.getElementsByTagName("address").item(0).getTextContent());
 					System.out.println("Year : " + eElement.getElementsByTagName("year").item(0).getTextContent());
 					
-					Element dataTag=doc1.getDocumentElement();
-					Element studenttag=(Element) dataTag.getElementsByTagName("student").item(0);
-					Element eachstudent=doc1.createElement("eachstudent");
-					Element username=doc1.createElement("username");
+					//Element dataTag=doc1.getDocumentElement();
+					Element user=(Element) doc1.getElementsByTagName("Users").item(0);					
+					Element studentTag=doc1.createElement("Student");					
+					Element username=doc1.createElement("UserName");					
 					username.setTextContent(eElement.getAttribute("id"));
-					Element password=doc1.createElement("password");
+					Element password=doc1.createElement("Password");					
 					//aesEncryption.encrypt((eElement.getElementsByTagName("name").item(0).getTextContent()).trim());						
 					//password.setTextContent(aesEncryption.getEncryptedString());
 					password.setTextContent((eElement.getElementsByTagName("name").item(0).getTextContent()).trim()); //uncomment above 2 lines and comment this line to enable encryption
-					eachstudent.appendChild(username);
-					eachstudent.appendChild(password);
-					studenttag.appendChild(eachstudent);					
+					Element firstTimeUser=doc1.createElement("FirstTimeUser");					
+					firstTimeUser.setTextContent("Y");
+					studentTag.appendChild(username);
+					studentTag.appendChild(password);
+					studentTag.appendChild(firstTimeUser);
+					user.appendChild(studentTag);					
+					
 					
 					student.setName(eElement.getElementsByTagName("name").item(0).getTextContent().toString());
 					student.setStudentEmail(eElement.getElementsByTagName("address").item(0).getTextContent().toString());
@@ -114,6 +120,7 @@ public class SelectAction extends ActionSupport{
 	private void create(String login) throws ParserConfigurationException, TransformerException {
 		// TODO Auto-generated method stub
 		File f = new File(login);
+		System.out.println("---->"+f.exists());
 		if(!f.exists()&&!f.isDirectory()){
 		DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
@@ -122,11 +129,11 @@ public class SelectAction extends ActionSupport{
         Element rootElement = doccreate.createElement("Users");
         doccreate.appendChild(rootElement);
         
-        Element students = doccreate.createElement("student");
-        rootElement.appendChild(students);
-        Element manager = doccreate.createElement("manager");
+//        Element students = doccreate.createElement("student");
+//        rootElement.appendChild(students);
+        Element manager = doccreate.createElement("Manager");
         rootElement.appendChild(manager);
-        Element admin = doccreate.createElement("admin");
+        Element admin = doccreate.createElement("Admin");
         rootElement.appendChild(admin);
         TransformerFactory transformerFactory = TransformerFactory.newInstance();
         javax.xml.transform.Transformer transformer = transformerFactory.newTransformer();

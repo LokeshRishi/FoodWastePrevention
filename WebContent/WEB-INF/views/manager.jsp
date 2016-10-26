@@ -61,6 +61,9 @@
                         <a href="#page-top"></a>
                     </li>
                     <li class="page-scroll">
+                        <a href="logout">Logout</a>
+                    </li>
+                    <li class="page-scroll">
                         <a href="#portfolio">Create Food Menu</a>
                     </li>
                     <li class="page-scroll">

@@ -80,7 +80,12 @@ public class StudentAction extends ActionSupport {
     	session = ServletActionContext.getRequest().getSession();
     	//session.setAttribute("studentId", "as132736");
     	request = ServletActionContext.getRequest();
+    	if(session.getAttribute("studentId")==null){    		
+    		return "logout";
+    	}
     	String studentId=session.getAttribute("studentId").toString(); 
+    	
+    	System.out.println("StudentId From Session--->" + studentId);
     	student = studentDAO.getStudent(studentId);
     	List<FoodSelected> listFoodSelected = foodSelectedDAO.listFoodSelected(student);
     	listQuad = quadInfoDAO.list();

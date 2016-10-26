@@ -58,6 +58,9 @@
                         <a href="#page-top"></a>
                     </li>
                     <li class="page-scroll">
+                        <a href="logout">Logout</a>
+                    </li>
+                    <li class="page-scroll">
                         <a href="#portfolio">Order Modification</a>
                     </li>
                     <li class="page-scroll">

@@ -26,7 +26,11 @@
     <bean id="managerActionBean" class="com.albany.edu.fwp.action.ManagerAction">
         <property name="studentDAO" ref="studentDAO" />
     </bean>
+    
     <bean id="loginActionBean" class="com.albany.edu.fwp.action.LoginAction">
+    </bean>
+    
+    <bean id="logoutActionBean" class="com.albany.edu.fwp.action.LogoutAction">
     </bean>
  
     <bean id="adminActionBean" class="com.albany.edu.fwp.action.AdminAction">

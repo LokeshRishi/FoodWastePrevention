@@ -68,6 +68,9 @@
                         <a href="#page-top"></a>
                     </li>
                     <li class="page-scroll">
+                        <a href="logout">Logout</a>
+                    </li>
+                    <li class="page-scroll">
                         <a href="#portfolio">Food Court</a>
                     </li>                    
                     <li class="page-scroll">
@@ -243,7 +246,7 @@
                     <form name="sentMessage" id="contactForm" novalidate>
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label>Name</label>
+                                <label>Student Name</label>
                                 <input type="text" class="form-control" placeholder="Name" id="name" required data-validation-required-message="Please enter your name.">
                                 <p class="help-block text-danger"></p>
                             </div>

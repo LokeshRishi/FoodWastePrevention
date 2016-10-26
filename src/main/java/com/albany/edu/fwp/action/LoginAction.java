@@ -21,7 +21,12 @@ import org.apache.struts2.ServletActionContext;
 import org.w3c.dom.*;
 
 public class LoginAction extends ActionSupport{
-	private String sessionUID, sessionPassword, redirection, newPassword, confirmNewPassword, type;
+	private String sessionUID;
+	private String sessionPassword;
+	private String redirection;
+	private String newPassword;
+	private String confirmNewPassword;
+	private String type;
 	private String err;
 	
 	//Remove this///
@@ -54,7 +59,7 @@ public class LoginAction extends ActionSupport{
     		if(loginnode.getNodeType()==loginnode.ELEMENT_NODE)
     		{
     			Element user=(Element) loginnode;    			
-    			if(sessionUID.equals(user.getElementsByTagName("UserName").item(0).getTextContent()))
+    			if(sessionUID.toLowerCase().equals(user.getElementsByTagName("UserName").item(0).getTextContent().toLowerCase()))
     				if(sessionPassword.equals(user.getElementsByTagName("Password").item(0).getTextContent()))
     				{
     					this.redirection=type.toLowerCase()+"success";
@@ -114,7 +119,7 @@ public class LoginAction extends ActionSupport{
     	    		if(loginnode.getNodeType()==loginnode.ELEMENT_NODE)
     	    		{
     	    			Element user=(Element) loginnode;    			
-    	    			if(sessionUID.equals(user.getElementsByTagName("UserName").item(0).getTextContent()))
+    	    			if(sessionUID.toLowerCase().equals(user.getElementsByTagName("UserName").item(0).getTextContent().toLowerCase()))
     	    			{
     	    				user.getElementsByTagName("Password").item(0).setTextContent(newPassword);
     	    				user.getElementsByTagName("FirstTimeUser").item(0).setTextContent("N");

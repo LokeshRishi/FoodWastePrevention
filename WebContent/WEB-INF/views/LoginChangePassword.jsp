@@ -5,14 +5,45 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Change Password</title>
+<title>Change Password - Food Waste Prevention</title>
+    <!-- Theme CSS -->
+    <link href="/foodwasteprevention/resources/css/freelancer.css" rel="stylesheet">
 </head>
+
 <body>
-<s:property value="%{err}"/>
-<s:form action="LoginChangePasswordSubmit" method='post'>
-<s:password label='New Password' key='newPassword'/>
-<s:password label='Confirm New Password' key="confirmNewPassword" />
-<s:submit value="Submit" name='Submit'/>
-</s:form>
+	<label style=" color: #18bc9c; font-family: 'Helvetica Neue', sans-serif; font-size: 26px; font-weight: bold; letter-spacing: -1px; line-height: 1; text-align: center;text-shadow: 3px 3px white;">Food Waste Prevention</label>
+
+	<div class="form">
+      <ul class="tab-group">
+        <li class="tab active"><a href="#login">Reset Password</a></li>
+      </ul>
+      
+      <div class="tab-content">
+      
+        <div id="login" style="display: block">   
+		  <s:property value="%{err}"/>
+          <form action="LoginChangePasswordSubmit" method="post">
+          
+            <div class="field-wrap">
+            <label>
+              New Password<span class="req">*</span>
+            </label>
+            <input type="password" key='newPassword' autocomplete="off"/>
+          </div>
+          
+          <div class="field-wrap">
+            <label>
+              Confirm New Password<span class="req">*</span>
+            </label>
+            <input type="password" key='confirmNewPassword' autocomplete="off"/>
+          </div>
+		
+          <button class="button button-block">Change Password</button>
+          </form>
+        </div>
+
+      </div><!-- tab-content -->
+      
+	</div> <!-- /form -->
 </body>
 </html>

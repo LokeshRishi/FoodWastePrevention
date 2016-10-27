@@ -50,6 +50,7 @@ public class StudentAction extends ActionSupport {
     private MealCourse mealCourse;
     private HashMap<String, HashMap<String, List<List<String>>>> allFoodItems;
     private HashMap<String, List<List<String>>> selectedFoodItemsPerMealCourseMap;
+    private String status;
  
     public void setFoodItemsDAO(FoodItemsDAO foodItemsDAO) {
 		this.foodItemsDAO = foodItemsDAO;
@@ -86,6 +87,14 @@ public class StudentAction extends ActionSupport {
     	String studentId=session.getAttribute("studentId").toString(); 
     	
     	System.out.println("StudentId From Session--->" + studentId);
+    	if(!(session.getAttribute("emailStatus")==null)){
+    		status=session.getAttribute("emailStatus").toString();
+    		session.removeAttribute("emailStatus");
+    	}else{
+    		status="";
+    	}
+    	
+    	System.out.println("parameterList Set--------->"+request.getParameterMap().keySet());
     	student = studentDAO.getStudent(studentId);
     	List<FoodSelected> listFoodSelected = foodSelectedDAO.listFoodSelected(student);
     	listQuad = quadInfoDAO.list();
@@ -139,7 +148,7 @@ public class StudentAction extends ActionSupport {
     		session.setAttribute("selectedFoodItemsQuadAndMealCourse", selectedFoodItemsQuadAndMealCourse);
     		returnString="edit";
 		}
-    	else if( !(request.getParameterMap().isEmpty()) && request.getParameter("next")==null )
+    	else if( !(request.getParameterMap().isEmpty()) && request.getParameter("next")==null)
     	{		
     		if( !(listFoodSelected.isEmpty()) ){
     			foodSelectedDAO.deleteStudentSelection(student);
@@ -212,6 +221,10 @@ public class StudentAction extends ActionSupport {
     
     public HashMap<String, List<List<String>>> getSelectedFoodItemsPerMealCourseMap() {
         return selectedFoodItemsPerMealCourseMap;
+    }
+    
+    public String getStatus() {
+        return status;
     }
     
     

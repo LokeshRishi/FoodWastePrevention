@@ -8,6 +8,7 @@
 <title>Change Password - Food Waste Prevention</title>
     <!-- Theme CSS -->
     <link href="/foodwasteprevention/resources/css/freelancer.css" rel="stylesheet">
+    <link href="/foodwasteprevention/resources/css/login.css" rel="stylesheet">
 </head>
 
 <body>
@@ -25,17 +26,18 @@
           <form action="LoginChangePasswordSubmit" method="post">
           
             <div class="field-wrap">
-            <label>
+            <!-- <label>
               New Password<span class="req">*</span>
-            </label>
-            <input type="password" key='newPassword' autocomplete="off"/>
+            </label> -->
+            
+            New Password: <input type="password" name='newPassword' autocomplete="off"/>
           </div>
           
           <div class="field-wrap">
-            <label>
+            <!-- <label>
               Confirm New Password<span class="req">*</span>
-            </label>
-            <input type="password" key='confirmNewPassword' autocomplete="off"/>
+            </label> -->
+            Confirm New Password: <input type="password" name='confirmNewPassword' autocomplete="off"/>
           </div>
 		
           <button class="button button-block">Change Password</button>

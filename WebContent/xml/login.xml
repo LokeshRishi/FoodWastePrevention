@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?><Users>
   <Manager>
-    <UserName>SR123123</UserName>
+    <UserName>SRA123123</UserName>
     <Password>Helping123</Password>
     <FirstTimeUser>N</FirstTimeUser>
   </Manager>
   <Student>
-    <UserName>SRA123123</UserName>
-    <Password>Shilpa123</Password>
+    <UserName>nr123123</UserName>
+    <Password>Test1234</Password>
     <FirstTimeUser>Y</FirstTimeUser>
   </Student>
   <Admin>

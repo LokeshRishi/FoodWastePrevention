@@ -10,14 +10,17 @@
 
     <!-- Theme CSS -->
     <link href="/foodwasteprevention/resources/css/freelancer.css" rel="stylesheet">
+    <link href="/foodwasteprevention/resources/css/login.css" rel="stylesheet">
 </head>
 
 <body>
 	<label style=" color: #18bc9c; font-family: 'Helvetica Neue', sans-serif; font-size: 26px; font-weight: bold; letter-spacing: -1px; line-height: 1; text-align: center;text-shadow: 3px 3px white;">Food Waste Prevention</label>
 	<div class="form">
       <ul class="tab-group">
-<!--         <li class="tab active"><a href="#forgot">Sign Up</a></li>
- -->        <li class="tab active"><a href="#login">Sign in</a></li>
+		<!-- <li class="tab active"><a href="#forgot">Sign Up</a></li>
+		-->
+             <li class="tab active"><a href="#login">Sign in</a></li>
+         
       </ul>
       
       <div class="tab-content">
@@ -28,16 +31,16 @@
           
             <div class="field-wrap">
             <label>
-              Email Address<span class="req">*</span>
+              Net Id<span class="req">*</span>
             </label>
-            <input key='sessionUID' autocomplete="off"/>
+            <input name='sessionUID' autocomplete="off"/>
           </div>
           
           <div class="field-wrap">
             <label>
               Password<span class="req">*</span>
             </label>
-            <input type="password" key='sessionPassword' autocomplete="off"/>
+            <input type="password" name='sessionPassword' autocomplete="off"/>
           </div>
 		
 		<div class="field-wrap">

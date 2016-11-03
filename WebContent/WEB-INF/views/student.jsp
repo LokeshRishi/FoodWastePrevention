@@ -15,6 +15,9 @@
 
     <title>Student - Make Food Selection</title>
 
+	<!-- Date Picker CSS -->
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	
     <!-- Bootstrap Core CSS -->
     <link href="/foodwasteprevention/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -125,13 +128,20 @@
     <!-- Portfolio Grid Section -->
     <section id="portfolio">
         <div class="container">
+			<div class="row">
+				<div class="col-lg-12 text-right">
+					<form id="dateSelector" action="setDate">
+						<p>Date: <input type="text" name="date" id="datepicker" onchange="dateSet()"></p>
+					</form>
+				</div>
+			</div>
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2>Satiate Your Tastebuds</h2>
-                    <hr class="star-primary">
+                    <h2>Satiate Your Tastebuds</h2>                    
+                    <hr class="star-primary">					
                 </div>
             </div>
-            
+			
             <div class="row">
             <form id="foodSelector" action="student">
             		<s:set var="itr" value="0" />
@@ -342,9 +352,15 @@
         </a>
     </div>
 
+	
 
     <!-- jQuery -->
     <script src="/foodwasteprevention/resources/jquery/jquery.min.js"></script>
+	
+	<!-- Date Picker -->
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="/foodwasteprevention/resources/bootstrap/js/bootstrap.min.js"></script>
@@ -354,11 +370,15 @@
 
     <!-- Contact Form JavaScript -->
     <script src="/foodwasteprevention/resources/js/jqBootstrapValidation.js"></script>
-
+	
+	
     <!-- Theme JavaScript -->
     <script src="/foodwasteprevention/resources/js/freelancer.js"></script>
 
     <script src="/foodwasteprevention/resources/js/jquery.countdown.js"></script>
+    
+    
+	
 
 	<script>
 	var arrMap = [];
@@ -468,6 +488,18 @@
 	    digitWidth: 33.99,
 	    digitHeight: 45
 	  });
+	  
+	$( function() {
+	    $( "#datepicker" ).datepicker();
+	  } );
+	  
+	function dateSet(){	
+		var date=$( "#datepicker" ).val();
+		var breakup = date.split("/");
+		var dateMod = breakup[2]+ "-" + breakup[0]+ "-" + breakup[1];
+		document.getElementById("datepicker").value = dateMod;
+		document.forms["dateSelector"].submit();
+	}  
 	</script>
 
 </body>

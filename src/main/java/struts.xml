@@ -42,6 +42,13 @@
             </result> 
         </action>
         
+        <action name="setDate" class="setDateActionBean">
+            <result name="success" type="redirectAction">
+                <param name='actionName'>student</param>
+            </result>             
+        </action>
+        
+        
         <action name="loginsubmit" class="loginActionBean" method="matchUIDandPassword">
             <result name="managersuccess" type="redirectAction">
                 <param name='actionName'>manager</param>

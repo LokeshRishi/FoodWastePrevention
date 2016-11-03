@@ -7,7 +7,7 @@
   <Student>
     <UserName>nr123123</UserName>
     <Password>Test1234</Password>
-    <FirstTimeUser>Y</FirstTimeUser>
+    <FirstTimeUser>N</FirstTimeUser>
   </Student>
   <Admin>
     <UserName>SRB123123</UserName>

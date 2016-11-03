@@ -33,6 +33,9 @@
     <bean id="loginActionBean" class="com.albany.edu.fwp.action.LoginAction">
     </bean>
     
+    <bean id="setDateActionBean" class="com.albany.edu.fwp.action.SetDateAction">
+    </bean>
+    
     <bean id="logoutActionBean" class="com.albany.edu.fwp.action.LogoutAction">
     </bean>
  
@@ -69,8 +72,16 @@
         <constructor-arg index="3">
             <ref bean="imagesDAO" />
         </constructor-arg>
+        <constructor-arg index="4">
+            <ref bean="foodDateDAO" />
+        </constructor-arg>
         
     </bean> 
+    <bean id="foodDateDAO" class="com.albany.edu.fwp.dao.FoodDateDAOImpl">
+        <constructor-arg>
+            <ref bean="sessionFactory" />
+        </constructor-arg>
+    </bean>
     <bean id="foodSelectedDAO" class="com.albany.edu.fwp.dao.FoodSelectedDAOImpl">
         <constructor-arg>
             <ref bean="sessionFactory" />

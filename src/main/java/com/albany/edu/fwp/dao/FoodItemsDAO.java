@@ -8,7 +8,7 @@ import com.albany.edu.fwp.model.FoodItems;
 public interface FoodItemsDAO {
 	FoodItems getFoodItem(String foodItemId);
 	List<FoodItems> list();
-	HashMap<String, HashMap<String, List<List<String>>>> getAllFoodItemsMap();
+	HashMap<String, HashMap<String, List<List<String>>>> getAllFoodItemsMap(String dateInString);
 //          Quand           MealCo  item      [itemName,Image]	
 //    List<FoodItems> getListBreakfastQuad10();
 //    List<FoodItems> getListBreakfastQuad20();

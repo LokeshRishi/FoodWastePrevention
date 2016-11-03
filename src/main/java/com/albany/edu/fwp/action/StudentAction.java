@@ -5,8 +5,10 @@
 package com.albany.edu.fwp.action;
  
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -96,7 +98,24 @@ public class StudentAction extends ActionSupport {
     	
     	System.out.println("parameterList Set--------->"+request.getParameterMap().keySet());
     	student = studentDAO.getStudent(studentId);
-    	List<FoodSelected> listFoodSelected = foodSelectedDAO.listFoodSelected(student);
+    	String dateString="";
+    	if(session.getAttribute("date")==null){ 
+    		SimpleDateFormat dmyFormat = new SimpleDateFormat("yyyy-MM-dd");
+    		Date date = new Date();
+    		Calendar c = Calendar.getInstance();
+    		try {
+				c.setTime(dmyFormat.parse(date.toString()));
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+    		c.add(Calendar.DATE, 1);
+    		session.setAttribute("date", dmyFormat.format(c.getTime()).toString());
+    		dateString=session.getAttribute("date").toString();
+    	}
+    	else{
+    		dateString=session.getAttribute("date").toString();
+    	}
+    	List<FoodSelected> listFoodSelected = foodSelectedDAO.listFoodSelected(student, dateString);
     	listQuad = quadInfoDAO.list();
 		quadNames = new ArrayList<String>();
 			for (QuadInfo quad : listQuad){
@@ -119,6 +138,8 @@ public class StudentAction extends ActionSupport {
 			}else{
 				session.setAttribute("resetRadio", "false");
 			}
+			
+			
 			
     	if( !listFoodSelected.isEmpty()	&& request.getParameterMap().isEmpty() )    	  
     	{
@@ -151,20 +172,21 @@ public class StudentAction extends ActionSupport {
     	else if( !(request.getParameterMap().isEmpty()) && request.getParameter("next")==null)
     	{		
     		if( !(listFoodSelected.isEmpty()) ){
-    			foodSelectedDAO.deleteStudentSelection(student);
+    			foodSelectedDAO.deleteStudentSelection(student, dateString);
     		}    		
-    		DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
-    		Date date = new Date();
-    		dateFormat.format(date).toString();
+//    		DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+//    		Date date = new Date();
+//    		dateFormat.format(date).toString();
     		Map<String, String[]> map = request.getParameterMap();
     		Iterator<Entry<String,String[]>> iterator = map.entrySet().iterator();
     		while (iterator.hasNext()) {
     			Map.Entry<String,String[]> entry = (Map.Entry<String,String[]>) iterator.next();
     			System.out.println("Key : " + entry.getKey() + " Value :" + entry.getValue()[0]);
     			foodItems=foodItemsDAO.getFoodItem(entry.getKey());
-    			foodSelectedDAO.insertFoodSelected(Integer.parseInt(entry.getValue()[0]), foodItems, student, dateFormat.format(date).toString());
+    			foodSelectedDAO.insertFoodSelected(Integer.parseInt(entry.getValue()[0]), foodItems, student, dateString);
+    			//foodSelectedDAO.insertFoodSelected(Integer.parseInt(entry.getValue()[0]), foodItems, student, dateFormat.format(date).toString());
     		}
-    		listFoodSelected = foodSelectedDAO.listFoodSelected(student);
+    		listFoodSelected = foodSelectedDAO.listFoodSelected(student, dateString);
     		for (FoodSelected foodSelected : listFoodSelected){ 
     			List<String> foodItemsAndQuantity = new ArrayList<String>();   			
     			foodItems = foodItemsDAO.getFoodItem( Integer.toString(foodSelected.getFoodItems().getFoodItemId()));
@@ -192,13 +214,13 @@ public class StudentAction extends ActionSupport {
 		}
     	
     	else{	    		
-	    	allFoodItems = foodItemsDAO.getAllFoodItemsMap();     
-	    	for (List foodItem : allFoodItems.get("Indian").get("Breakfast")){
-			    System.out.println("Quad Ids: "+ foodItem);
-			}
+	    	allFoodItems = foodItemsDAO.getAllFoodItemsMap(dateString);     
+//	    	for (List foodItem : allFoodItems.get("Indian").get("Breakfast")){
+//			    System.out.println("Quad Ids: "+ foodItem);
+//			}
 	    	returnString="firstchoice";
     	}
-    	
+    	System.out.println("Date --------------------> "+session.getAttribute("date"));
         return returnString;
     }
 

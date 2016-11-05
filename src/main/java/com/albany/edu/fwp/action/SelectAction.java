@@ -37,7 +37,14 @@ public class SelectAction extends ActionSupport{
 	private AesEncryption aesEncryption;
 	private StudentDAO studentdao;
 	private String result;
+	private String destPath; 
 	
+	public String getDestPath() {
+		return destPath;
+	}
+	public void setDestPath(String destPath) {
+		this.destPath = destPath;
+	}
 	public void setStudent(Student student){
 		this.student=student;
 	}
@@ -51,6 +58,7 @@ public class SelectAction extends ActionSupport{
 
 	public String execute() {
 		try {
+			System.out.println(ServletActionContext.getServletContext().getRealPath("/")+"xml");
 			String studentonboarding = ServletActionContext.getServletContext().getRealPath("/")+"xml/studentonboarding.xml"; 
 			String login = ServletActionContext.getServletContext().getRealPath("/")+"xml/login.xml"; 
 			File fXmlFile = new File(studentonboarding);

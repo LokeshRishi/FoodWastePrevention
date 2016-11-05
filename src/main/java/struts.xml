@@ -104,8 +104,25 @@
 			<result name="success">/WEB-INF/views/SetConfigurations.jsp</result>
 		</action>
 		
-		<action name="selectaction"	class="selectActionBean" >
-			<result name="success">/WEB-INF/views/test.jsp</result>
+		<action name="uploadactionsubmit"	class="uploadActionBean" method='upload' >			
+			<result name="success" type="redirectAction">
+				<param name='actionName'>selectaction</param>
+            	<param name='destPath'>${destPath}</param>            	
+            </result>   
+            <result name="error" type="redirectAction">
+            	<param name='actionName'>uploadaction</param>
+            	<param name='err'>${err}</param>
+            </result>    
+		</action>
+		<action name="uploadaction"	class="uploadActionBean" method='execute'>
+			<result name="success">/WEB-INF/views/browse.jsp</result>			
+		</action>
+		
+		<action name="selectaction"	class="selectActionBean" >		
+			<result name="success" type="redirectAction">
+				<param name='actionName'>uploadaction</param>
+            	<param name='result'>${result}</param>            	
+            </result>		 
 		</action>
 
         <action name="manageredit" class="managerActionBean">

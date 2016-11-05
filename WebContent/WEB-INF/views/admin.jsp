@@ -70,7 +70,7 @@ body {
   <a href="<s:url action="urlTagAction" />" target="frame1">Manager</a>
   <a href="<s:url action="urlTagAction1" />" target="frame1" >Quads</a>
   <a href="<s:url action="urlTagAction2" />" target="frame1" >Configure Time</a>    
-  <a href="<s:url action="selectaction" />" target="frame1" >Add Student</a>    
+  <a href="<s:url action="uploadaction" />" target="frame1" >Add Student</a>    
 </div>
  
 <div id="main">

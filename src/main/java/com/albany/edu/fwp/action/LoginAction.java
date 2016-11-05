@@ -10,6 +10,7 @@ import com.mysql.jdbc.StringUtils;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.xml.parsers.*;
 import javax.xml.transform.Transformer;
@@ -28,20 +29,32 @@ public class LoginAction extends ActionSupport{
 	private String confirmNewPassword;
 	private String type;
 	private String err;
+	private HttpServletRequest request;
+	private HttpSession session;
 	
 	//Remove this///
 	
 	private  String xmlfile;
 	
     public String execute() {
-    	xmlfile=ServletActionContext.getServletContext().getRealPath("/")+"xml/login.xml";
+    		   	
+    	
     	return SUCCESS;
+    	
     }
     
     public String matchUIDandPassword(){
     	NodeList loginList=null;
 	    try
-	    {
+	    {xmlfile=ServletActionContext.getServletContext().getRealPath("/")+"xml/login.xml";    
+	    	type="Student";
+	    	request = ServletActionContext.getRequest(); 
+	    	sessionUID=request.getParameter("sessionUID").toString();
+	    	sessionPassword=request.getParameter("sessionPassword").toString();	    	
+	    	type=request.getParameter("type").toString();
+	    	System.out.println(ServletActionContext.getServletContext().getRealPath("/")+"xml/login.xml");
+	    	System.out.println("Form Data----->"+request.getParameterMap().values());
+	    	
 	    	System.out.println("--->"+xmlfile);
 	    	File loginFile = new File(xmlfile);
 	    	DocumentBuilderFactory logindbf = DocumentBuilderFactory.newInstance();
@@ -94,6 +107,10 @@ public class LoginAction extends ActionSupport{
     
     public String newPassword()
     {    	
+    	request = ServletActionContext.getRequest(); 
+    	System.out.println("Form Data----->"+request.getParameterMap().values());
+    	newPassword=request.getParameter("newPassword").toString();
+    	confirmNewPassword=request.getParameter("confirmNewPassword").toString();
     	if(newPassword.equals(confirmNewPassword))
     		if(newPassword.length()<8||newPassword.matches("[a-z]") || newPassword.matches("[A-Z]")|| newPassword.matches("[0-9]"))
     		{
@@ -145,22 +162,7 @@ public class LoginAction extends ActionSupport{
     	//replace password
     }
     
-    public void setSessionUID(String sessionUID)
-    {
-    	this.sessionUID=sessionUID;
-    }
-    public String getSessionUID()
-    {
-    	return this.sessionUID;
-    }
-    public void setSessionPassword(String sessionPassword)
-    {
-    	this.sessionPassword=sessionPassword;
-    }
-    public String getSessionPassword()
-    {
-    	return this.sessionPassword;
-    }
+   
     public void setRedirection(String redirection)
     {
     	this.redirection=redirection;
@@ -169,29 +171,7 @@ public class LoginAction extends ActionSupport{
     {
     	return this.redirection;
     }
-    public void setNewPassword(String newPassword)
-    {
-    	this.newPassword=newPassword;
-    }
-    public String getNewPassword()
-    {
-    	return this.newPassword;
-    }
-    public void setConfirmNewPassword(String confirmNewPassword)
-    {
-    	this.confirmNewPassword=confirmNewPassword;
-    }
-    public String getConfirmNewPassword()
-    {
-    	return this.confirmNewPassword;
-    }
-	public String getType() {
-		return type;
-	}
-	public void setType(String type) {
-		this.type = type;
-	}
-
+   
 	public String getErr() {
 		return err;
 	}

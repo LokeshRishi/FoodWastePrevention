@@ -15,6 +15,9 @@
 
     <title>Student - Make Food Selection</title>
 
+	<!-- Date Picker CSS -->
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	
     <!-- Bootstrap Core CSS -->
     <link href="/foodwasteprevention/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -125,13 +128,20 @@
     <!-- Portfolio Grid Section -->
     <section id="portfolio">
         <div class="container">
+			<div class="row">
+				<div class="col-lg-12 text-right">
+					<form id="dateSelector" action="setDate">
+						<p>Date: <input type="text" name="date" id="datepicker" onchange="dateSet()"></p>
+					</form>
+				</div>
+			</div>
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2>Satiate Your Tastebuds</h2>
-                    <hr class="star-primary">
+                    <h2>Satiate Your Tastebuds</h2>                    
+                    <hr class="star-primary">					
                 </div>
             </div>
-            
+			
             <div class="row">
             <form id="foodSelector" action="student">
             		<s:set var="itr" value="0" />
@@ -230,45 +240,45 @@
             </div>
         </div>
     </section>
-    
-
+	<s:property value="#status"/>
     <!-- Contact Section -->
     <section id="contact">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <h2>Questions/Feedback</h2>
+                    <span class="skills">${status}</span>
                     <hr class="star-primary">
                 </div>
             </div>
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2">
-                    <form name="sentMessage" id="contactForm" novalidate>
+                    <form name="sentMessage" action="feedback" id="contactForm" novalidate>
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
                                 <label>Student Name</label>
-                                <input type="text" class="form-control" placeholder="Name" id="name" required data-validation-required-message="Please enter your name.">
+                                <input type="text" name="name" class="form-control" placeholder="Name" id="name" required data-validation-required-message="Please enter your name.">
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
                                 <label>Quad Email</label>
-                                <input type="email" class="form-control" placeholder="Quad Email" id="email" required data-validation-required-message="Please enter your email address.">
+                                <input type="email" name="email" class="form-control" placeholder="Quad Email" id="email" required data-validation-required-message="Please enter your email address.">
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
                                 <label>Phone Number</label>
-                                <input type="tel" class="form-control" placeholder="Phone Number" id="phone" required data-validation-required-message="Please enter your phone number.">
+                                <input type="tel" name="tel" class="form-control" placeholder="Phone Number" id="phone" required data-validation-required-message="Please enter your phone number.">
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
                                 <label>Message</label>
-                                <textarea rows="5" class="form-control" placeholder="Message" id="message" required data-validation-required-message="Please enter a message."></textarea>
+                                <textarea rows="5" name="msg" class="form-control" placeholder="Message" id="message" required data-validation-required-message="Please enter a message."></textarea>
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
@@ -342,9 +352,15 @@
         </a>
     </div>
 
+	
 
     <!-- jQuery -->
     <script src="/foodwasteprevention/resources/jquery/jquery.min.js"></script>
+	
+	<!-- Date Picker -->
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="/foodwasteprevention/resources/bootstrap/js/bootstrap.min.js"></script>
@@ -354,11 +370,15 @@
 
     <!-- Contact Form JavaScript -->
     <script src="/foodwasteprevention/resources/js/jqBootstrapValidation.js"></script>
-
+	
+	
     <!-- Theme JavaScript -->
     <script src="/foodwasteprevention/resources/js/freelancer.js"></script>
 
     <script src="/foodwasteprevention/resources/js/jquery.countdown.js"></script>
+    
+    
+	
 
 	<script>
 	var arrMap = [];
@@ -468,6 +488,18 @@
 	    digitWidth: 33.99,
 	    digitHeight: 45
 	  });
+	  
+	$( function() {
+	    $( "#datepicker" ).datepicker();
+	  } );
+	  
+	function dateSet(){	
+		var date=$( "#datepicker" ).val();
+		var breakup = date.split("/");
+		var dateMod = breakup[2]+ "-" + breakup[0]+ "-" + breakup[1];
+		document.getElementById("datepicker").value = dateMod;
+		document.forms["dateSelector"].submit();
+	}  
 	</script>
 
 </body>

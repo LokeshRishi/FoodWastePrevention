@@ -13,8 +13,7 @@ pageEncoding="ISO-8859-1"%>
    <form action="uploadactionsubmit" method="post" enctype="multipart/form-data">
       <label for="myFile">Upload your file</label>
       <input type="file" name="myFile" />
-      <input type="submit" value="Upload"/>
-      <input type="submit" value="Submit"/>
+      <input type="submit" value="Upload"/>     
    </form>
 </body>
 </html>

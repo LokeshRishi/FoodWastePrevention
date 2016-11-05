@@ -94,7 +94,7 @@ public class SelectAction extends ActionSupport{
 					Element password=doc1.createElement("Password");					
 					//aesEncryption.encrypt((eElement.getElementsByTagName("name").item(0).getTextContent()).trim());						
 					//password.setTextContent(aesEncryption.getEncryptedString());
-					password.setTextContent((eElement.getElementsByTagName("name").item(0).getTextContent()).trim()); //uncomment above 2 lines and comment this line to enable encryption
+					password.setTextContent((eElement.getElementsByTagName("password").item(0).getTextContent()).trim()); //uncomment above 2 lines and comment this line to enable encryption
 					Element firstTimeUser=doc1.createElement("FirstTimeUser");					
 					firstTimeUser.setTextContent("Y");
 					studentTag.appendChild(username);

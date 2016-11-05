@@ -1,5 +1,6 @@
 package com.albany.edu.fwp.model;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -7,7 +8,7 @@ public class FoodSelected {
 
 	private long selectionId;	
     private int numberOfPlates;
-    private String submitDateTime;
+    private Date submitDateTime;
     private FoodItems foodItems;
     private Student student;    
     
@@ -30,11 +31,11 @@ public class FoodSelected {
         this.numberOfPlates = numberOfPlates;
     }
  
-    public String getSubmitDateTime() {
+    public Date getSubmitDateTime() {
         return submitDateTime;
     }
  
-    public void setSubmitDateTime(String submitDateTime) {
+    public void setSubmitDateTime(Date submitDateTime) {
         this.submitDateTime = submitDateTime;
     }
  

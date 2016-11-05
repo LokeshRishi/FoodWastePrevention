@@ -37,6 +37,13 @@
             </key>
             <one-to-many class="com.albany.edu.fwp.model.FoodSelected" />
         </set>
+        <set name="foodByDate" table="FoodDate"
+				inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="FoodItemID" not-null="true" />
+            </key>
+            <one-to-many class="com.albany.edu.fwp.model.FoodDate" />
+        </set>
         
        
         

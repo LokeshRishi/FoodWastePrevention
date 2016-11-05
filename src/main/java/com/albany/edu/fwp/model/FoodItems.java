@@ -11,6 +11,7 @@ public class FoodItems {
     private int calories;
     private boolean isSelectedInMenu;
     private Set<FoodSelected> foodSelections =	new HashSet<FoodSelected>(0);
+    private Set<FoodDate> foodByDate =	new HashSet<FoodDate>(0);
     private Images images;
     private QuadInfo quadInfo;
     private MealCourse mealCourse;
@@ -97,6 +98,14 @@ public class FoodItems {
 
 	public void setIsSelectedInMenu(boolean isSelectedInMenu) {
 		this.isSelectedInMenu = isSelectedInMenu;
+	}
+	
+	public Set<FoodDate> getFoodByDate() {
+	        return foodByDate;
+	}
+	 
+	public void setFoodByDate(Set<FoodDate> foodByDate) {
+	        this.foodByDate = foodByDate;
 	}
 
 	

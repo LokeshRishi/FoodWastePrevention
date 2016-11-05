@@ -1,6 +1,8 @@
 package com.albany.edu.fwp.dao;
 
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -11,6 +13,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 
+import com.albany.edu.fwp.model.FoodDate;
 import com.albany.edu.fwp.model.FoodItems;
 import com.albany.edu.fwp.model.QuadInfo;
 import com.albany.edu.fwp.model.MealCourse;
@@ -23,13 +26,15 @@ public class FoodItemsDAOImpl implements FoodItemsDAO {
     private QuadInfoDAO quadInfoDAO;
     private MealCourseDAO mealCourseDAO;
     private ImagesDAO imagesDAO;
+    private FoodDateDAO foodDateDAO;
  
     public FoodItemsDAOImpl(SessionFactory sessionFactory, QuadInfoDAO quadInfoDAO,
-    		MealCourseDAO mealCourseDAO, ImagesDAO imagesDAO) {
+    		MealCourseDAO mealCourseDAO, ImagesDAO imagesDAO,  FoodDateDAO foodDateDAO) {
         this.sessionFactory = sessionFactory;
         this.quadInfoDAO = quadInfoDAO;
         this.mealCourseDAO = mealCourseDAO;
         this.imagesDAO = imagesDAO;
+        this.foodDateDAO = foodDateDAO;
     }
     
     @Transactional
@@ -53,13 +58,21 @@ public class FoodItemsDAOImpl implements FoodItemsDAO {
     
     
 	  @Transactional
-	  public HashMap<String, HashMap<String, List<List<String>>>> getAllFoodItemsMap() {
+	  public HashMap<String, HashMap<String, List<List<String>>>> getAllFoodItemsMap(String dateInString) {
 	      @SuppressWarnings("unchecked")	      
 	      String hql = "FROM FoodItems F WHERE F.isSelectedInMenu = true AND F.quadInfo = <quadId> AND F.mealCourse = <mealCourseId>";
 	      Query query;	   	      	      
 	      HashMap<String, HashMap<String, List<List<String>>>> allFoodItems = new HashMap<String, HashMap<String, List<List<String>>>>();
 	      List<QuadInfo> listQuad = quadInfoDAO.list();
 	      List<MealCourse> listMealCourse = mealCourseDAO.list();
+		  List<FoodDate> listFoodItemsByDate = foodDateDAO.listFoodByDate(dateInString);
+		  String foodItemId = "";
+		  for (FoodDate foodDate : listFoodItemsByDate){
+			  foodItemId = foodDate.getFoodItems().getFoodItemName();
+			  System.out.println("+++++FoodByDate+++++++++ "+ foodItemId); 
+		  }
+	    
+	      
 	        for (QuadInfo quad : listQuad){
 	        	HashMap<String, List<List<String>>> quadFoodItemsPerMealCourseMap = new HashMap<String, List<List<String>>>();	        	
 	        	for (MealCourse mealCourse : listMealCourse){
@@ -67,14 +80,18 @@ public class FoodItemsDAOImpl implements FoodItemsDAO {
 	        		List<FoodItems> foodItems = new ArrayList<FoodItems>();
 	        		query = sessionFactory.getCurrentSession().createQuery(hql.replaceAll("<quadId>", Integer.toString(quad.getQuadId())).replaceAll("<mealCourseId>", Integer.toString(mealCourse.getMealCourseId())));
 	        		foodItems = (List<FoodItems>)query.list();
-	        		for (FoodItems foodItem : foodItems){	        			
-		        		List<String> foodItemsImageAndCalorie = new ArrayList<String>();
-		        		foodItemsImageAndCalorie.add(foodItem.getFoodItemName());
-		        		foodItemsImageAndCalorie.add(imagesDAO.imagePath(foodItem.getImages().getImageId()));
-		        		foodItemsImageAndCalorie.add(Integer.toString(foodItem.getCalories()));
-		        		foodItemsImageAndCalorie.add(Integer.toString(foodItem.getFoodItemId()));
-	        			System.out.println("------->"+foodItem.getFoodItemName()+ "  "+imagesDAO.imagePath(foodItem.getImages().getImageId()));
-	        			quadFoodItemsPerMealCourseList.add(foodItemsImageAndCalorie);
+	        		for (FoodItems foodItem : foodItems){
+	        			List<String> foodItemsImageAndCalorie = new ArrayList<String>();
+	        			for (FoodDate foodDate : listFoodItemsByDate){
+	        				if(foodItem.getFoodItemId()==foodDate.getFoodItems().getFoodItemId()){
+	        					foodItemsImageAndCalorie.add(foodItem.getFoodItemName());
+	    		        		foodItemsImageAndCalorie.add(imagesDAO.imagePath(foodItem.getImages().getImageId()));
+	    		        		foodItemsImageAndCalorie.add(Integer.toString(foodItem.getCalories()));
+	    		        		foodItemsImageAndCalorie.add(Integer.toString(foodItem.getFoodItemId()));
+	    	        			System.out.println("------->"+foodItem.getFoodItemName()+ "  "+imagesDAO.imagePath(foodItem.getImages().getImageId()));
+	    	        			quadFoodItemsPerMealCourseList.add(foodItemsImageAndCalorie);
+	        				}	        				
+	        			}		        		
 	        		}	        		
 	        		quadFoodItemsPerMealCourseMap.put(mealCourse.getMealCourseName(), quadFoodItemsPerMealCourseList);	        		
 	        	}

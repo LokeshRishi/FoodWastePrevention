@@ -1,3 +1,7 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib  prefix="s" uri="/struts-tags" %>   
+<%@taglib  prefix="bean" uri="http://struts.apache.org/tags-bean" %>
+<%@taglib prefix="logic" uri="http://struts.apache.org/tags-logic" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -106,10 +110,17 @@
             </div>
             
             <div class="row">
-
+			
             <div id="container">
                 <div class="food-list food-container" id="catalog">
-                    <h3>Catalog</h3>
+                    <h3>Catalog</h3>                    
+                     <s:iterator value="foodList" var="myvar" status="stat">
+	                     <div class="menu-item ui-draggable" id=${myvar[0]} style="position: relative;">
+	                     <div class="food-header">${myvar[1]}</div>
+	                     <div class="meal-typelabel label-default">${myvar[3]}</div>
+						 </div>
+					  </s:iterator>					  
+					  
                 </div>
 
                 <div class="food-list food-container" id="menu">

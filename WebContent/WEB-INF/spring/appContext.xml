@@ -35,7 +35,9 @@
     </bean>
     
     <bean id="managerActionBean" class="com.albany.edu.fwp.action.ManagerAction">
-        <property name="studentDAO" ref="studentDAO" />
+        <property name="foodItemsDAO" ref="foodItemsDAO" />
+        <property name="mealCourseDAO" ref="mealCourseDAO" />
+        <property name="imagesDAO" ref="imagesDAO" />
     </bean>
     
     <bean id="feedBackActionBean" class="com.albany.edu.fwp.action.FeedBackAction">

@@ -54,6 +54,14 @@ public class FoodItemsDAOImpl implements FoodItemsDAO {
         List<FoodItems> listFoodItems = (List<FoodItems>) query.list();  
         return listFoodItems;
     }
+    @Transactional
+    public List<FoodItems> listByQuadId(int quadId) {
+        @SuppressWarnings("unchecked")        
+        String hql = "FROM FoodItems F WHERE F.quadInfo.quadId = '"+quadId+"'";
+        Query query = sessionFactory.getCurrentSession().createQuery(hql);
+        List<FoodItems> listFoodItems = (List<FoodItems>) query.list();  
+        return listFoodItems;
+    }
     
     
     

@@ -87,7 +87,7 @@ public class FoodItemsDAOImpl implements FoodItemsDAO {
 	        					foodItemsImageAndCalorie.add(foodItem.getFoodItemName());
 	    		        		foodItemsImageAndCalorie.add(imagesDAO.imagePath(foodItem.getImages().getImageId()));
 	    		        		foodItemsImageAndCalorie.add(Integer.toString(foodItem.getCalories()));
-	    		        		foodItemsImageAndCalorie.add(Integer.toString(foodItem.getFoodItemId()));
+	    		        		foodItemsImageAndCalorie.add(foodItem.getFoodItemId());
 	    	        			System.out.println("------->"+foodItem.getFoodItemName()+ "  "+imagesDAO.imagePath(foodItem.getImages().getImageId()));
 	    	        			quadFoodItemsPerMealCourseList.add(foodItemsImageAndCalorie);
 	        				}	        				

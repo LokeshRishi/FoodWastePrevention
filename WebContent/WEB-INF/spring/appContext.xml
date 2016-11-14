@@ -13,9 +13,17 @@
         <property name="mealCourseDAO" ref="mealCourseDAO" />
         <property name="studentDAO" ref="studentDAO" />
         <property name="foodSelectedDAO" ref="foodSelectedDAO" />
+        <property name="configDAO" ref="configDAO" />
     </bean>
-    <bean id="uploadActionBean" class="com.albany.edu.fwp.action.UploadAction">
-        
+    <bean id="quadActionBean" class="com.albany.edu.fwp.action.QuadAction">
+        <property name="quadInfoDAO" ref="quadInfoDAO" />
+        <property name="mealCourseDAO" ref="mealCourseDAO" />
+    </bean>
+    <bean id="mealCourseActionBean" class="com.albany.edu.fwp.action.MealCourseAction">
+        <property name="quadInfoDAO" ref="quadInfoDAO" />
+        <property name="mealCourseDAO" ref="mealCourseDAO" />
+    </bean>
+    <bean id="uploadActionBean" class="com.albany.edu.fwp.action.UploadAction">        
     </bean>
     
     <bean id="reportActionBean" class="com.albany.edu.fwp.action.ReportAction">
@@ -31,6 +39,13 @@
     </bean>
     
     <bean id="feedBackActionBean" class="com.albany.edu.fwp.action.FeedBackAction">
+    	<property name="feedBackDAO" ref="feedBackDAO" />
+    	<property name="studentDAO" ref="studentDAO" />
+    	<property name="quadInfoDAO" ref="quadInfoDAO" />
+    </bean>
+    
+    <bean id="configActionBean" class="com.albany.edu.fwp.action.ConfigAction">
+    	<property name="configDAO" ref="configDAO" />
     </bean>
     
     <bean id="loginActionBean" class="com.albany.edu.fwp.action.LoginAction">
@@ -111,7 +126,19 @@
         </constructor-arg>
     </bean>
     
-        <bean class="com.albany.edu.fwp.dao.ImagesDAOImpl">
+    <bean class="com.albany.edu.fwp.dao.ImagesDAOImpl">
+        <constructor-arg>
+            <ref bean="sessionFactory" />
+        </constructor-arg>
+    </bean>
+    
+    <bean id="feedBackDAO" class="com.albany.edu.fwp.dao.FeedBackDAOImpl">
+        <constructor-arg>
+            <ref bean="sessionFactory" />
+        </constructor-arg>
+    </bean>
+    
+    <bean id="configDAO" class="com.albany.edu.fwp.dao.ConfigDAOImpl">
         <constructor-arg>
             <ref bean="sessionFactory" />
         </constructor-arg>
@@ -139,7 +166,7 @@
         <property name="driverClassName" value="com.mysql.jdbc.Driver" />
         <property name="url" value="jdbc:mysql://localhost:3306/fwp" />
         <property name="username" value="root" />
-        <property name="password" value="admin" />
+        <property name="password" value="test123" />
     </bean>
     
    

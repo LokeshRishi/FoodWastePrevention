@@ -4,7 +4,7 @@
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping package="com.albany.edu.fwp.model">
     <class name="FoodItems" table="FoodItems">
-        <id name="foodItemId" type="java.lang.Integer" column="FoodItemID">
+        <id name="foodItemId" type="string" column="FoodItemID">
         </id>
         <property name="foodItemName" type="string">
         	<column name="FoodItem_Name" length="100" not-null="true"/>

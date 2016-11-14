@@ -9,6 +9,12 @@ import java.util.Properties;
 
 import org.apache.struts2.ServletActionContext;
 
+import com.albany.edu.fwp.dao.FeedBackDAO;
+import com.albany.edu.fwp.dao.MealCourseDAO;
+import com.albany.edu.fwp.dao.QuadInfoDAO;
+import com.albany.edu.fwp.dao.StudentDAO;
+import com.albany.edu.fwp.model.QuadInfo;
+import com.albany.edu.fwp.model.Student;
 import com.opensymphony.xwork2.ActionSupport;
 
 import javax.mail.Message;
@@ -26,59 +32,43 @@ import javax.servlet.http.HttpSession;
 public class FeedBackAction extends ActionSupport {
 	private HttpServletRequest request;
 	private HttpSession httpSession;
+	private QuadInfoDAO quadInfoDAO;
+	private FeedBackDAO feedBackDAO;
+	private StudentDAO studentDAO;
+	private Student student;
+	private QuadInfo quadInfo;
+	
+	public void setQuadInfoDAO(QuadInfoDAO quadInfoDAO) {
+		this.quadInfoDAO = quadInfoDAO;
+	}
+    public void setFeedBackDAO(FeedBackDAO feedBackDAO) {
+		this.feedBackDAO = feedBackDAO;
+	}
+    public void setStudentDAO(StudentDAO studentDAO) {
+		this.studentDAO = studentDAO;
+	}
 	
     public String execute() {
     	
-    	String name;
-    	String phone;
-        String email;
+    	
+        String quadId;
         String msg;
+        String studentId;
         
     	request = ServletActionContext.getRequest();
     	httpSession=request.getSession(false); 
     	
-    	name=request.getParameter("name").toString();     	
-    	phone=request.getParameter("tel").toString();    	
-    	email=request.getParameter("email").toString();     	
+    	quadId=request.getParameter("quadId").toString();     	
     	msg=request.getParameter("msg").toString();
-    	System.out.println("Is Request Param empty:----> "+request.getParameterMap().keySet());
-        String to=email;//change accordingly  
-         
-         //Get the session object  
-         Properties props = new Properties();  
-         props.put("mail.smtp.host", "smtp.gmail.com");  
-         props.put("mail.smtp.socketFactory.port", "465");  
-         props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");  
-         props.put("mail.smtp.auth", "true");  
-         props.put("mail.smtp.port", "465");  
-          
-         //https://www.google.com/settings/security/lesssecureapps
-         Session session = Session.getDefaultInstance(props,  
-          new javax.mail.Authenticator() {  
-          protected PasswordAuthentication getPasswordAuthentication() {  
-          return new PasswordAuthentication("foodwastagepreventiont5@gmail.com","Fwp@1234");//change accordingly  
-          }  
-         });  
-          
-         //compose message  
+    	studentId=httpSession.getAttribute("studentId").toString();
          try {  
-          MimeMessage message = new MimeMessage(session);  
-          message.setFrom(new InternetAddress("foodwastagepreventiont5@gmail.com"));//change accordingly  
-          message.addRecipient(Message.RecipientType.TO,new InternetAddress(to));  
-          message.setSubject("Feedback");  
-          String body="";
-          body = "Name: "   + name + "\n" +
-        		 "Phone: "  + phone + "\n" +
-        		 "Message: "+ msg;
-        		  
-          message.setText(body);  
-            
-          //send message  
-          Transport.send(message);            
-          System.out.println("message sent successfully");  
+        	 student = studentDAO.getStudent(studentId);
+        	 quadInfo=quadInfoDAO.getQuadInfo(Integer.parseInt(quadId));
+        	 feedBackDAO.insert(msg, quadInfo, student);
+        	 System.out.println("message sent successfully");  
           
          } 
-         catch (MessagingException e) 
+         catch (Exception e) 
          {
         	 
         	 httpSession.setAttribute("emailStatus", "Feedback Not Sent");  

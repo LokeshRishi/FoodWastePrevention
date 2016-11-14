@@ -5,7 +5,8 @@ import java.util.Set;
 
 public class QuadInfo {
     private int quadId;
-    private String quadName;   
+    private String quadName; 
+    private Set<FeedBack> feedBack;
     
     private Set<FoodItems> foodItems =	new HashSet<FoodItems>(0); 
     
@@ -33,6 +34,14 @@ public class QuadInfo {
     public void setFoodItems(Set<FoodItems> foodItems) {
         this.foodItems = foodItems;
     }
+
+	public Set<FeedBack> getFeedBack() {
+		return feedBack;
+	}
+
+	public void setFeedBack(Set<FeedBack> feedBack) {
+		this.feedBack = feedBack;
+	}
 
 	
 

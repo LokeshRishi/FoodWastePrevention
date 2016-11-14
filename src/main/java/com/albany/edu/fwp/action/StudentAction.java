@@ -21,11 +21,13 @@ import org.apache.struts2.ServletActionContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.albany.edu.fwp.dao.ConfigDAO;
 import com.albany.edu.fwp.dao.FoodItemsDAO;
 import com.albany.edu.fwp.dao.FoodSelectedDAO;
 import com.albany.edu.fwp.dao.MealCourseDAO;
 import com.albany.edu.fwp.dao.QuadInfoDAO;
 import com.albany.edu.fwp.dao.StudentDAO;
+import com.albany.edu.fwp.model.Config;
 import com.albany.edu.fwp.model.FoodItems;
 import com.albany.edu.fwp.model.FoodSelected;
 import com.albany.edu.fwp.model.MealCourse;
@@ -42,6 +44,7 @@ public class StudentAction extends ActionSupport {
     private MealCourseDAO mealCourseDAO;
     private StudentDAO studentDAO;
     private FoodSelectedDAO foodSelectedDAO;
+    private ConfigDAO configDAO;
     private List<FoodItems> listFoodItems;
     private List<QuadInfo> listQuad;
     private List<MealCourse> listMealCourse;
@@ -53,6 +56,8 @@ public class StudentAction extends ActionSupport {
     private HashMap<String, HashMap<String, List<List<String>>>> allFoodItems;
     private HashMap<String, List<List<String>>> selectedFoodItemsPerMealCourseMap;
     private String status;
+    private List<List<String>> quadList;
+    private String dateTimeVal;
  
     public void setFoodItemsDAO(FoodItemsDAO foodItemsDAO) {
 		this.foodItemsDAO = foodItemsDAO;
@@ -68,6 +73,9 @@ public class StudentAction extends ActionSupport {
 	}
     public void setFoodSelectedDAO(FoodSelectedDAO foodSelectedDAO) {
 		this.foodSelectedDAO = foodSelectedDAO;
+	}
+    public void setConfigDAO(ConfigDAO configDAO) {
+		this.configDAO = configDAO;
 	}
  
     public String execute() {
@@ -146,12 +154,12 @@ public class StudentAction extends ActionSupport {
     		System.out.println("Edit Page---------->"); 
     		for (FoodSelected foodSelected : listFoodSelected){ 
     			List<String> foodItemsAndQuantity = new ArrayList<String>();   			
-    			foodItems = foodItemsDAO.getFoodItem( Integer.toString(foodSelected.getFoodItems().getFoodItemId()));
-    			foodItemsAndQuantity.add(Integer.toString(foodItems.getFoodItemId()));
+    			foodItems = foodItemsDAO.getFoodItem( foodSelected.getFoodItems().getFoodItemId());
+    			foodItemsAndQuantity.add(foodItems.getFoodItemId());
     			foodItemsAndQuantity.add(foodItems.getFoodItemName());
     			foodItemsAndQuantity.add(Integer.toString(foodSelected.getNumberOfPlates()));
     			foodItemsAndQuantity.add(Integer.toString(foodItems.getCalories()));
-    			selectedFoodItems.put(Integer.toString(foodItems.getFoodItemId()), Integer.toString(foodSelected.getNumberOfPlates()));
+    			selectedFoodItems.put(foodItems.getFoodItemId(), Integer.toString(foodSelected.getNumberOfPlates()));
     			mealCourse = mealCourseDAO.getMealCourse(foodItems.getMealCourse().getMealCourseId()); 
     			quadInfo = quadInfoDAO.getQuadInfo(foodItems.getQuadInfo().getQuadId());
     			selectedFoodItemsQuadAndMealCourse.put(quadInfo.getQuadName()+mealCourse.getMealCourseName(), mealCourse.getMealCourseName());
@@ -189,12 +197,12 @@ public class StudentAction extends ActionSupport {
     		listFoodSelected = foodSelectedDAO.listFoodSelected(student, dateString);
     		for (FoodSelected foodSelected : listFoodSelected){ 
     			List<String> foodItemsAndQuantity = new ArrayList<String>();   			
-    			foodItems = foodItemsDAO.getFoodItem( Integer.toString(foodSelected.getFoodItems().getFoodItemId()));
-    			foodItemsAndQuantity.add(Integer.toString(foodItems.getFoodItemId()));
+    			foodItems = foodItemsDAO.getFoodItem( foodSelected.getFoodItems().getFoodItemId());
+    			foodItemsAndQuantity.add(foodItems.getFoodItemId());
     			foodItemsAndQuantity.add(foodItems.getFoodItemName());
     			foodItemsAndQuantity.add(Integer.toString(foodSelected.getNumberOfPlates()));  
     			foodItemsAndQuantity.add(Integer.toString(foodItems.getCalories()));
-    			selectedFoodItems.put(Integer.toString(foodItems.getFoodItemId()), Integer.toString(foodSelected.getNumberOfPlates()));
+    			selectedFoodItems.put(foodItems.getFoodItemId(), Integer.toString(foodSelected.getNumberOfPlates()));
     			mealCourse = mealCourseDAO.getMealCourse(foodItems.getMealCourse().getMealCourseId()); 
     			quadInfo = quadInfoDAO.getQuadInfo(foodItems.getQuadInfo().getQuadId());
     			selectedFoodItemsQuadAndMealCourse.put(quadInfo.getQuadName()+mealCourse.getMealCourseName(), mealCourse.getMealCourseName());
@@ -220,7 +228,21 @@ public class StudentAction extends ActionSupport {
 //			}
 	    	returnString="firstchoice";
     	}
+    	
+    	List <QuadInfo> quads = quadInfoDAO.list();
+    	quadList = new ArrayList<List<String>>();
+    	for (QuadInfo quad : quads){
+    		List<String> quadDetails = new ArrayList();
+    		quadDetails.add(Integer.toString(quad.getQuadId()));
+    		quadDetails.add(quad.getQuadName()); 
+    		System.out.println("Quad Name :"+quad.getQuadName());
+    		quadList.add(quadDetails);
+    	}
+    	String date = session.getAttribute("date").toString();
+    	List <Config> configs = configDAO.list();
+    	dateTimeVal=date.split("-")[1]+"/"+date.split("-")[2]+"/"+date.split("-")[0].replace("20", "")+"/"+configs.get(0).getStudentTime()+":59";
     	System.out.println("Date --------------------> "+session.getAttribute("date"));
+    	System.out.println("dateTimeVal --------------------> "+dateTimeVal);
         return returnString;
     }
 
@@ -248,7 +270,13 @@ public class StudentAction extends ActionSupport {
     public String getStatus() {
         return status;
     }
-    
+    public List<List<String>> getQuadList() {
+		  return quadList;
+	}
+	public String getDateTimeVal() {
+		return dateTimeVal;
+	}
+	
     
 
 }

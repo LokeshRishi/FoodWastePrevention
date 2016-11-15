@@ -58,6 +58,7 @@ public class StudentAction extends ActionSupport {
     private String status;
     private List<List<String>> quadList;
     private String dateTimeVal;
+    private Boolean isDeadlinePassed;
  
     public void setFoodItemsDAO(FoodItemsDAO foodItemsDAO) {
 		this.foodItemsDAO = foodItemsDAO;
@@ -107,22 +108,28 @@ public class StudentAction extends ActionSupport {
     	System.out.println("parameterList Set--------->"+request.getParameterMap().keySet());
     	student = studentDAO.getStudent(studentId);
     	String dateString="";
-    	if(session.getAttribute("date")==null){ 
+    	String datetimeDeadline="";
+    	String datetimeSession="";
+    	 
     		SimpleDateFormat dmyFormat = new SimpleDateFormat("yyyy-MM-dd");
     		Date date = new Date();
     		Calendar c = Calendar.getInstance();
     		try {
-				c.setTime(dmyFormat.parse(date.toString()));
+				c.setTime(dmyFormat.parse(date.toString()));				
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
+    		c.add(Calendar.DATE, 0);
+    		datetimeDeadline=dmyFormat.format(c.getTime()).toString();
     		c.add(Calendar.DATE, 1);
-    		session.setAttribute("date", dmyFormat.format(c.getTime()).toString());
-    		dateString=session.getAttribute("date").toString();
-    	}
-    	else{
-    		dateString=session.getAttribute("date").toString();
-    	}
+    		datetimeSession=dmyFormat.format(c.getTime()).toString();
+	    	if(session.getAttribute("date")==null){
+	    		session.setAttribute("date", dmyFormat.format(c.getTime()).toString());
+	    		dateString=session.getAttribute("date").toString();
+	    	}
+	    	else{
+	    		dateString=session.getAttribute("date").toString();
+	    	}
     	List<FoodSelected> listFoodSelected = foodSelectedDAO.listFoodSelected(student, dateString);
     	listQuad = quadInfoDAO.list();
 		quadNames = new ArrayList<String>();
@@ -238,9 +245,31 @@ public class StudentAction extends ActionSupport {
     		System.out.println("Quad Name :"+quad.getQuadName());
     		quadList.add(quadDetails);
     	}
-    	String date = session.getAttribute("date").toString();
+    	
     	List <Config> configs = configDAO.list();
-    	dateTimeVal=date.split("-")[1]+"/"+date.split("-")[2]+"/"+date.split("-")[0].replace("20", "")+"/"+configs.get(0).getStudentTime()+":59";
+    	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");     	
+    	try {
+    		Date date1 = sdf.parse(datetimeDeadline);
+			Date date2 = sdf.parse(session.getAttribute("date").toString());
+			if(date1.before(date2)){
+				c.setTime(date2);
+				c.add(Calendar.DATE, -1);
+				isDeadlinePassed=false;
+				datetimeDeadline=dmyFormat.format(c.getTime()).toString();
+				dateTimeVal=datetimeDeadline.split("-")[1]+"/"+datetimeDeadline.split("-")[2]+"/"+datetimeDeadline.split("-")[0].replace("20", "")+"/"+configs.get(0).getStudentTime()+":59";
+	    	}
+			else{
+				isDeadlinePassed=true;
+				dateTimeVal=datetimeDeadline.split("-")[1]+"/"+datetimeDeadline.split("-")[2]+"/"+datetimeDeadline.split("-")[0].replace("20", "")+"/"+configs.get(0).getStudentTime()+":59";
+			}
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
+    	
+    	System.out.println("isDeadlinePassed --------------------> "+isDeadlinePassed);
+    	
     	System.out.println("Date --------------------> "+session.getAttribute("date"));
     	System.out.println("dateTimeVal --------------------> "+dateTimeVal);
         return returnString;
@@ -276,6 +305,10 @@ public class StudentAction extends ActionSupport {
 	public String getDateTimeVal() {
 		return dateTimeVal;
 	}
+	public Boolean getIsDeadlinePassed() {
+		return isDeadlinePassed;
+	}
+	
 	
     
 

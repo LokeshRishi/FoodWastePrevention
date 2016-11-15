@@ -39,7 +39,12 @@
         <property name="mealCourseDAO" ref="mealCourseDAO" />
         <property name="imagesDAO" ref="imagesDAO" />
         <property name="quadInfoDAO" ref="quadInfoDAO" />
+
         <property name="foodDateDAO" ref="foodDateDAO" />
+
+        <property name="foodSelectedDAO" ref="foodSelectedDAO" />
+        <property name="feedBackDAO" ref="feedBackDAO" />
+
     </bean>
     
        

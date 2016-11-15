@@ -41,10 +41,14 @@
 
 <body id="page-top" class="index">
 
-	<nav style="position:fixed;top:105px;box-shadow: 10px 10px 5px #888888;background-color:#18bc9c;padding:4px">
-	 	<h5 style="margin-left:1em">Food Selection Deadline</h5>
-	 	<div id="counter"> </div>
-	</nav>
+	<s:if test="%{isDeadlinePassed}">
+	</s:if>
+	<s:else>
+		<nav style="position:fixed;top:105px;box-shadow: 10px 10px 5px #888888;background-color:#18bc9c;padding:4px">
+		<h5 style="margin-left:1em">Food Selection Deadline</h5>
+		<div id="counter"> </div>
+		</nav>
+	</s:else>
 
     <!-- Navigation -->
     <nav id="mainNav" class="navbar navbar-default navbar-fixed-top navbar-custom">
@@ -116,6 +120,13 @@
 					</form>
 				</div>
 			</div>
+			<s:if test="%{isDeadlinePassed}">
+			<div class="col-lg-12 text-center">
+				<h2>Selection Time is Over</h2>                    
+				<hr class="star-primary">					
+			</div>
+			</s:if>
+			<s:else>
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <h2>Time to Eat</h2>
@@ -141,11 +152,15 @@
             </div>
             <br>
             <input type="edit" value="Edit" class="btn btn-lg btn-block btn-warning" onclick="location.href='student?next=studentpage';" style="max-width: 265px; margin: 0 auto;">
-    </div>
+    </s:else>
+	</div>	
     </section>
 
 
-
+	<s:if test="%{isDeadlinePassed}">
+	</s:if>
+	<s:else>
+<!-- About Section -->
     <!-- About Section -->
     <section class="success" id="about">
         <div class="container">
@@ -160,6 +175,8 @@
             </div>
         </div>
     </section>
+	</s:else>
+    
     <!-- Contact Section -->
     <section id="contact">
         <div class="container">
@@ -172,32 +189,25 @@
             </div>
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2">
-                    <form name="sentMessage" action="feedback" id="contactForm" novalidate>
+					<form name="sentMessage" action="feedback" id="contactForm" novalidate>
+                        
                         <div class="row control-group">
-                            <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label>Student Name</label>
-                                <input type="text" name="name" class="form-control" placeholder="Name" id="name" required data-validation-required-message="Please enter your name.">
-                                <p class="help-block text-danger"></p>
+                            <div class="form-group col-xs-12 floating-label-form-group controls"> 								
+                                <input STYLE="VISIBILITY: hidden;" type="email" name="email" class="form-control" placeholder="Quad Email" id="email" required data-validation-required-message="Please enter your email address.">
+                                <h4>Select Quad</h4>
+								<select name="quadId" class="form-control" placeholder="Quad Email" id="email">
+								  <s:iterator value="quadList" var="myvar" status="stat">
+								  	<option value=${myvar[0]}>${myvar[1]}</option>
+								  </s:iterator>
+								</select>
+								<p class="help-block text-danger"></p>
                             </div>
                         </div>
+                        
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label>Quad Email</label>
-                                <input type="email" name="email" class="form-control" placeholder="Quad Email" id="email" required data-validation-required-message="Please enter your email address.">
-                                <p class="help-block text-danger"></p>
-                            </div>
-                        </div>
-                        <div class="row control-group">
-                            <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label>Phone Number</label>
-                                <input type="tel" name="tel" class="form-control" placeholder="Phone Number" id="phone" required data-validation-required-message="Please enter your phone number.">
-                                <p class="help-block text-danger"></p>
-                            </div>
-                        </div>
-                        <div class="row control-group">
-                            <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label>Message</label>
-                                <textarea rows="5" name="msg" class="form-control" placeholder="Message" id="message" required data-validation-required-message="Please enter a message."></textarea>
+                                <h4>Message</h4>
+                                <textarea rows="5" name="msg" class="form-control" id="message" required data-validation-required-message="Please enter a message."></textarea>
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>

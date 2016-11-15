@@ -9,12 +9,11 @@
 	<title>Login - Food Waste Prevention</title>
 
     <!-- Theme CSS -->
-    <link href="/foodwasteprevention/resources/css/freelancer.css" rel="stylesheet">
     <link href="/foodwasteprevention/resources/css/login.css" rel="stylesheet">
 </head>
 
 <body>
-	<label style=" color: #18bc9c; font-family: 'Helvetica Neue', sans-serif; font-size: 26px; font-weight: bold; letter-spacing: -1px; line-height: 1; text-align: center;text-shadow: 3px 3px white;">Food Waste Prevention</label>
+	<label style=" color: #18bc9c; font-family: 'Helvetica Neue', sans-serif; font-size: 26px; font-size: 2.1vw; font-weight: bold; letter-spacing: -1px; line-height: 1; text-align: center;text-shadow: 2px 2px white;">Food Waste Prevention</label>
 	<div class="form">
       <ul class="tab-group">
 		<!-- <li class="tab active"><a href="#forgot">Sign Up</a></li>
@@ -31,7 +30,7 @@
           
             <div class="field-wrap">
             <label>
-              Net Id<span class="req">*</span>
+              Net ID<span class="req">*</span>
             </label>
             <input name='sessionUID' autocomplete="off"/>
           </div>
@@ -44,17 +43,17 @@
           </div>
 		
 		<div class="field-wrap">
-			<div>
+			<div style="padding:5px">
 				<label id="radioLabels">Student</label>
 				<input name="type" id="typeStudent" value="Student" type="radio" style="width:57%">
 			</div>
 
-			<div>
+			<div style="padding:5px">
 				<label id="radioLabels">Manager</label>	
 				<input name="type" id="typeManager" value="Manager" type="radio" style="width:57%">
 			</div>
 			
-			<div>
+			<div style="padding:5px">
 				<label id="radioLabels">Admin</label>
 				<input name="type" id="typeAdmin" value="Admin" type="radio" style="width:57%">
 			</div>

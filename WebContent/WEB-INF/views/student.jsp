@@ -47,11 +47,14 @@
 </head>
 
 <body id="page-top" class="index" onLoad="checkRefresh();">
-
+<s:if test="%{isDeadlinePassed}">
+</s:if>
+<s:else>
 <nav style="position:fixed;top:105px;box-shadow: 10px 10px 5px #888888;background-color:#18bc9c;padding:4px">
  	<h5 style="margin-left:1em">Food Selection Deadline</h5>
  	<div id="counter"> </div>
 </nav>
+</s:else>
 
     <!-- Navigation -->
     <nav id="mainNav" class="navbar navbar-default navbar-fixed-top navbar-custom">
@@ -135,7 +138,15 @@
 					</form>
 				</div>
 			</div>
-            <div class="row">
+            
+			<s:if test="%{isDeadlinePassed}">
+				<div class="col-lg-12 text-center">
+                    <h2>Selection Time is Over</h2>                    
+                    <hr class="star-primary">					
+                </div>
+			</s:if>
+			<s:else>	
+			<div class="row">
                 <div class="col-lg-12 text-center">
                     <h2>Satiate Your Tastebuds</h2>                    
                     <hr class="star-primary">					
@@ -222,11 +233,16 @@
 	             	</div>
 	            </div>
             </form>
-        </div>
+			</div>
+			</s:else>        
     </div>
     </section>
-
-    <!-- About Section -->
+	
+	
+	<s:if test="%{isDeadlinePassed}">
+	</s:if>
+	<s:else>
+<!-- About Section -->
     <section class="success" id="about">
         <div class="container">
             <div class="row">
@@ -240,6 +256,9 @@
             </div>
         </div>
     </section>
+	</s:else>
+
+    
 	<s:property value="#status"/>
     <!-- Contact Section -->
     <section id="contact">

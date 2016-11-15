@@ -14,12 +14,8 @@
     <mapping resource="com/albany/edu/fwp/model/MealCourse.hbm.xml" />
     <mapping resource="com/albany/edu/fwp/model/QuadInfo.hbm.xml" />
     <mapping resource="com/albany/edu/fwp/model/FoodDate.hbm.xml" />
-<<<<<<< HEAD
     <mapping resource="com/albany/edu/fwp/model/ManagerInfo.hbm.xml" />
-=======
     <mapping resource="com/albany/edu/fwp/model/FeedBack.hbm.xml" />
     <mapping resource="com/albany/edu/fwp/model/Config.hbm.xml" />
-    
->>>>>>> origin/staging
   </session-factory>
 </hibernate-configuration>

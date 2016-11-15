@@ -133,7 +133,7 @@ private ArrayList<ArrayList<String>> parsesearch = new ArrayList<ArrayList<Strin
     		{
     			for(ManagerInfo m: searchresults)
     			{
-    				ArrayList<String> temp = new ArrayList<>(0);
+    				ArrayList<String> temp = new ArrayList<String>(0);
     				temp.add(m.getManagerID());
     				temp.add(m.getManagerName());
     				temp.add(String.valueOf((m.getQuad().getQuadId())));

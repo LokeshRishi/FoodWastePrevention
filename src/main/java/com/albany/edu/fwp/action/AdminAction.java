@@ -32,7 +32,7 @@ private ArrayList<Integer> quadName;
 private QuadInfo quadInfo;
 private List<QuadInfo> quads;
 private HashMap<Integer,String> hm=new HashMap<Integer, String>();
-private ArrayList<ArrayList<String>> parsesearch = new ArrayList<ArrayList<String>>(0);
+private ArrayList<ArrayList<String>> parsesearch;
 
 	public void setManagerInfoDAO(ManagerInfoDAO managerInfoDAO) {
 	    this.managerInfoDAO = managerInfoDAO;
@@ -97,6 +97,7 @@ private ArrayList<ArrayList<String>> parsesearch = new ArrayList<ArrayList<Strin
     }
     
     public String searchManagers(){
+    	parsesearch = new ArrayList<ArrayList<String>>();
     	request=ServletActionContext.getRequest();
     	if(request.getParameter("searchmanagerid")==null)
     		searchmanagerID="";    
@@ -127,7 +128,7 @@ private ArrayList<ArrayList<String>> parsesearch = new ArrayList<ArrayList<Strin
     		quadInfo.setQuadName(hm.get(searchmanagerQuad));
     		List<ManagerInfo> searchresults=managerInfoDAO.searchManagerInfo(searchmanagerID,searchmanagerName, quadInfo, searchmanagerEmail);
     		System.out.println(searchresults.size());
-    		if(searchresults.size()-1==0)
+    		if(searchresults.isEmpty())
     			request.setAttribute("SEARCHRESULTSMESSAGE","No results found");
     		else
     		{

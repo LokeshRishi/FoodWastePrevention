@@ -24,17 +24,31 @@ else
 <p><%= message %></p>
 
 <form action="addmanagersubmit" method="post">
-* Name:<input type="managername" name="addmanagername">
-<br/><br/>
-* ManagerID:<input type="managerid" name="addmanagerid">
-<br/><br/>
-Phone Number:<input type="managerphonenumber" name="addmanagerphonenumber">
-<br/><br/>
-* Email:<input type="manageremail" name="addmanageremail">
-<br/><br/>
-* Quad ID:<s:select name="addmanagerQuad" list="quadName"/>
-<br/><br/>
-<input type="submit" value="Add">
+<table style="width:30%">  
+  <tr>
+    <td>* Name:</td>
+    <td><input type="managername" name="addmanagername"></td>
+  </tr>
+  <tr>
+    <td>* ManagerID:</td>
+    <td><input type="managerid" name="addmanagerid"></td>
+  </tr>
+  <tr>
+    <td>Phone Number:</td>
+    <td><input type="managerphonenumber" name="addmanagerphonenumber"></td>
+  </tr>
+  <tr>
+    <td>* Email:</td>
+    <td><input type="manageremail" name="addmanageremail"></td>
+  </tr>
+  <tr>
+    <td>* Quad ID:</td>
+	<td><s:select name="addmanagerQuad" list="quadName"/></td
+  </tr>
+  <tr>
+    <td><input type="submit" value="Add"></td>
+  </tr>
+</table> 
 </form>
 
 <hr>

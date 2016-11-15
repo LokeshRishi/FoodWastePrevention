@@ -18,4 +18,4 @@
     <mapping resource="com/albany/edu/fwp/model/FeedBack.hbm.xml" />
     <mapping resource="com/albany/edu/fwp/model/Config.hbm.xml" />
   </session-factory>
-</hibernate-configuration>
+</hibernate-configuration> 

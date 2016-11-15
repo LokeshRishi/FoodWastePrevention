@@ -62,7 +62,7 @@ public class FoodSelectedDAOImpl implements FoodSelectedDAO {
     public List<FoodSelected> fetchReportData() {
         @SuppressWarnings("unchecked")
         // Needs to be updated for date.today
-        String hql = "FROM FoodSelected F WHERE F.submitDateTime = '2016-11-15'";
+        String hql = "FROM FoodSelected F WHERE F.submitDateTime = '2016-11-16'";
         Query query = sessionFactory.getCurrentSession().createQuery(hql);
         List<FoodSelected> fetchReportData = (List<FoodSelected>) query.list();  
         return fetchReportData;

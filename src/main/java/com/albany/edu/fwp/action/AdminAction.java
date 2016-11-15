@@ -11,7 +11,18 @@ import java.util.List;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+
 import org.apache.struts2.ServletActionContext;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
 import com.albany.edu.fwp.dao.QuadInfoDAO;
 import com.albany.edu.fwp.model.ManagerInfo;
 import com.albany.edu.fwp.model.QuadInfo;
@@ -49,8 +60,6 @@ private ArrayList<ArrayList<String>> parsesearch;
     	{
     		hm.put(q.getQuadId(), q.getQuadName());
     	}
-    	
-    	//search manager code
     	return SUCCESS;
     }
     
@@ -77,13 +86,7 @@ private ArrayList<ArrayList<String>> parsesearch;
     		addmanagerPhone="";
     	else
     		addmanagerPhone=request.getParameter("addmanagerphonenumber").toString();
-    	
-    	/*if(request.getParameter("addmanagerquad")==null)
-    		addmanagerQuad=-1;
-    	else**/
-    	//addmanagerQuad=Integer.valueOf(request.getParameter("addmanagerquad").toString());
-    	System.out.println(addmanagerQuad);
-    	
+
     	if(addmanagerID.isEmpty()||addmanagerName.isEmpty()||addmanagerQuad==-1||addmanagerEmail.isEmpty())
     		request.setAttribute("MESSAGE","Name, manager ID, Email ID and Quad entries are mandatory");
     	else {
@@ -91,7 +94,35 @@ private ArrayList<ArrayList<String>> parsesearch;
     		quadInfo.setQuadId(addmanagerQuad);
     		quadInfo.setQuadName(hm.get(addmanagerQuad));
     		managerInfoDAO.insertManagerInfo(addmanagerID, addmanagerName, addmanagerEmail, addmanagerPhone,quadInfo);
-    		request.setAttribute("MESSAGE","Manager creation successful"); }
+    		request.setAttribute("MESSAGE","Manager creation successful"); 
+    		String xmlfile=ServletActionContext.getServletContext().getRealPath("/")+"xml/login.xml";
+    		DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder documentBuilder;
+			try {
+				documentBuilder = documentBuilderFactory.newDocumentBuilder();
+				Document document = documentBuilder.parse(xmlfile);
+				Element root = document.getDocumentElement();				
+				Element newManager = document.createElement("Manager");
+				Element UserName = document.createElement("UserName");
+				UserName.appendChild(document.createTextNode(addmanagerID));
+				newManager.appendChild(UserName);
+				Element Password = document.createElement("Password");
+				Password.appendChild(document.createTextNode("Test12345"));
+				newManager.appendChild(Password);
+				Element FirstTimeUser = document.createElement("FirstTimeUser");
+				FirstTimeUser.appendChild(document.createTextNode("Y"));
+				newManager.appendChild(FirstTimeUser);
+				root.appendChild(newManager);
+				DOMSource source = new DOMSource(document);
+		        TransformerFactory transformerFactory = TransformerFactory.newInstance();
+		        Transformer transformer = transformerFactory.newTransformer();
+		        StreamResult result = new StreamResult(xmlfile);
+		        transformer.transform(source, result);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+            
+            }
     	
     	return SUCCESS;
     }
@@ -108,12 +139,6 @@ private ArrayList<ArrayList<String>> parsesearch;
     		searchmanagerName="";
     	else
     		searchmanagerName=request.getParameter("searchmanagername").toString();
-    	
-    	/*if(request.getParameter("searchmanagerquad")==null)
-    		searchmanagerQuad=-1;
-    	else
-    		searchmanagerQuad=Integer.valueOf(request.getParameter("searchmanagerquad"));**/
-    	System.out.println(searchmanagerQuad);
 
     	if(request.getParameter("searchmanageremail")==null)
     		searchmanagerEmail="";
@@ -142,7 +167,6 @@ private ArrayList<ArrayList<String>> parsesearch;
     				temp.add(m.getManagerPhoneNumber());
     				parsesearch.add(temp);
     			}
-    			request.setAttribute("arraylist", parsesearch);
     		}}
     	return SUCCESS;
     }

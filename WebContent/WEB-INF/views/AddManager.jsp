@@ -43,7 +43,7 @@ else
   </tr>
   <tr>
     <td>* Quad ID:</td>
-	<td><s:select name="addmanagerQuad" list="quadName"/></td
+	<td><s:select name="addmanagerQuad" list="quadName"/></td>
   </tr>
   <tr>
     <td><input type="submit" value="Add"></td>

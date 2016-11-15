@@ -4,6 +4,7 @@
  */
 package com.albany.edu.fwp.action;
  
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,6 +28,10 @@ public class ManagerAction extends ActionSupport {
     private MealCourseDAO mealCourseDAO;
     private HttpSession session;
     private List<List<String>> foodList;
+    private List<String> foodItemIdList;
+    private List<String> foodItemNameList;
+    private List<String> foodItemMealCourseList;
+    private List<String> foodItemImagePathList;
     
     public void setFoodItemsDAO(FoodItemsDAO foodItemsDAO) {
         this.foodItemsDAO = foodItemsDAO;
@@ -43,10 +48,19 @@ public class ManagerAction extends ActionSupport {
     	session = ServletActionContext.getRequest().getSession();
     	session.setAttribute("quadID", 10);
     	
+    	
     	List <FoodItems> foodItems = foodItemsDAO.listByQuadId(Integer.parseInt(session.getAttribute("quadID").toString()));
     	foodList = new ArrayList<List<String>>();
+    	foodItemIdList = new ArrayList<String>();
+    	foodItemNameList = new ArrayList<String>();
+    	foodItemMealCourseList = new ArrayList<String>();
+    	foodItemImagePathList = new ArrayList<String>();
     	for (FoodItems foodItem : foodItems){
-    		List<String> foodItemDetails = new ArrayList();
+    		foodItemIdList.add(foodItem.getFoodItemId());
+    		foodItemNameList.add(foodItem.getFoodItemName());
+    		foodItemMealCourseList.add(mealCourseDAO.getMealCourse(foodItem.getMealCourse().getMealCourseId()).getMealCourseName());
+    		foodItemImagePathList.add(imagesDAO.imagePath(foodItem.getImages().getImageId()));
+    		List<String> foodItemDetails = new ArrayList();    		
     		foodItemDetails.add(foodItem.getFoodItemId());
     		foodItemDetails.add(foodItem.getFoodItemName());    		;
     		foodItemDetails.add(imagesDAO.imagePath(foodItem.getImages().getImageId()));
@@ -62,7 +76,20 @@ public class ManagerAction extends ActionSupport {
 	public List<List<String>> getFoodList() {
 		return foodList;
 	}
-
+	public List<String> getFoodItemIdList() {
+		return foodItemIdList;
+	}
+	public List<String> getFoodItemNameList() {
+		return foodItemNameList;
+	}
+	
+	public List<String> getFoodItemMealCourseList() {
+		return foodItemMealCourseList;
+	}
+	
+	public List<String> getFoodItemImagePathList() {
+		return foodItemImagePathList;
+	}
 	
  
    

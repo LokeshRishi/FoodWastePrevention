@@ -126,8 +126,66 @@ data = data || {};
     var removeElement = function (params) {
         $("#" + defaults.foodId + params.id).remove();
     };
+	
+	foodItem.remove = function (idnum) {
+        $("#" + defaults.foodId + idnum).remove();
+		delete data[idnum];
+        localStorage.setItem("menuData", JSON.stringify(data));
+    };
+	
+	
+	foodItem.addCatalog = function(idnum, name, mealCourse, image) {
+        var inputs = $("#" + defaults.formId + " :input"),
+            errorMessage = "<h5>Every food has a name. Duh!</h5>",
+            errorMessage2 = "<h5>Where's the image? :O</h5>",
+            id, title, description, mealType, tempData;
 
-    foodItem.add = function() {
+        if (inputs.length !== 4) {
+            return;
+        }
+
+        title = name;
+        description = image;
+        mealType = mealCourse;
+
+        if (!title) {
+//            generateDialog(errorMessage);
+//            return;
+        }
+
+        if (!description) {
+//            generateDialog(errorMessage2);
+//            return;
+        }
+
+        id = idnum;
+
+        tempData = {
+            id : id,
+            code: "1",
+            title: title,
+            description: description,
+            mealType: mealType
+        };
+		// Saving element in local storage
+        data[id] = tempData;
+        localStorage.setItem("menuData", JSON.stringify(data));
+
+        // Generate Element
+        generateElement(tempData);
+
+        // Reset Form
+        inputs[0].value = "";
+        inputs[1].value = "";
+        title = "";
+        description = "";
+        mealType = "";
+
+    };
+		
+		
+
+    foodItem.add = function(idnum) {
         var inputs = $("#" + defaults.formId + " :input"),
             errorMessage = "<h5>Every food has a name. Duh!</h5>",
             errorMessage2 = "<h5>Where's the image? :O</h5>",
@@ -151,7 +209,7 @@ data = data || {};
 //            return;
         }
 
-        id = new Date().getTime();
+        id = idnum;
 
         tempData = {
             id : id,

@@ -40,7 +40,7 @@
 
 </head>
 
-<body id="page-top" class="index">
+<body id="page-top" class="index" onLoad="addToCatalog('${foodItemIdList}', '${foodItemNameList}', '${foodItemMealCourseList}', '${foodItemImagePathList}');">
 
 <nav style="position:fixed;top:105px;box-shadow: 10px 10px 5px #888888;background-color:#18bc9c;padding:4px">
  	<h5 style="margin-left:1em">Menu Creation Deadline</h5>
@@ -111,15 +111,18 @@
             
             <div class="row">
 			
+				
+			
             <div id="container">
                 <div class="food-list food-container" id="catalog">
                     <h3>Catalog</h3>                    
-                     <s:iterator value="foodList" var="myvar" status="stat">
-	                     <div class="menu-item ui-draggable" id=${myvar[0]} style="position: relative;">
-	                     <div class="food-header">${myvar[1]}</div>
-	                     <div class="meal-typelabel label-default">${myvar[3]}</div>
+                     <!--<s:iterator value="foodList" var="myvar" status="stat">
+	                     <div class="menu-item ui-draggable" id=food-id${myvar[0]} style="position: relative;">
+							<div style="display: none;"><input type="text" name=foodItemId${myvar[0]} value=${myvar[0]}></div>
+							 <div class="food-header">${myvar[1]}</div>
+							 <div class="meal-typelabel label-default">${myvar[3]}</div>
 						 </div>
-					  </s:iterator>					  
+					  </s:iterator>		-->			  
 					  
                 </div>
 
@@ -276,6 +279,11 @@
             <i class="fa fa-chevron-up"></i>
         </a>
     </div>
+	
+	<table id="outside">
+    <tr><td id="t1">one</td></tr>
+    <tr><td id="t2">two</td></tr>
+	</table>
 
 
     <!-- jQuery -->
@@ -301,6 +309,24 @@
     <script src="/foodwasteprevention/resources/js/jquery.countdown.js"></script>
 
     <script type="text/javascript">
+	var foodItemId = "";
+	window.addEventListener('beforeunload', function(event) {
+        console.log('I am the 1st one.');
+      });
+	  
+      window.addEventListener('unload', function(event) {
+        console.log('I am the 3rd one.');
+		//alert('unload')
+			var entries = foodItemId.split(",");
+			for(var i=0; i < entries.length; i++){
+				var tokens = entries[i].replace("[","").replace(["]"],"").replace(" ","");
+				//foodItem.add(tokens);
+				//alert("add " + tokens)
+				foodItem.remove(tokens);
+				//alert("remove " + tokens)
+			}        
+      });
+	
     	
 	    function validationFunction() {
 	        var fI = $("#foodImage").val();
@@ -314,11 +340,32 @@
 	        } else if (fM.checkValidity() == false) {
 	            document.getElementById("errorMessage").innerHTML = "<h6>Please select the meal type</h6>";
 	        } else {
-	        	foodItem.add();
+	        	foodItem.add(new Date().getTime());
 	        }
 	    }
-
-        $(".food-container").droppable();
+		
+		function addToCatalog(foodItemIdTemp, foodItemName, foodItemMeanCourse, foodItemImage) {	
+		foodItemId=foodItemIdTemp
+		//alert(foodItemMeanCourse)
+			var ids = foodItemId.split(",");
+			var names = foodItemName.split(",");
+			var mealCourses = foodItemMeanCourse.split(",");
+			var images = foodItemImage.split(",");
+			for(var i=0; i < ids.length; i++){
+				var id = ids[i].replace("[","").replace(["]"],"").replace(" ","");
+				var name = names[i].replace("[","").replace(["]"],"").replace(" ","");
+				var mealCourse = mealCourses[i].replace("[","").replace(["]"],"").replace(" ","");
+				var image = images[i].replace("[","").replace(["]"],"").replace(" ","");
+				foodItem.addCatalog(id, name, mealCourse, image);
+				//alert("add " + tokens)
+				//foodItem.remove(tokens);
+				//alert("remove " + tokens)
+			}        	
+	    }
+		
+		
+	  
+		$(".food-container").droppable();
         $(".menu-item").draggable({ revert: "valid", revertDuration:200 });
         foodItem.init();
         

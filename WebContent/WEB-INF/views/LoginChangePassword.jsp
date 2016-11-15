@@ -7,12 +7,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Change Password - Food Waste Prevention</title>
     <!-- Theme CSS -->
-    <link href="/foodwasteprevention/resources/css/freelancer.css" rel="stylesheet">
     <link href="/foodwasteprevention/resources/css/login.css" rel="stylesheet">
 </head>
 
 <body>
-	<label style=" color: #18bc9c; font-family: 'Helvetica Neue', sans-serif; font-size: 26px; font-weight: bold; letter-spacing: -1px; line-height: 1; text-align: center;text-shadow: 3px 3px white;">Food Waste Prevention</label>
+	<label style=" color: #18bc9c; font-family: 'Helvetica Neue', sans-serif; font-size: 26px; font-size: 2.1vw; font-weight: bold; letter-spacing: -1px; line-height: 1; text-align: center;text-shadow: 2px 2px white;">Food Waste Prevention</label>
 
 	<div class="form">
       <ul class="tab-group">

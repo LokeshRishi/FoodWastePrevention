@@ -43,7 +43,14 @@
     </bean>
  
     <bean id="adminActionBean" class="com.albany.edu.fwp.action.AdminAction">
-        <property name="studentDAO" ref="studentDAO" />
+        <property name="managerInfoDAO" ref="managerInfoDAO" />
+        <property name="quadInfoDAO" ref="quadInfoDAO" />
+    </bean>
+    
+    <bean id="managerInfoDAO" class="com.albany.edu.fwp.dao.ManagerInfoDAOImpl">
+        <constructor-arg>
+            <ref bean="sessionFactory" />
+        </constructor-arg>
     </bean>
     
     <bean id="student" 
@@ -139,11 +146,9 @@
         <property name="driverClassName" value="com.mysql.jdbc.Driver" />
         <property name="url" value="jdbc:mysql://localhost:3306/fwp" />
         <property name="username" value="root" />
-        <property name="password" value="admin" />
+        <property name="password" value="test123" />
     </bean>
     
-   
- 
     <tx:annotation-driven />
      
     <bean id="transactionManager"

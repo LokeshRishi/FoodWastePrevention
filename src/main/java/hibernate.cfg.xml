@@ -14,6 +14,6 @@
     <mapping resource="com/albany/edu/fwp/model/MealCourse.hbm.xml" />
     <mapping resource="com/albany/edu/fwp/model/QuadInfo.hbm.xml" />
     <mapping resource="com/albany/edu/fwp/model/FoodDate.hbm.xml" />
-    
+    <mapping resource="com/albany/edu/fwp/model/ManagerInfo.hbm.xml" />
   </session-factory>
 </hibernate-configuration>

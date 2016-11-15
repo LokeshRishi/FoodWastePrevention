@@ -10,6 +10,14 @@
             <result name="success">/WEB-INF/views/admin.jsp</result>
         </action>
         
+        <action name="addmanagersubmit" class="adminActionBean" method="addManager">
+            <result name="success">/WEB-INF/views/AddManager.jsp</result>
+        </action>
+        
+        <action name="searchmanagersubmit" class="adminActionBean" method="searchManagers">
+            <result name="success">/WEB-INF/views/AddManager.jsp</result>
+        </action>
+        
         <action name="student" class="studentActionBean">
         	<result name="success">/WEB-INF/views/student.jsp</result>
         	<result name="firstchoice">/WEB-INF/views/student.jsp</result>

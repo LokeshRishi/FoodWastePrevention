@@ -87,7 +87,8 @@ public class LoginAction extends ActionSupport{
     					
     					if(type.toLowerCase().equalsIgnoreCase("manager"))
     					{
-    						request.setAttribute("QuadID", managerInfoDAO.getManagerQuad(sessionUID).get(0));
+    						//request.setAttribute("QuadID", managerInfoDAO.getManagerQuad(sessionUID).get(0));
+    						session.setAttribute("quadID", managerInfoDAO.getManagerQuad(sessionUID).get(0));
     					}
     						
     					if("Y".equalsIgnoreCase(user.getElementsByTagName("FirstTimeUser").item(0).getTextContent()))

@@ -22,7 +22,9 @@
         	<result name="success">/WEB-INF/views/student.jsp</result>
         	<result name="firstchoice">/WEB-INF/views/student.jsp</result>
             <result name="edit">/WEB-INF/views/student_edit.jsp</result>
-            <result name="logout">/WEB-INF/views/login.jsp</result>
+            <result name="logout" type="redirectAction">
+                <param name='actionName'>login</param>
+            </result>
         </action>
         
         <action name="report" class="reportActionBean">
@@ -31,6 +33,9 @@
         
         <action name="manager" class="managerActionBean">
             <result name="success">/WEB-INF/views/manager.jsp</result>
+            <result name="logout" type="redirectAction">
+                <param name='actionName'>login</param>
+            </result>
         </action>
         
         <action name="login" class="loginActionBean">

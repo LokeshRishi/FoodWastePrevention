@@ -38,6 +38,7 @@
         <property name="foodItemsDAO" ref="foodItemsDAO" />
         <property name="mealCourseDAO" ref="mealCourseDAO" />
         <property name="imagesDAO" ref="imagesDAO" />
+        <property name="quadInfoDAO" ref="quadInfoDAO" />
     </bean>
     
     <bean id="feedBackActionBean" class="com.albany.edu.fwp.action.FeedBackAction">

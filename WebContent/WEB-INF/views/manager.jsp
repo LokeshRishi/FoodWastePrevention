@@ -105,6 +105,7 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <h2>Cook to Order</h2>
+                    <h2>${quadName}</h2>
                     <hr class="star-primary">
                 </div>
             </div>

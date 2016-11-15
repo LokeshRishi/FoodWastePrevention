@@ -5,11 +5,9 @@
 package com.albany.edu.fwp.action;
 
 import java.io.File;
-
 import com.mysql.jdbc.StringUtils;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.xml.parsers.*;
@@ -36,17 +34,18 @@ public class LoginAction extends ActionSupport{
 	
 	private  String xmlfile;
 	
-    public String execute() {
-    		   	
-    	
+    public String execute() { 
+    	xmlfile=ServletActionContext.getServletContext().getRealPath("/")+"xml/login.xml";
     	return SUCCESS;
     	
     }
     
     public String matchUIDandPassword(){
+    	this.err="";
     	NodeList loginList=null;
 	    try
-	    {xmlfile=ServletActionContext.getServletContext().getRealPath("/")+"xml/login.xml";    
+	    {
+	    	xmlfile=ServletActionContext.getServletContext().getRealPath("/")+"xml/login.xml";    
 	    	type="Student";
 	    	request = ServletActionContext.getRequest(); 
 	    	sessionUID=request.getParameter("sessionUID").toString();
@@ -106,7 +105,8 @@ public class LoginAction extends ActionSupport{
     }
     
     public String newPassword()
-    {    	
+    {   
+    	this.err="";
     	request = ServletActionContext.getRequest(); 
     	System.out.println("Form Data----->"+request.getParameterMap().values());
     	newPassword=request.getParameter("newPassword").toString();

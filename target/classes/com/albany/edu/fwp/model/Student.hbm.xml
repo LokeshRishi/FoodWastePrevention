@@ -22,5 +22,13 @@
             </key>
             <one-to-many class="com.albany.edu.fwp.model.FoodSelected" />
         </set>
+        
+        <set name="feedBack" table="FeedBack"
+				inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="StudentID" not-null="true" />
+            </key>
+            <one-to-many class="com.albany.edu.fwp.model.FeedBack" />
+        </set>
     </class> 
 </hibernate-mapping>

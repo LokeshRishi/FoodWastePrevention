@@ -254,31 +254,24 @@
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2">
                     <form name="sentMessage" action="feedback" id="contactForm" novalidate>
+                        
                         <div class="row control-group">
-                            <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label>Student Name</label>
-                                <input type="text" name="name" class="form-control" placeholder="Name" id="name" required data-validation-required-message="Please enter your name.">
-                                <p class="help-block text-danger"></p>
+                            <div class="form-group col-xs-12 floating-label-form-group controls"> 								
+                                <input STYLE="VISIBILITY: hidden;" type="email" name="email" class="form-control" placeholder="Quad Email" id="email" required data-validation-required-message="Please enter your email address.">
+                                <h4>Select Quad</h4>
+								<select name="quadId" class="form-control" placeholder="Quad Email" id="email">
+								  <s:iterator value="quadList" var="myvar" status="stat">
+								  	<option value=${myvar[0]}>${myvar[1]}</option>
+								  </s:iterator>
+								</select>
+								<p class="help-block text-danger"></p>
                             </div>
                         </div>
+                        
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label>Quad Email</label>
-                                <input type="email" name="email" class="form-control" placeholder="Quad Email" id="email" required data-validation-required-message="Please enter your email address.">
-                                <p class="help-block text-danger"></p>
-                            </div>
-                        </div>
-                        <div class="row control-group">
-                            <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label>Phone Number</label>
-                                <input type="tel" name="tel" class="form-control" placeholder="Phone Number" id="phone" required data-validation-required-message="Please enter your phone number.">
-                                <p class="help-block text-danger"></p>
-                            </div>
-                        </div>
-                        <div class="row control-group">
-                            <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label>Message</label>
-                                <textarea rows="5" name="msg" class="form-control" placeholder="Message" id="message" required data-validation-required-message="Please enter a message."></textarea>
+                                <h4>Message</h4>
+                                <textarea rows="5" name="msg" class="form-control" id="message" required data-validation-required-message="Please enter a message."></textarea>
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
@@ -352,7 +345,7 @@
         </a>
     </div>
 
-	
+	<input type="text" STYLE="VISIBILITY: hidden;" name="datetime" id="datetimeval" value=${dateTimeVal}>
 
     <!-- jQuery -->
     <script src="/foodwasteprevention/resources/jquery/jquery.min.js"></script>
@@ -382,6 +375,7 @@
 
 	<script>
 	var arrMap = [];
+	var datetime=$( "#datetimeval" ).val()
 	function evalGroup(quadAndMealCourse,mealcourse,foodItem,calorie)
 	{   
 		var hash = "#"
@@ -481,10 +475,10 @@
 	    $('[data-toggle="tooltip"]').tooltip(); 
 	});
 	
-	$('#counter').countdown({
+	$('#counter').countdown({			
 	    image: "./resources/img/digits.png",
-	    format: "hh:mm:ss",
-	    endTime: new Date('10/25/16 18:59:59'),
+	    format: "dd:hh:mm:ss",
+	    endTime: new Date(datetime),
 	    digitWidth: 33.99,
 	    digitHeight: 45
 	  });

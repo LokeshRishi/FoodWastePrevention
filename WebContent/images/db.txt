@@ -118,6 +118,9 @@ INSERT INTO fooddate VALUES
 ('2016-11-16', 22),
 ('2016-11-16', 23);
 
+INSERT INTO config VALUES 
+(1,"10:00", "23:59");
+
 insert into student values('nr123123', 'Navodit', 'nr123@albany.edu', 1);
 
 Below Commands are for Demo only

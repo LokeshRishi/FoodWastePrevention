@@ -54,6 +54,14 @@ public class FoodItemsDAOImpl implements FoodItemsDAO {
         List<FoodItems> listFoodItems = (List<FoodItems>) query.list();  
         return listFoodItems;
     }
+    @Transactional
+    public List<FoodItems> listByQuadId(int quadId) {
+        @SuppressWarnings("unchecked")        
+        String hql = "FROM FoodItems F WHERE F.quadInfo.quadId = '"+quadId+"'";
+        Query query = sessionFactory.getCurrentSession().createQuery(hql);
+        List<FoodItems> listFoodItems = (List<FoodItems>) query.list();  
+        return listFoodItems;
+    }
     
     
     
@@ -87,7 +95,7 @@ public class FoodItemsDAOImpl implements FoodItemsDAO {
 	        					foodItemsImageAndCalorie.add(foodItem.getFoodItemName());
 	    		        		foodItemsImageAndCalorie.add(imagesDAO.imagePath(foodItem.getImages().getImageId()));
 	    		        		foodItemsImageAndCalorie.add(Integer.toString(foodItem.getCalories()));
-	    		        		foodItemsImageAndCalorie.add(Integer.toString(foodItem.getFoodItemId()));
+	    		        		foodItemsImageAndCalorie.add(foodItem.getFoodItemId());
 	    	        			System.out.println("------->"+foodItem.getFoodItemName()+ "  "+imagesDAO.imagePath(foodItem.getImages().getImageId()));
 	    	        			quadFoodItemsPerMealCourseList.add(foodItemsImageAndCalorie);
 	        				}	        				

@@ -269,7 +269,7 @@
         </a>
     </div>
 
-
+	<input type="text" STYLE="VISIBILITY: hidden;" name="datetime" id="datetimeval" value=${dateTimeVal}>
     <!-- jQuery -->
     <script src="/foodwasteprevention/resources/jquery/jquery.min.js"></script>
 	
@@ -293,10 +293,11 @@
     
    
    <script>
+   var datetime=$( "#datetimeval" ).val()
    	$('#counter').countdown({
 	    image: "./resources/img/digits.png",
-	    format: "hh:mm:ss",
-	    endTime: new Date('10/25/16 18:59:59'),
+	    format: "dd:hh:mm:ss",
+	    endTime: new Date(datetime),
 	    digitWidth: 33.99,
 	    digitHeight: 45
 	  });

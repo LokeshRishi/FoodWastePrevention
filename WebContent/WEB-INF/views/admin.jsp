@@ -68,8 +68,9 @@ body {
 
    <!--href="<s:url action="actionName"/>"-->
   <a href="<s:url action="urlTagAction" />" target="frame1">Manager</a>
-  <a href="<s:url action="urlTagAction1" />" target="frame1" >Quads</a>
-  <a href="<s:url action="urlTagAction2" />" target="frame1" >Configure Time</a>    
+  <a href="<s:url action="quadInfo" />" target="frame1" >Quads</a>
+  <a href="<s:url action="mealCourseInfo" />" target="frame1" >MealCourses</a>
+  <a href="<s:url action="configEdit" />" target="frame1" >Configure Time</a>    
   <a href="<s:url action="uploadaction" />" target="frame1" >Add Student</a>    
 </div>
  

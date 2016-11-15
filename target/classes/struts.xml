@@ -10,6 +10,14 @@
             <result name="success">/WEB-INF/views/admin.jsp</result>
         </action>
         
+        <action name="addmanagersubmit" class="adminActionBean" method="addManager">
+            <result name="success">/WEB-INF/views/AddManager.jsp</result>
+        </action>
+        
+        <action name="searchmanagersubmit" class="adminActionBean" method="searchManagers">
+            <result name="success">/WEB-INF/views/AddManager.jsp</result>
+        </action>
+        
         <action name="student" class="studentActionBean">
         	<result name="success">/WEB-INF/views/student.jsp</result>
         	<result name="firstchoice">/WEB-INF/views/student.jsp</result>
@@ -96,11 +104,21 @@
 			<result name="success">/WEB-INF/views/AddManager.jsp</result>
 		</action>
 
-		<action name="urlTagAction1" class="adminActionBean" >
+		<action name="quadInfo" class="quadActionBean" >
+			<result name="success">/WEB-INF/views/ViewQuads.jsp</result>
+		</action>
+		<action name="quadEdit" class="quadActionBean" >
 			<result name="success">/WEB-INF/views/ViewQuads.jsp</result>
 		</action>
 		
-		<action name="urlTagAction2" class="adminActionBean" >
+		<action name="mealCourseInfo" class="mealCourseActionBean" >
+			<result name="success">/WEB-INF/views/ViewMealCourses.jsp</result>
+		</action>
+		<action name="mealCourseEdit" class="mealCourseActionBean" >
+			<result name="success">/WEB-INF/views/ViewMealCourses.jsp</result>
+		</action>
+		
+		<action name="configEdit" class="configActionBean" >
 			<result name="success">/WEB-INF/views/SetConfigurations.jsp</result>
 		</action>
 		

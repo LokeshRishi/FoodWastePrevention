@@ -8,17 +8,17 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>VIEW QUADS</h1>
+<h1>VIEW MEALCOURSES</h1>
 <hr>
 
-<form action="quadInfo"> 
-<table style="width:20%">  
+<form action="mealCourseInfo"> 
+<table style="width:30%">  
   <tr>
-    <td>Quad Id:</td>
+    <td>MealCourse Id:</td>
     <td><input type="text" name="id"></td>
   </tr>
   <tr>
-    <td>Quad Name:</td>
+    <td>MealCourse Name:</td>
     <td><input type="text" name="name"></td>
   </tr>
   <tr>
@@ -27,8 +27,7 @@
 </table> 
 </form> 
 <br><br>
-
-<form action="quadEdit"> 
+<form action="mealCourseEdit"> 
 <table style="width:30%">
   <tr>  
   <th style="color:red;">${status}</th>
@@ -36,12 +35,13 @@
   <tr><td></td></tr>
   <tr><td></td></tr>
   <tr><td></td></tr>
+  
   <tr>
-    <th>Quad Id:</th>
-	<th>Quad Name:</th>
+    <th>MealCourse Id:</th>
+	<th>MealCourse Name:</th>
 	<th>Check</th>    
   </tr>
-  <s:iterator value="quadList" var="myvar" status="stat">
+  <s:iterator value="mealCourseList" var="myvar" status="stat">
   <tr>
     <td>${myvar[0]}</td>
     <td><input type="text" name=name_${myvar[0]} value=${myvar[1]}></td>

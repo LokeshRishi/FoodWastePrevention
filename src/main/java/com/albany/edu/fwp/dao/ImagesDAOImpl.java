@@ -26,6 +26,7 @@ public class ImagesDAOImpl implements ImagesDAO {
         return listImages;
     }	
     
+    @Transactional
     public String imagePath(int imageId) {
         @SuppressWarnings("unchecked")
         String imagePath ="";

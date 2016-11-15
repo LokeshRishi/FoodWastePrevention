@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Student {
+	private Set<FeedBack> feedBack;
     private String studentId;
     private String name;
     private String studentEmail;
@@ -61,4 +62,12 @@ public class Student {
     public void setFoodSelections(Set<FoodSelected> foodSelections) {
         this.foodSelections = foodSelections;
     }
+
+	public Set<FeedBack> getFeedBack() {
+		return feedBack;
+	}
+
+	public void setFeedBack(Set<FeedBack> feedBack) {
+		this.feedBack = feedBack;
+	}
 }

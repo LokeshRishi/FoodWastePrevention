@@ -5,6 +5,8 @@
 package com.albany.edu.fwp.action;
 
 import java.io.File;
+
+import com.albany.edu.fwp.dao.ManagerInfoDAO;
 import com.mysql.jdbc.StringUtils;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -29,10 +31,15 @@ public class LoginAction extends ActionSupport{
 	private String err;
 	private HttpServletRequest request;
 	private HttpSession session;
+	private ManagerInfoDAO managerInfoDAO;
 	
 	//Remove this///
 	
 	private  String xmlfile;
+	
+	public void setManagerInfoDAO(ManagerInfoDAO managerInfoDAO) {
+	    this.managerInfoDAO = managerInfoDAO;
+	}
 	
     public String execute() { 
     	xmlfile=ServletActionContext.getServletContext().getRealPath("/")+"xml/login.xml";
@@ -77,6 +84,12 @@ public class LoginAction extends ActionSupport{
     					this.redirection=type.toLowerCase()+"success";
     					HttpSession session = ServletActionContext.getRequest().getSession();
     					session.setAttribute(type.toLowerCase()+"Id", sessionUID);
+    					
+    					if(type.toLowerCase().equalsIgnoreCase("manager"))
+    					{
+    						request.setAttribute("QuadID", managerInfoDAO.getManagerQuad(sessionUID).get(0));
+    					}
+    						
     					if("Y".equalsIgnoreCase(user.getElementsByTagName("FirstTimeUser").item(0).getTextContent()))
     						return "newuserredirection";
     					else

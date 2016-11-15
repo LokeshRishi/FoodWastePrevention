@@ -41,4 +41,14 @@ public class ManagerInfoDAOImpl implements ManagerInfoDAO{
         List<ManagerInfo> listManagerInfo = (List<ManagerInfo>) query.list();  
         return listManagerInfo;
     }
+    
+    @Transactional
+    public List<Integer> getManagerQuad(String managerID) {
+    	ManagerInfo m = new ManagerInfo();
+    	m.setManagerID(managerID);
+    	String hql = "SELECT F.Quad.quadId FROM ManagerInfo F WHERE F.ManagerID = '"+managerID+"'";
+    	Query query = sessionFactory.getCurrentSession().createQuery(hql);
+    	List<Integer> quadid = (List<Integer>) query.list();
+    	return quadid;
+    }
 }

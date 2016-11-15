@@ -51,6 +51,7 @@
     </bean>
     
     <bean id="loginActionBean" class="com.albany.edu.fwp.action.LoginAction">
+    <property name="managerInfoDAO" ref="managerInfoDAO" />
     </bean>
     
     <bean id="setDateActionBean" class="com.albany.edu.fwp.action.SetDateAction">

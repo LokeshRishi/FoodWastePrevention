@@ -4,14 +4,27 @@
  */
 package com.albany.edu.fwp.action;
  
+import java.io.File;
 import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.apache.struts2.ServletActionContext;
+import org.w3c.dom.Document;
 
+import com.albany.edu.fwp.dao.FoodDateDAO;
 import com.albany.edu.fwp.dao.FoodItemsDAO;
 import com.albany.edu.fwp.dao.ImagesDAO;
 import com.albany.edu.fwp.dao.MealCourseDAO;
@@ -33,9 +46,17 @@ public class ManagerAction extends ActionSupport {
     private List<String> foodItemIdList;
     private List<String> foodItemNameList;
     private List<String> foodItemMealCourseList;
-    private List<String> foodItemImagePathList;
-    private String quadName;
-    
+    private List<String> foodItemImagePathList;    
+	private String quadName;
+    private HttpServletRequest request;
+    private FoodDateDAO foodDateDAO;
+	
+    public FoodDateDAO getFoodDateDAO() {
+		return foodDateDAO;
+	}
+	public void setFoodDateDAO(FoodDateDAO foodDateDAO) {
+		this.foodDateDAO = foodDateDAO;
+	}
     public void setFoodItemsDAO(FoodItemsDAO foodItemsDAO) {
         this.foodItemsDAO = foodItemsDAO;
     }
@@ -50,12 +71,54 @@ public class ManagerAction extends ActionSupport {
     }
  
     public String execute() {
+    	
+    	try
+   	    {	  	
+   	    	
+    		   
+   	   
         
     	session = ServletActionContext.getRequest().getSession();
     	//session.setAttribute("quadID", 10);
     	if(session.getAttribute("quadID")==null){    		
     		return "logout";
     	}
+    	
+    	 request = ServletActionContext.getRequest();   
+       	 String dateString="";
+       	 if(session.getAttribute("date")==null){ 
+     		SimpleDateFormat dmyFormat = new SimpleDateFormat("yyyy-MM-dd");
+     		Date date = new Date();
+     		Calendar c = Calendar.getInstance();
+     		try {
+    				c.setTime(dmyFormat.parse(date.toString()));
+    			} catch (ParseException e) {
+    				e.printStackTrace();
+    			}
+     		c.add(Calendar.DATE, 1);
+     		session.setAttribute("date", dmyFormat.format(c.getTime()).toString());
+     		dateString=session.getAttribute("date").toString();
+       	 }
+       	 else{
+     		dateString=session.getAttribute("date").toString();
+       	 }
+       	 
+       	 if( !(request.getParameterMap().isEmpty())){
+        		Map<String, String[]> map = request.getParameterMap();
+     		Iterator<Entry<String,String[]>> iterator = map.entrySet().iterator();
+     		while (iterator.hasNext()) {
+     			Map.Entry<String,String[]> entry = (Map.Entry<String,String[]>) iterator.next();
+     			System.out.println("Key : " + entry.getKey() + " Value :" + entry.getValue()[0]);
+     			System.out.println(dateString);
+     			FoodItems foodItems= foodItemsDAO.getFoodItem(entry.getValue()[0]);
+     			foodDateDAO.insertFoodSelected(foodItems, dateString);
+     			//foodItems=foodItemsDAO.getFoodItem(entry.getKey());
+     			//foodSelectedDAO.insertFoodSelected(Integer.parseInt(entry.getValue()[0]), foodItems, student, dateString);
+     			//foodSelectedDAO.insertFoodSelected(Integer.parseInt(entry.getValue()[0]), foodItems, student, dateFormat.format(date).toString());
+     		}
+       	 }
+     		else
+     		{
     	
     	int quadId=Integer.parseInt(session.getAttribute("quadID").toString());
     	quadName=quadInfoDAO.getQuadInfo(quadId).getQuadName();
@@ -79,10 +142,62 @@ public class ManagerAction extends ActionSupport {
     		foodItemDetails.add(Integer.toString(foodItem.getCalories()));
     		foodList.add(foodItemDetails);
     	}
-    	
+    	}
+   	    }
+    	catch (Exception e){		
+       		e.printStackTrace();
+       	}
+    	  	
+    	   	
         return SUCCESS;
     }
-
+    /*public String insertdateid(){
+    	try
+   	    {	  	
+   	    	
+    		   
+   	    request = ServletActionContext.getRequest();   
+   	 String dateString="";
+   	 if(session.getAttribute("date")==null){ 
+ 		SimpleDateFormat dmyFormat = new SimpleDateFormat("yyyy-MM-dd");
+ 		Date date = new Date();
+ 		Calendar c = Calendar.getInstance();
+ 		try {
+				c.setTime(dmyFormat.parse(date.toString()));
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+ 		c.add(Calendar.DATE, 1);
+ 		session.setAttribute("date", dmyFormat.format(c.getTime()).toString());
+ 		dateString=session.getAttribute("date").toString();
+   	 }
+   	 else{
+ 		dateString=session.getAttribute("date").toString();
+   	 }
+ 	
+   	 if( !(request.getParameterMap().isEmpty())){
+   		Map<String, String[]> map = request.getParameterMap();
+		Iterator<Entry<String,String[]>> iterator = map.entrySet().iterator();
+		while (iterator.hasNext()) {
+			Map.Entry<String,String[]> entry = (Map.Entry<String,String[]>) iterator.next();
+			System.out.println("Key : " + entry.getKey() + " Value :" + entry.getValue()[0]);
+			System.out.println(dateString);
+			FoodItems foodItems= foodItemsDAO.getFoodItem(entry.getValue()[0]);
+			fooddateDAO.insertFoodSelected(foodItems, dateString);
+			//foodItems=foodItemsDAO.getFoodItem(entry.getKey());
+			//foodSelectedDAO.insertFoodSelected(Integer.parseInt(entry.getValue()[0]), foodItems, student, dateString);
+			//foodSelectedDAO.insertFoodSelected(Integer.parseInt(entry.getValue()[0]), foodItems, student, dateFormat.format(date).toString());
+		}
+   	 }
+   	    
+   	    	
+   	      	    	
+       	}
+       	catch (Exception e){		
+       		e.printStackTrace();
+       	}
+    	return "edit";
+    }*/
 	public List<List<String>> getFoodList() {
 		return foodList;
 	}

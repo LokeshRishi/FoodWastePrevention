@@ -14,6 +14,9 @@
     <meta name="author" content="">
 
     <title>Manager - Welcome Quad Manager</title>
+    
+    <!-- Date Picker CSS -->
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
     <!-- Bootstrap Core CSS -->
     <link href="/foodwasteprevention/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -110,9 +113,15 @@
                 </div>
             </div>
             
-            <div class="row">
-			
-				
+            	<div class="row">
+				<div class="col-lg-12 text-right">
+					<form id="dateSelector" action="setDatemanager">
+						<p>Date: <input type="text" name="date" id="datepicker" onchange="dateSet()"></p>
+					</form>
+				</div>
+			</div>
+            
+            <div class="row">				
 			
             <div id="container">
                 <div class="food-list food-container" id="catalog">
@@ -126,10 +135,13 @@
 					  </s:iterator>		-->			  
 					  
                 </div>
-
+				<form id="selected" action="manager">
                 <div class="food-list food-container" id="menu">
-                    <h3>Menu</h3>
+                
+                 <h3>Menu</h3>
+                 
                 </div>
+                </form>
 
                 <div class="food-list">
                     <h3>Add a food item</h3>
@@ -155,7 +167,7 @@
             </div>
            <br/>
 			<p id="errorMessage" style="text-align: center; max-width: 293px; margin: 0 427px; margin-top: 10px"></p>
-			<input type="button" value="Create Menu" onclick="location.href='manageredit';" class="btn btn-lg btn-block btn-warning" style="max-width: 293px; margin: 0 427px; margin-top: 10px">
+			<input type="button" value="Create Menu" onclick="valuesfunction();" class="btn btn-lg btn-block btn-warning" style="max-width: 293px; margin: 0 427px; margin-top: 10px">
             </div>
     </div>
     </section>
@@ -290,7 +302,10 @@
     <!-- jQuery -->
     <script src="/foodwasteprevention/resources/jquery/jquery.min.js"></script>
     <script src="/foodwasteprevention/resources/jquery/jquery.ui.min.js"></script>
-
+	<!-- Date Picker -->
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <!-- Bootstrap Core JavaScript -->
     <script src="/foodwasteprevention/resources/bootstrap/js/bootstrap.min.js"></script>
 
@@ -310,6 +325,18 @@
     <script src="/foodwasteprevention/resources/js/jquery.countdown.js"></script>
 
     <script type="text/javascript">
+    
+    $( function() {
+	    $( "#datepicker" ).datepicker();
+	  } );
+	  
+	function dateSet(){	
+		var date=$( "#datepicker" ).val();
+		var breakup = date.split("/");
+		var dateMod = breakup[2]+ "-" + breakup[0]+ "-" + breakup[1];
+		document.getElementById("datepicker").value = dateMod;
+		document.forms["dateSelector"].submit();
+	}  
 	var foodItemId = "";
 	window.addEventListener('beforeunload', function(event) {
         console.log('I am the 1st one.');
@@ -343,6 +370,10 @@
 	        } else {
 	        	foodItem.add(new Date().getTime());
 	        }
+	    }
+	    
+	    function valuesfunction() {
+	    	document.forms["selected"].submit();       
 	    }
 		
 		function addToCatalog(foodItemIdTemp, foodItemName, foodItemMeanCourse, foodItemImage) {	

@@ -39,8 +39,10 @@
         <property name="mealCourseDAO" ref="mealCourseDAO" />
         <property name="imagesDAO" ref="imagesDAO" />
         <property name="quadInfoDAO" ref="quadInfoDAO" />
+        <property name="foodDateDAO" ref="foodDateDAO" />
     </bean>
     
+       
     <bean id="feedBackActionBean" class="com.albany.edu.fwp.action.FeedBackAction">
     	<property name="feedBackDAO" ref="feedBackDAO" />
     	<property name="studentDAO" ref="studentDAO" />
@@ -177,11 +179,10 @@
         <property name="driverClassName" value="com.mysql.jdbc.Driver" />
         <property name="url" value="jdbc:mysql://localhost:3306/fwp" />
         <property name="username" value="root" />
-        <property name="password" value="test123" />
+        <property name="password" value="admin" />
     </bean>
     
-    <tx:annotation-driven />
-     
+    <tx:annotation-driven />     
     <bean id="transactionManager"
         class="org.springframework.orm.hibernate4.HibernateTransactionManager">
         <property name="sessionFactory" ref="sessionFactory" />

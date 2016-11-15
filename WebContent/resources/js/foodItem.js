@@ -13,7 +13,8 @@ data = data || {};
             foodId: "food-id",
             formId: "foodItem-form",
             dataAttribute: "data",
-            deleteDiv: "delete-div"
+            deleteDiv: "delete-div",
+            menuid:"foodItem-menu"
         }, codes = {
             "1" : "#catalog",
             "2" : "#inProgress",
@@ -103,6 +104,12 @@ data = data || {};
 //            "class" : defaults.foodImage,
 //            "text": params.description
 //        }).appendTo(wrapper);
+        $("<input />", {      
+        	"type" : "hidden",
+            "class" : defaults.foodHeader,            
+            "name" : params.id,
+            "value": params.id
+        }).appendTo(wrapper);
         
         $("<div />", {
             "class" : defaults.mealType + "label label-default",

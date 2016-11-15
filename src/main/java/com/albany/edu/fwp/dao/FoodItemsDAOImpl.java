@@ -37,14 +37,7 @@ public class FoodItemsDAOImpl implements FoodItemsDAO {
         this.foodDateDAO = foodDateDAO;
     }
     
-    @Transactional
-    public FoodItems getFoodItem(String foodItemId) {
-        @SuppressWarnings("unchecked")
-        String hql = "FROM FoodItems F WHERE F.foodItemId = '"+foodItemId+"'";
-        Query query = sessionFactory.getCurrentSession().createQuery(hql);
-        FoodItems foodItem = (FoodItems) query.list().get(0); 
-        return foodItem;
-    }
+    
     
     @Transactional
     public List<FoodItems> list() {
@@ -63,7 +56,14 @@ public class FoodItemsDAOImpl implements FoodItemsDAO {
         return listFoodItems;
     }
     
-    
+    @Transactional
+    public FoodItems getFoodItem(String foodItemId) {
+        @SuppressWarnings("unchecked")
+        String hql = "FROM FoodItems F WHERE F.foodItemId = '"+foodItemId+"'";
+        Query query = sessionFactory.getCurrentSession().createQuery(hql);
+        FoodItems foodItem = (FoodItems) query.list().get(0); 
+        return foodItem;
+    }
     
 	  @Transactional
 	  public HashMap<String, HashMap<String, List<List<String>>>> getAllFoodItemsMap(String dateInString) {

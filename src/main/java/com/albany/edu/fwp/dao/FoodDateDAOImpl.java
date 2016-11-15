@@ -1,5 +1,7 @@
 package com.albany.edu.fwp.dao;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -33,7 +35,21 @@ public class FoodDateDAOImpl implements FoodDateDAO {
         List<FoodDate> listFoodByDate = (List<FoodDate>) query.list();  
         return listFoodByDate;
     }
-    
-   	
+    @Transactional
+    public void insertFoodSelected(FoodItems foodItems, String DateTime) {
+    	SimpleDateFormat dmyFormat = new SimpleDateFormat("yyyy-MM-dd");
+    	
+    	FoodDate foodDate = new FoodDate();
+    	//foodSelected.setSelectionId(1);
+    	
+    	
+    	foodDate.setFoodItems(foodItems);
+    	try {
+    		foodDate.setFoodDate(dmyFormat.parse(DateTime));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+    	sessionFactory.getCurrentSession().save(foodDate);		
+	}
 
 }

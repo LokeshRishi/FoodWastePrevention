@@ -82,6 +82,7 @@ Quad ID:<s:select name="searchmanagerQuad" headerKey='-1' headerValue="" list="q
     <th>Quad ID</th>
     <th>Email ID</th>
     <th>Phone Number</th>
+    <th>Select</th>
   </tr>
  
 
@@ -95,17 +96,20 @@ Quad ID:<s:select name="searchmanagerQuad" headerKey='-1' headerValue="" list="q
 	   out.print("<tr><td>"+request.getAttribute("SEARCHRESULTSMESSAGE").toString()+"</td></tr>");
    }
    %>
-   
+
    <s:iterator value="parsesearch" var="var">
 	<tr>
 	<td><s:property value="#var[0]"/></td>
-	<td><s:property value="#var[1]"/></td>
-	<td><s:property value="#var[2]"/></td>
-	<td><s:property value="#var[3]"/></td>
-	<td><s:property value="#var[4]"/></td>
+	<td><input type="text" name=name_${var[0]} value="${var[1]}"/></td>
+	<td><input type="text" name=quad_${var[0]} value="${var[2]}" /></td>
+	<td><input type="text" name=email_${var[0]} value="${var[3]}"/></td>
+	<td><input type="text" name=phone_${var[0]} value="${var[4]}"/></td>
+	<td><input type="radio" name="check" value="${var[0]}"></td>
 	</tr>
  </s:iterator>
-    
+   	<tr><input type="submit" name="buttonAction" value="Delete" formaction="updatedeletemanagersubmit">
+	<input type="submit" name="buttonAction" value="Update" formaction="updatedeletemanagersubmit"></tr>
+	
 </form>
 </body>
 </html>

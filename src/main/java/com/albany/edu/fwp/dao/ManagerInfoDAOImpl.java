@@ -51,4 +51,25 @@ public class ManagerInfoDAOImpl implements ManagerInfoDAO{
     	List<Integer> quadid = (List<Integer>) query.list();
     	return quadid;
     }
+    
+    @Transactional
+	public void updateManager(String managerID, String Manager_Name, String Manager_EmailID, String Manager_PhoneNumber, QuadInfo managerQuad) {
+    	ManagerInfo m = new ManagerInfo();
+    	m.setManagerID(managerID);
+    	m.setManagerName(Manager_Name);
+    	m.setManagerEmailID(Manager_EmailID);
+    	m.setManagerPhoneNumber(Manager_PhoneNumber);
+    	String hql ="UPDATE ManagerInfo F SET F.Quad.quadId ="+managerQuad.getQuadId()+", F.ManagerName='"+Manager_Name+"', F.ManagerEmailID='"+Manager_EmailID+"', F.ManagerPhoneNumber='"+Manager_PhoneNumber+"' WHERE F.ManagerID = '"+managerID+"'";
+    	Query query = sessionFactory.getCurrentSession().createQuery(hql);
+    	query.executeUpdate();
+    }
+    
+    @Transactional
+    public void deleteManager(String managerID) {
+    	ManagerInfo m = new ManagerInfo();
+    	m.setManagerID(managerID);
+    	String hql ="DELETE FROM ManagerInfo F where F.ManagerID='"+managerID+"'";
+    	Query query = sessionFactory.getCurrentSession().createQuery(hql);
+    	query.executeUpdate();
+    }
 }

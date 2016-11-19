@@ -9,4 +9,6 @@ public interface ManagerInfoDAO {
 	void insertManagerInfo(String managerID, String managerName, String managerPhoneNumber, String managerEmailID, QuadInfo managerQuad);
 	public List<ManagerInfo> searchManagerInfo(String managerID, String managerName, QuadInfo Quad, String managerEmailID);
 	public List<Integer> getManagerQuad(String managerID);
+	public void updateManager(String managerID, String managerName, String managerPhoneNumber, String managerEmailID, QuadInfo managerQuad);
+	public void deleteManager(String managerID);
 }

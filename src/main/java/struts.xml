@@ -18,6 +18,10 @@
             <result name="success">/WEB-INF/views/AddManager.jsp</result>
         </action>
         
+        <action name="updatedeletemanagersubmit" class="adminActionBean" method="updateDeleteManager">
+            <result name="success">/WEB-INF/views/AddManager.jsp</result>
+        </action>
+        
         <action name="student" class="studentActionBean">
         	<result name="success">/WEB-INF/views/student.jsp</result>
         	<result name="firstchoice">/WEB-INF/views/student.jsp</result>

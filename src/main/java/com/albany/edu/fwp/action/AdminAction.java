@@ -152,7 +152,6 @@ private ArrayList<ArrayList<String>> parsesearch;
     		quadInfo.setQuadId(searchmanagerQuad);
     		quadInfo.setQuadName(hm.get(searchmanagerQuad));
     		List<ManagerInfo> searchresults=managerInfoDAO.searchManagerInfo(searchmanagerID,searchmanagerName, quadInfo, searchmanagerEmail);
-    		System.out.println(searchresults.size());
     		if(searchresults.isEmpty())
     			request.setAttribute("SEARCHRESULTSMESSAGE","No results found");
     		else
@@ -168,6 +167,33 @@ private ArrayList<ArrayList<String>> parsesearch;
     				parsesearch.add(temp);
     			}
     		}}
+    	return SUCCESS;
+    }
+    
+    public String updateDeleteManager(){
+    	if(request.getParameter("check")!=null){ 
+    		String id =request.getParameter("check").toString();
+    		String name = request.getParameter("name_"+id).toString();
+    		String email = request.getParameter("email_"+id).toString();
+    		String phone = request.getParameter("phone_"+id).toString();
+    		int quad = Integer.parseInt(request.getParameter("quad_"+id));
+    		if(request.getParameter("buttonAction").equals("Delete")){
+    			managerInfoDAO.deleteManager(id);
+    		}
+    		if(request.getParameter("buttonAction").equals("Update"))
+    		{
+    			try{
+    	    		quadInfo=new QuadInfo();
+    	    		quadInfo.setQuadId(quad);
+    	    		quadInfo.setQuadName(hm.get(quad));
+    				managerInfoDAO.updateManager(id, name, email, phone, quadInfo);
+    				request.setAttribute("SEARCHERRORMESSAGE","Update Successful");
+        			}catch(Exception e){
+        				e.printStackTrace();
+        				request.setAttribute("SEARCHERRORMESSAGE","Error in Update.");
+        			}
+        	}
+    	}
     	return SUCCESS;
     }
     

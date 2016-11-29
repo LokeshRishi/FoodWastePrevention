@@ -188,7 +188,7 @@
 		                    <s:iterator value="mealCourseNames" var="mealCourseName" status="stat">		                    	
 		                    	<li id=${quadName}${mealCourseName} class="list-group-item" data-toggle="tooltip" data-placement="left" title=<s:property value="mealCourseName"/>>
 		                    	<s:if test="%{allFoodItems[#quadName][#mealCourseName].isEmpty()}">			                    	
-				                        <p class="lead" style="font-size:20px"><strong>Sorry! No ${mealCourseName}</strong></p>				                    
+				                        <p class="lead" style="font-size:20px"><strong>${mealCourseName} Coming Up!</strong></p>				                    
 		                    	</s:if>
 		                    	<s:else>
 			                    

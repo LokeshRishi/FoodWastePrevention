@@ -21,11 +21,12 @@ public class FeedBackDAOImpl implements FeedBackDAO{
 	    }
 	
 	@Transactional
-	public void insert(String description, QuadInfo quadInfo, Student student){
+	public void insert(String description, QuadInfo quadInfo, Student student, String timestamp){
     	FeedBack feedBack = new FeedBack();
     	feedBack.setDescription(description);
     	feedBack.setQuadInfo(quadInfo);
-    	feedBack.setStudent(student);    	
+    	feedBack.setStudent(student);  
+    	feedBack.setTimestamp(timestamp);
     	sessionFactory.getCurrentSession().save(feedBack);	    	
     }
 

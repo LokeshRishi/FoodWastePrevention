@@ -25,6 +25,12 @@ public class FoodDateDAOImpl implements FoodDateDAO {
         this.sessionFactory = sessionFactory;
     }
 
+    @Transactional
+	public void deleteFoodSelected(String foodItemId, String date){
+    	String hql = "DELETE FoodDate F WHERE F.foodDate = '"+date+"' AND F.foodItems.foodItemId = '"+foodItemId+"'";
+        Query query = sessionFactory.getCurrentSession().createQuery(hql);
+        query.executeUpdate();   	
+    }
         
     @Transactional
     public List<FoodDate> listFoodByDate(String date) {

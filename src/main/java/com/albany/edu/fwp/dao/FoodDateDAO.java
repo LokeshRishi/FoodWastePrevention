@@ -10,6 +10,7 @@ import com.albany.edu.fwp.model.Student;
 public interface FoodDateDAO {
 	
 	List<FoodDate> listFoodByDate(String date);
-	void insertFoodSelected(FoodItems foodItems, String DateTime);
+	void insertFoodSelected(FoodItems foodItem, String DateTime);
+	void deleteFoodSelected(String foodItem, String DateTime);
 
 }

@@ -7,6 +7,7 @@ public class FeedBack {
     private String description; 
     private QuadInfo quadInfo;
     private Student student;
+    private String timestamp;
     
 	public long getFeedBackId() {
 		return feedBackId;
@@ -34,6 +35,12 @@ public class FeedBack {
 	}
 	public void setStudent(Student student) {
 		this.student = student;
+	}
+	public String getTimestamp() {
+		return timestamp;
+	}
+	public void setTimestamp(String timestamp) {
+		this.timestamp = timestamp;
 	}
 
 }

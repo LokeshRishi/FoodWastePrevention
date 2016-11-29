@@ -43,12 +43,17 @@
     <style> table{font-size: 23px} </style>
 </head>
 
-<body id="page-top" class="index" onLoad="addToCatalog('${foodItemIdList}', '${foodItemNameList}', '${foodItemMealCourseList}', '${foodItemImagePathList}');">
+<body id="page-top" class="index" onLoad="addToCatalog('${foodItemIdList}', '${foodItemNameList}', '${foodItemMealCourseList}', '${foodItemImagePathList}', '${foodItemIdListAlreadyInMenu}');">
 
+<s:if test="%{isDeadlinePassed}">	
+</s:if>
+<s:else>
 <nav style="position:fixed;top:105px;box-shadow: 10px 10px 5px #888888;background-color:#18bc9c;padding:4px">
  	<h5 style="margin-left:1em">Menu Creation Deadline</h5>
  	<div id="counter"> </div>
 </nav>
+</s:else>
+
 
     <!-- Navigation -->
     <nav id="mainNav" class="navbar navbar-default navbar-fixed-top navbar-custom">
@@ -104,24 +109,41 @@
 
     <!-- Portfolio Grid Section -->
     <section id="portfolio">
-        <div class="container">
+		<div class="container">
+		
+        
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2>Cook to Order</h2>
+					<h2>Cook to Order</h2>
                     <h2>${quadName}</h2>
                     <hr class="star-primary">
                 </div>
             </div>
             
-            	<div class="row">
-				<div class="col-lg-12 text-right">
-					<form id="dateSelector" action="setDatemanager">
-						<p>Date: <input type="text" name="date" id="datepicker" onchange="dateSet()"></p>
-					</form>
-				</div>
+			<div class="row">
+			<div class="col-lg-12 text-right">
+				<form id="dateSelector" action="setDatemanager">
+					<p>Date: <input type="text" name="date" id="datepicker" onchange="dateSet()"></p>
+				</form>
 			</div>
-            
-            <div class="row">				
+			</div>
+			<input type="text" STYLE="VISIBILITY: hidden;" name="datetime" id="datetimeval" value=${dateTimeVal}>
+            <form STYLE="VISIBILITY:hidden;" id="clearMenu" action="manager">
+					<input 
+						STYLE="VISIBILITY:hidden;"
+						type="text"
+						name="action" 
+						value="clear"                    
+					/>
+				<input >
+				</form>
+            <div class="row">	
+			<s:if test="%{isDeadlinePassed}">
+				<div class="col-lg-12 text-center">
+					<h2>Menu Creation Time is Over</h2> 		
+				</div>
+			</s:if>
+			<s:else>
 			
             <div id="container">
                 <div class="food-list food-container" id="catalog">
@@ -135,10 +157,19 @@
 					  </s:iterator>		-->			  
 					  
                 </div>
+				
 				<form id="selected" action="manager">
                 <div class="food-list food-container" id="menu">
                 
                  <h3>Menu</h3>
+                 
+                 <s:iterator value="foodListAlreadyInMenu" var="myvar" status="stat">
+                     <div class="menu-item ui-draggable" id=food-id${myvar[0]} style="position: relative;">
+						<div style="display: none;"><input type="text" name=foodItemId${myvar[0]} value=${myvar[0]}></div>
+						 <div class="food-header">${myvar[1]}</div>
+						 <div class="meal-typelabel label-default">${myvar[3]}</div>
+					 </div>
+				  </s:iterator>
                  
                 </div>
                 </form>
@@ -168,7 +199,10 @@
            <br/>
 			<p id="errorMessage" style="text-align: center; max-width: 293px; margin: 0 427px; margin-top: 10px"></p>
 			<input type="button" value="Create Menu" onclick="valuesfunction();" class="btn btn-lg btn-block btn-warning" style="max-width: 293px; margin: 0 427px; margin-top: 10px">
-            </div>
+			<input type="button" value="Clear Menu" onclick="clearfunction();" class="btn btn-lg btn-block btn-warning" style="max-width: 293px; margin: 0 427px; margin-top: 10px">
+        
+		</s:else>
+		</div>
     </div>
     </section>
 
@@ -281,8 +315,7 @@
     <script src="/foodwasteprevention/resources/jquery/jquery.min.js"></script>
     <script src="/foodwasteprevention/resources/jquery/jquery.ui.min.js"></script>
 	<!-- Date Picker -->
-	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-	
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>	
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <!-- Bootstrap Core JavaScript -->
     <script src="/foodwasteprevention/resources/bootstrap/js/bootstrap.min.js"></script>
@@ -303,18 +336,8 @@
     <script src="/foodwasteprevention/resources/js/jquery.countdown.js"></script>
 
     <script type="text/javascript">
-    
-    $( function() {
-	    $( "#datepicker" ).datepicker();
-	  } );
-	  
-	function dateSet(){	
-		var date=$( "#datepicker" ).val();
-		var breakup = date.split("/");
-		var dateMod = breakup[2]+ "-" + breakup[0]+ "-" + breakup[1];
-		document.getElementById("datepicker").value = dateMod;
-		document.forms["dateSelector"].submit();
-	}  
+    var datetime=$( "#datetimeval" ).val()
+     
 	var foodItemId = "";
 	window.addEventListener('beforeunload', function(event) {
         console.log('I am the 1st one.');
@@ -353,14 +376,18 @@
 	    function valuesfunction() {
 	    	document.forms["selected"].submit();       
 	    }
+		function clearfunction() {
+	    	document.forms["clearMenu"].submit();       
+	    }
 		
-		function addToCatalog(foodItemIdTemp, foodItemName, foodItemMeanCourse, foodItemImage) {	
+		function addToCatalog(foodItemIdTemp, foodItemName, foodItemMeanCourse, foodItemImage, foodItemIdListAlreadyInMenu) {	
 		foodItemId=foodItemIdTemp
 		//alert(foodItemMeanCourse)
 			var ids = foodItemId.split(",");
 			var names = foodItemName.split(",");
 			var mealCourses = foodItemMeanCourse.split(",");
 			var images = foodItemImage.split(",");
+			var presentIds = foodItemIdListAlreadyInMenu.split(",");
 			for(var i=0; i < ids.length; i++){
 				var id = ids[i].replace("[","").replace(["]"],"").replace(" ","");
 				var name = names[i].replace("[","").replace(["]"],"").replace(" ","");
@@ -370,7 +397,15 @@
 				//alert("add " + tokens)
 				//foodItem.remove(tokens);
 				//alert("remove " + tokens)
-			}        	
+			}     
+			
+			for(var i=0; i < presentIds.length; i++){
+				var idpass = presentIds[i].replace("[","").replace(["]"],"").replace(" ","");
+				foodItem.dropdiv(idpass);
+				//alert("add " + tokens)
+				//foodItem.remove(tokens);
+				//alert("remove " + tokens)
+			}     
 	    }
 		
 		
@@ -385,11 +420,23 @@
         
     	$('#counter').countdown({
     	    image: "./resources/img/digits.png",
-    	    format: "hh:mm:ss",
-    	    endTime: new Date('10/25/16 23:59:59'),
+    	    format: "dd:hh:mm:ss",
+    	    endTime: new Date(datetime),
     	    digitWidth: 33.99,
     	    digitHeight: 45
     	  });
+		  
+		  $( function() {
+			$( "#datepicker" ).datepicker();
+		  } );
+		  
+		  function dateSet(){	
+				var date=$( "#datepicker" ).val();
+				var breakup = date.split("/");
+				var dateMod = breakup[2]+ "-" + breakup[0]+ "-" + breakup[1];
+				document.getElementById("datepicker").value = dateMod;
+				document.forms["dateSelector"].submit();
+			}  
     	</script>
 
 </body>

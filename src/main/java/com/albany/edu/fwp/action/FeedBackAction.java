@@ -5,6 +5,7 @@
 package com.albany.edu.fwp.action; 
 
 
+import java.sql.Timestamp;
 import java.util.Properties;
 
 import org.apache.struts2.ServletActionContext;
@@ -62,9 +63,10 @@ public class FeedBackAction extends ActionSupport {
     	msg=request.getParameter("msg").toString();
     	studentId=httpSession.getAttribute("studentId").toString();
          try {  
+        	 Timestamp timestamp = new Timestamp(System.currentTimeMillis());
         	 student = studentDAO.getStudent(studentId);
         	 quadInfo=quadInfoDAO.getQuadInfo(Integer.parseInt(quadId));
-        	 feedBackDAO.insert(msg, quadInfo, student);
+        	 feedBackDAO.insert(msg, quadInfo, student, timestamp.toString());
         	 System.out.println("message sent successfully");  
           
          } 

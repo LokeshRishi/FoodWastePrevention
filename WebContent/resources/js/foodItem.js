@@ -79,6 +79,12 @@ data = data || {};
         })
 
     };
+	foodItem.dropdiv = function(id) {
+		object = data[id];
+		removeElement(object);
+		$("#" + defaults.deleteDiv).hide();
+		
+	};	
 
     // Add
     var generateElement = function(params){

@@ -37,6 +37,20 @@ public class FoodItemsDAOImpl implements FoodItemsDAO {
         this.foodDateDAO = foodDateDAO;
     }
     
+    @Transactional
+   	public void insert(String foodName, QuadInfo quadInfo, int relAmt, int relativeServingPlates, Images images, int calories, MealCourse mealCourse, Boolean isSelInMenu){
+       	FoodItems foodItem = new FoodItems();
+       	foodItem.setFoodItemName(foodName);
+       	foodItem.setQuadInfo(quadInfo);
+       	foodItem.setRelativeAmount(relAmt);
+       	foodItem.setRelativeServingPlates(relativeServingPlates);
+       	foodItem.setImages(images);
+       	foodItem.setCalories(calories);
+       	foodItem.setMealCourse(mealCourse);
+       	foodItem.setIsSelectedInMenu(isSelInMenu);
+       	sessionFactory.getCurrentSession().save(foodItem);	    	
+       }
+    
     
     
     @Transactional
@@ -95,7 +109,7 @@ public class FoodItemsDAOImpl implements FoodItemsDAO {
 	        					foodItemsImageAndCalorie.add(foodItem.getFoodItemName());
 	    		        		foodItemsImageAndCalorie.add(imagesDAO.imagePath(foodItem.getImages().getImageId()));
 	    		        		foodItemsImageAndCalorie.add(Integer.toString(foodItem.getCalories()));
-	    		        		foodItemsImageAndCalorie.add(foodItem.getFoodItemId());
+	    		        		foodItemsImageAndCalorie.add(Integer.toString(foodItem.getFoodItemId()));
 	    	        			System.out.println("------->"+foodItem.getFoodItemName()+ "  "+imagesDAO.imagePath(foodItem.getImages().getImageId()));
 	    	        			quadFoodItemsPerMealCourseList.add(foodItemsImageAndCalorie);
 	        				}	        				

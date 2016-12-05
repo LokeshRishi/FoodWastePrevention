@@ -32,6 +32,17 @@ import org.w3c.dom.Document;
 
 
 
+
+
+
+
+
+
+
+
+
+
+
 import com.albany.edu.fwp.dao.ConfigDAO;
 import com.albany.edu.fwp.dao.FoodDateDAO;
 import com.albany.edu.fwp.dao.FeedBackDAO;
@@ -46,6 +57,7 @@ import com.albany.edu.fwp.model.FeedBack;
 import com.albany.edu.fwp.model.FoodDate;
 import com.albany.edu.fwp.model.FoodItems;
 import com.albany.edu.fwp.model.FoodSelected;
+import com.albany.edu.fwp.model.MealCourse;
 import com.albany.edu.fwp.model.QuadInfo;
 import com.albany.edu.fwp.model.Student;
 import com.opensymphony.xwork2.ActionSupport;
@@ -62,6 +74,7 @@ public class ManagerAction extends ActionSupport {
     private List<String> foodItemIdList;
     private List<String> foodItemNameList;
     private List<String> foodItemMealCourseList;
+    private List<String> foodItemCalList;
 
     private List<String> foodItemImagePathList; 
     private List<String> foodItemIdListAlreadyInMenu;
@@ -72,18 +85,14 @@ public class ManagerAction extends ActionSupport {
     private HttpServletRequest request;
     private FoodDateDAO foodDateDAO;
     private ConfigDAO configDAO;
+    private List<String> feedbackString;
+    private List<List<String>> reportData;
+    private List<List<String>> mealCourseList;
 	
-    public FoodDateDAO getFoodDateDAO() {
-		return foodDateDAO;
-	}
+   
 	public void setFoodDateDAO(FoodDateDAO foodDateDAO) {
 		this.foodDateDAO = foodDateDAO;
 	}
-
-   
-    private List<String> feedbackString;
-    private List<List<String>> reportData;
-    
 
     public void setFoodItemsDAO(FoodItemsDAO foodItemsDAO) {
         this.foodItemsDAO = foodItemsDAO;
@@ -119,11 +128,22 @@ public class ManagerAction extends ActionSupport {
 	    		return "logout";
 	    	}
 	    	
+	    	
+	    	
+	    	
+	    	List <MealCourse> mealCourses = mealCourseDAO.list();
+	    	mealCourseList = new ArrayList<List<String>>();
+	    	for (MealCourse mealCourse : mealCourses){
+	    		List<String> mealCourseDetails = new ArrayList();
+	    		mealCourseDetails.add(Integer.toString(mealCourse.getMealCourseId()));
+	    		mealCourseDetails.add(mealCourse.getMealCourseName()); 
+	    		mealCourseList.add(mealCourseDetails);
+	    	}
 	
 	    	 request = ServletActionContext.getRequest();   
 	    	 String dateString="";
-	     	String datetimeDeadline="";
-	     	String datetimeSession="";
+	     	 String datetimeDeadline="";
+	     	 String datetimeSession="";
 	     	 
 	     		SimpleDateFormat dmyFormat = new SimpleDateFormat("yyyy-MM-dd");
 	     		Date date = new Date();
@@ -137,12 +157,12 @@ public class ManagerAction extends ActionSupport {
 	     		datetimeDeadline=dmyFormat.format(c.getTime()).toString();
 	     		c.add(Calendar.DATE, 1);
 	     		datetimeSession=dmyFormat.format(c.getTime()).toString();
-	 	    	if(session.getAttribute("date")==null){
-	 	    		session.setAttribute("date", dmyFormat.format(c.getTime()).toString());
-	 	    		dateString=session.getAttribute("date").toString();
+	 	    	if(session.getAttribute("dateManager")==null){
+	 	    		session.setAttribute("dateManager", dmyFormat.format(c.getTime()).toString());
+	 	    		dateString=session.getAttribute("dateManager").toString();
 	 	    	}
 	 	    	else{
-	 	    		dateString=session.getAttribute("date").toString();
+	 	    		dateString=session.getAttribute("dateManager").toString();
 	 	    	}
 	       	 
 	       	 
@@ -153,8 +173,8 @@ public class ManagerAction extends ActionSupport {
 		    	foodItemIdListAlreadyInMenu = new ArrayList<String>();
 		    	for (FoodItems foodItem : foodItems){
 			    	for (FoodDate allFoodItemByDate : allFoodItemsByDate){
-			    		if(allFoodItemByDate.getFoodItems().getFoodItemId().equals(foodItem.getFoodItemId())){
-			    			foodItemIdListAlreadyInMenu.add(foodItem.getFoodItemId());
+			    		if(Integer.toString(allFoodItemByDate.getFoodItems().getFoodItemId()).equals(Integer.toString(foodItem.getFoodItemId()))){
+			    			foodItemIdListAlreadyInMenu.add(Integer.toString(foodItem.getFoodItemId()));
 			    		}
 			    		
 			    	}
@@ -196,8 +216,8 @@ public class ManagerAction extends ActionSupport {
 		    	foodItemIdListAlreadyInMenu = new ArrayList<String>();
 		    	for (FoodItems foodItem : foodItems){
 			    	for (FoodDate allFoodItemByDate : allFoodItemsByDate){
-			    		if(allFoodItemByDate.getFoodItems().getFoodItemId().equals(foodItem.getFoodItemId())){
-			    			foodItemIdListAlreadyInMenu.add(foodItem.getFoodItemId());
+			    		if(Integer.toString(allFoodItemByDate.getFoodItems().getFoodItemId()).equals(Integer.toString(foodItem.getFoodItemId()))){
+			    			foodItemIdListAlreadyInMenu.add(Integer.toString(foodItem.getFoodItemId()));
 			    		}
 			    		
 			    	}
@@ -209,13 +229,15 @@ public class ManagerAction extends ActionSupport {
 		    	foodItemNameList = new ArrayList<String>();
 		    	foodItemMealCourseList = new ArrayList<String>();
 		    	foodItemImagePathList = new ArrayList<String>();
+		    	foodItemCalList = new ArrayList<String>();
 		    	for (FoodItems foodItem : foodItems){
-		    		foodItemIdList.add(foodItem.getFoodItemId());
+		    		foodItemIdList.add(Integer.toString(foodItem.getFoodItemId()));
 		    		foodItemNameList.add(foodItem.getFoodItemName());
 		    		foodItemMealCourseList.add(mealCourseDAO.getMealCourse(foodItem.getMealCourse().getMealCourseId()).getMealCourseName());
 		    		foodItemImagePathList.add(imagesDAO.imagePath(foodItem.getImages().getImageId()));
+		    		foodItemCalList.add(Integer.toString(foodItem.getCalories()));
 		    		List<String> foodItemDetails = new ArrayList();    		
-		    		foodItemDetails.add(foodItem.getFoodItemId());
+		    		foodItemDetails.add(Integer.toString(foodItem.getFoodItemId()));
 		    		foodItemDetails.add(foodItem.getFoodItemName());
 		    		foodItemDetails.add(imagesDAO.imagePath(foodItem.getImages().getImageId()));
 		    		foodItemDetails.add(mealCourseDAO.getMealCourse(foodItem.getMealCourse().getMealCourseId()).getMealCourseName()); 
@@ -244,13 +266,13 @@ public class ManagerAction extends ActionSupport {
 		    	reportData = new ArrayList<List<String>>();
 		    	for (FoodSelected foodSelected : fetchReportData){
 		    		List<String> eachRow = new ArrayList();
-		    		eachRow.add(foodItemsDAO.getFoodItem(foodSelected.getFoodItems().getFoodItemId()).getFoodItemName());
-		    		eachRow.add(mealCourseDAO.getMealCourse(foodItemsDAO.getFoodItem(foodSelected.getFoodItems().getFoodItemId()).getMealCourse().getMealCourseId()).getMealCourseName());
+		    		eachRow.add(foodItemsDAO.getFoodItem(Integer.toString(foodSelected.getFoodItems().getFoodItemId())).getFoodItemName());
+		    		eachRow.add(mealCourseDAO.getMealCourse(foodItemsDAO.getFoodItem(Integer.toString(foodSelected.getFoodItems().getFoodItemId())).getMealCourse().getMealCourseId()).getMealCourseName());
 		    		
 		    		Integer totalPlates = 0;
 		    		Integer relativePlates = 0;
 		    		
-		    		relativePlates = foodItemsDAO.getFoodItem(foodSelected.getFoodItems().getFoodItemId()).getRelativeServingPlates();
+		    		relativePlates = foodItemsDAO.getFoodItem(Integer.toString(foodSelected.getFoodItems().getFoodItemId())).getRelativeServingPlates();
 		    		totalPlates += foodSelected.getNumberOfPlates();
 		    		eachRow.add(Integer.toString(totalPlates/relativePlates));
 		    		reportData.add(eachRow);
@@ -266,7 +288,7 @@ public class ManagerAction extends ActionSupport {
 		    	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");     	
 		    	try {
 		    		Date date1 = sdf.parse(datetimeDeadline);
-					Date date2 = sdf.parse(session.getAttribute("date").toString());
+					Date date2 = sdf.parse(session.getAttribute("dateManager").toString());
 					if(date1.before(date2)){
 						c.setTime(date2);
 						c.add(Calendar.DATE, -1);
@@ -286,7 +308,7 @@ public class ManagerAction extends ActionSupport {
 		    	
 		    	System.out.println("isDeadlinePassed --------------------> "+isDeadlinePassed);
 		    	
-		    	System.out.println("Date --------------------> "+session.getAttribute("date"));
+		    	System.out.println("Date --------------------> "+session.getAttribute("dateManager"));
 		    	System.out.println("dateTimeVal --------------------> "+dateTimeVal);
 		    	
 		    	
@@ -412,6 +434,14 @@ public class ManagerAction extends ActionSupport {
 	}
 	public Boolean getIsDeadlinePassed() {
 		return isDeadlinePassed;
+	}
+
+	public List<List<String>> getMealCourseList() {
+		return mealCourseList;
+	}
+
+	public List<String> getFoodItemCalList() {
+		return foodItemCalList;
 	}
 	
 }

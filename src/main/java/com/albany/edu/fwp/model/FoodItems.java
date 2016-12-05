@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class FoodItems {
-    private String foodItemId;
+    private int foodItemId;
     private String foodItemName;    
     private int relativeAmount;
     private int relativeServingPlates;
@@ -18,11 +18,11 @@ public class FoodItems {
     
     
     
-    public String getFoodItemId() {
+    public int getFoodItemId() {
 		return foodItemId;
 	}
 
-	public void setFoodItemId(String foodItemId) {
+	public void setFoodItemId(int foodItemId) {
 		this.foodItemId = foodItemId;
 	}
 

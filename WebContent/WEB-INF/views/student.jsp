@@ -135,6 +135,12 @@
 				<div class="col-lg-12 text-right">
 					<form id="dateSelector" action="setDate">
 						<p>Date: <input type="text" name="date" id="datepicker" onchange="dateSet()"></p>
+						<input 
+						STYLE="VISIBILITY:hidden;"
+						type="text"
+						name="userType" 
+						value="student"                    
+					/>
 					</form>
 				</div>
 			</div>
@@ -148,8 +154,10 @@
 			<s:else>	
 			<div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2>Satiate Your Tastebuds</h2>                    
-                    <hr class="star-primary">					
+                    <h2>Satiate Your Tastebuds</h2>   
+                    <hr class="star-primary">   
+                    <h2>Select for ${date}</h2>              
+                    					
                 </div>
             </div>
 			

@@ -30,11 +30,18 @@ public class SetDateAction extends ActionSupport {
     public String execute() {
     	
     	String date; 	
-        
     	request = ServletActionContext.getRequest();
-    	httpSession=request.getSession(false); 
-    	date = request.getParameter("date").toString();
-    	httpSession.setAttribute("date", date);
+    	httpSession=request.getSession(false);
+    	String userType = request.getParameter("userType");
+        
+    	if(userType.equals("student")){
+	    	date = request.getParameter("date").toString();
+	    	httpSession.setAttribute("date", date);
+    	}
+    	if(userType.equals("manager")){
+	    	date = request.getParameter("date").toString();
+	    	httpSession.setAttribute("dateManager", date);
+    	}
     	
         return SUCCESS;
     }

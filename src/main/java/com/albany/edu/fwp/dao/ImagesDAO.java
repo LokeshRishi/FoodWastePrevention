@@ -7,5 +7,7 @@ import com.albany.edu.fwp.model.Images;;
 public interface ImagesDAO {
 	List<Images> list();
 	String imagePath(int imageId);
+	void insert(String imagePath);
+	Images getImages(int imageId);
 }
 

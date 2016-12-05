@@ -46,6 +46,18 @@
 
     </bean>
     
+    <bean id="addFoodItemActionBean" class="com.albany.edu.fwp.action.AddFoodItemAction">
+        <property name="foodItemsDAO" ref="foodItemsDAO" />
+        <property name="mealCourseDAO" ref="mealCourseDAO" />
+        <property name="imagesDAO" ref="imagesDAO" />
+        <property name="quadInfoDAO" ref="quadInfoDAO" />
+        <property name="foodDateDAO" ref="foodDateDAO" />
+        <property name="foodSelectedDAO" ref="foodSelectedDAO" />
+        <property name="feedBackDAO" ref="feedBackDAO" />        
+        <property name="configDAO" ref="configDAO" />
+
+    </bean>
+    
        
     <bean id="feedBackActionBean" class="com.albany.edu.fwp.action.FeedBackAction">
     	<property name="feedBackDAO" ref="feedBackDAO" />

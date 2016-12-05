@@ -4,8 +4,12 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.albany.edu.fwp.model.FoodItems;
+import com.albany.edu.fwp.model.Images;
+import com.albany.edu.fwp.model.MealCourse;
+import com.albany.edu.fwp.model.QuadInfo;
 
 public interface FoodItemsDAO {
+	void insert(String foodName, QuadInfo quadInfo, int relAmt, int relativeServingPlates, Images images, int calories, MealCourse mealCourse, Boolean isSelInMenu);
 	FoodItems getFoodItem(String foodItemId);
 	List<FoodItems> list();
 	List<FoodItems> listByQuadId(int quadId);

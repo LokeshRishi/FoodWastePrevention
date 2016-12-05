@@ -161,12 +161,12 @@ public class StudentAction extends ActionSupport {
     		System.out.println("Edit Page---------->"); 
     		for (FoodSelected foodSelected : listFoodSelected){ 
     			List<String> foodItemsAndQuantity = new ArrayList<String>();   			
-    			foodItems = foodItemsDAO.getFoodItem( foodSelected.getFoodItems().getFoodItemId());
-    			foodItemsAndQuantity.add(foodItems.getFoodItemId());
+    			foodItems = foodItemsDAO.getFoodItem( Integer.toString(foodSelected.getFoodItems().getFoodItemId()));
+    			foodItemsAndQuantity.add(Integer.toString(foodItems.getFoodItemId()));
     			foodItemsAndQuantity.add(foodItems.getFoodItemName());
     			foodItemsAndQuantity.add(Integer.toString(foodSelected.getNumberOfPlates()));
     			foodItemsAndQuantity.add(Integer.toString(foodItems.getCalories()));
-    			selectedFoodItems.put(foodItems.getFoodItemId(), Integer.toString(foodSelected.getNumberOfPlates()));
+    			selectedFoodItems.put(Integer.toString(foodItems.getFoodItemId()), Integer.toString(foodSelected.getNumberOfPlates()));
     			mealCourse = mealCourseDAO.getMealCourse(foodItems.getMealCourse().getMealCourseId()); 
     			quadInfo = quadInfoDAO.getQuadInfo(foodItems.getQuadInfo().getQuadId());
     			selectedFoodItemsQuadAndMealCourse.put(quadInfo.getQuadName()+mealCourse.getMealCourseName(), mealCourse.getMealCourseName());
@@ -204,12 +204,12 @@ public class StudentAction extends ActionSupport {
     		listFoodSelected = foodSelectedDAO.listFoodSelected(student, dateString);
     		for (FoodSelected foodSelected : listFoodSelected){ 
     			List<String> foodItemsAndQuantity = new ArrayList<String>();   			
-    			foodItems = foodItemsDAO.getFoodItem( foodSelected.getFoodItems().getFoodItemId());
-    			foodItemsAndQuantity.add(foodItems.getFoodItemId());
+    			foodItems = foodItemsDAO.getFoodItem( Integer.toString(foodSelected.getFoodItems().getFoodItemId()));
+    			foodItemsAndQuantity.add(Integer.toString(foodItems.getFoodItemId()));
     			foodItemsAndQuantity.add(foodItems.getFoodItemName());
     			foodItemsAndQuantity.add(Integer.toString(foodSelected.getNumberOfPlates()));  
     			foodItemsAndQuantity.add(Integer.toString(foodItems.getCalories()));
-    			selectedFoodItems.put(foodItems.getFoodItemId(), Integer.toString(foodSelected.getNumberOfPlates()));
+    			selectedFoodItems.put(Integer.toString(foodItems.getFoodItemId()), Integer.toString(foodSelected.getNumberOfPlates()));
     			mealCourse = mealCourseDAO.getMealCourse(foodItems.getMealCourse().getMealCourseId()); 
     			quadInfo = quadInfoDAO.getQuadInfo(foodItems.getQuadInfo().getQuadId());
     			selectedFoodItemsQuadAndMealCourse.put(quadInfo.getQuadName()+mealCourse.getMealCourseName(), mealCourse.getMealCourseName());

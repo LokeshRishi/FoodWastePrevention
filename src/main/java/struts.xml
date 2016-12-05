@@ -156,6 +156,12 @@
 			<result name="success">/WEB-INF/views/SetConfigurations.jsp</result>
 		</action>
 		
+		<action name="addFoodItem"	class="addFoodItemActionBean">			
+			<result name="success" type="redirectAction">
+				<param name='actionName'>manager</param>     	
+            </result>   
+		</action>
+		
 		<action name="uploadactionsubmit"	class="uploadActionBean" method='upload' >			
 			<result name="success" type="redirectAction">
 				<param name='actionName'>selectaction</param>

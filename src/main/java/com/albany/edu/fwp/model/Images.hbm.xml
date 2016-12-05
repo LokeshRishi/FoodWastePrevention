@@ -4,7 +4,8 @@
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping package="com.albany.edu.fwp.model">
     <class name="Images" table="Images">
-        <id name="imageId" type="java.lang.Integer" column="Image_ID">
+        <id name="imageId" column="Image_ID">              	
+            <generator class="native"/>
         </id>
         <property name="imagePath" type="string">
         	<column name="Image_Path" length="100" not-null="true"/>

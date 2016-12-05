@@ -43,7 +43,7 @@
     <style> table{font-size: 23px} </style>
 </head>
 
-<body id="page-top" class="index" onLoad="addToCatalog('${foodItemIdList}', '${foodItemNameList}', '${foodItemMealCourseList}', '${foodItemImagePathList}', '${foodItemIdListAlreadyInMenu}');">
+<body id="page-top" class="index" onLoad="addToCatalog('${foodItemIdList}', '${foodItemNameList}', '${foodItemMealCourseList}', '${foodItemImagePathList}', '${foodItemCalList}', '${foodItemIdListAlreadyInMenu}');">
 
 <s:if test="%{isDeadlinePassed}">	
 </s:if>
@@ -115,7 +115,7 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
 					<h2>Cook to Order</h2>
-                    <h2>${quadName}</h2>
+                    <h2>${quadName} quad menu for ${dateManager}</h2>
                     <hr class="star-primary">
                 </div>
             </div>
@@ -123,6 +123,12 @@
 			<div class="row">
 			<div class="col-lg-12 text-right">
 				<form id="dateSelector" action="setDatemanager">
+					<input 
+						STYLE="VISIBILITY:hidden;"
+						type="text"
+						name="userType" 
+						value="manager"                    
+					/>
 					<p>Date: <input type="text" name="date" id="datepicker" onchange="dateSet()"></p>
 				</form>
 			</div>
@@ -173,21 +179,36 @@
                  
                 </div>
                 </form>
-
+				
+				
                 <div class="food-list">
                     <h3>Add a food item</h3>
-                    <form id="foodItem-form">
-                        <input type="text" id="foodText" class="form-control" placeholder="Name of food item"/>
-                        <input id="foodImage" class="form-control" name="foodImage" type="file" style="height: 25%; !important">
-						<select  id="foodMeal" name="meal-type" class="form-control" style="margin-left: 25px; width: 83%; !important" required>
+						<form id="addFoodItem" action="addFoodItem" method="post" enctype="multipart/form-data">
+						<div STYLE="display: none;">
+							<input type="text" id="foodName" name="foodName"/>
+						</div>
+						<div STYLE="display: none;">
+							<input type="text" id="mealType" name="mealType"/>	
+						</div>
+						<input type="text" id="relserv"  class="form-control" name="relativeServingPlates" style="margin-left: 25px;" placeholder="Scoops for a Pan"/>
+					    <input type="text" id="cal" class="form-control" name="calories" style="margin-left: 25px;"  placeholder="Calories per serving"/>
+						<input id="foodImage" class="form-control" name="foodImage" type="file" style="margin-left: 25px; height: 25%; !important">
+									
+					</form>
+                    <form id="foodItem-form" action="addFoodItem" method="post" enctype="multipart/form-data">
+                        <input type="text" id="foodText" name="foodName" class="form-control" placeholder="Name of food item"/>
+						<select  id="foodMeal" name="mealtype" class="form-control" style="margin-left: 25px; width: 83%; !important" required>
 						  <option value="">Select Meal</option>
-						  <option value="Breakfast">Breakfast</option>
-						  <option value="Lunch">Lunch</option>
-						  <option value="Dinner">Dinner</option>
+						  <s:iterator value="mealCourseList" var="myvar" status="stat">
+						  	<option value=${myvar[0]}>${myvar[1]}</option>
+						  </s:iterator>
 						</select>
-						
+						<input STYLE="VISIBILITY:hidden;" id="foodImage" class="form-control" name="foodImage" type="file">	
                         <input type="button" class="btn btn-primary" value="Add item" onclick="validationFunction();" />
-                    </form>                    
+                    </form> 
+					
+					
+					
                     
                     <div id="delete-div">
                         Drag Here to Delete
@@ -358,19 +379,24 @@
 	
     	
 	    function validationFunction() {
-	        var fI = $("#foodImage").val();
-	        var fM = document.getElementById("foodMeal");
-	        var fT = $("#foodText").val();
+	        //var fI = $("#foodImage").val();
+	        //var fM = document.getElementById("foodMeal");
+	        //var fT = $("#foodText").val();
 
-	        if (jQuery.trim(fT).length == 0) {
-	            document.getElementById("errorMessage").innerHTML = "<h6>Please enter the name of the food item</h6>";
-	        } else if (jQuery.trim(fI).length == 0) {
-	            document.getElementById("errorMessage").innerHTML = "<h6>Please upload an image of the food item</h6>";
-	        } else if (fM.checkValidity() == false) {
-	            document.getElementById("errorMessage").innerHTML = "<h6>Please select the meal type</h6>";
-	        } else {
-	        	foodItem.add(new Date().getTime());
-	        }
+	        //if (jQuery.trim(fT).length == 0) {
+	        //    document.getElementById("errorMessage").innerHTML = "<h6>Please enter the name of the food item</h6>";
+	        //} else if (jQuery.trim(fI).length == 0) {
+	        //    document.getElementById("errorMessage").innerHTML = "<h6>Please upload an image of the food item</h6>";
+	        //} else if (fM.checkValidity() == false) {
+	        //    document.getElementById("errorMessage").innerHTML = "<h6>Please select the meal type</h6>";
+	        //} else {
+	        //	foodItem.add(new Date().getTime());
+	        //}
+			
+					
+			document.getElementById("foodName").value = $("#foodText").val();
+			document.getElementById("mealType").value = $("#foodMeal").val();
+			document.forms["addFoodItem"].submit(); 
 	    }
 	    
 	    function valuesfunction() {
@@ -380,20 +406,22 @@
 	    	document.forms["clearMenu"].submit();       
 	    }
 		
-		function addToCatalog(foodItemIdTemp, foodItemName, foodItemMeanCourse, foodItemImage, foodItemIdListAlreadyInMenu) {	
+		function addToCatalog(foodItemIdTemp, foodItemName, foodItemMeanCourse, foodItemImage, foodItemCalList, foodItemIdListAlreadyInMenu) {	
 		foodItemId=foodItemIdTemp
 		//alert(foodItemMeanCourse)
 			var ids = foodItemId.split(",");
 			var names = foodItemName.split(",");
 			var mealCourses = foodItemMeanCourse.split(",");
 			var images = foodItemImage.split(",");
+			var calList = foodItemCalList.split(",");
 			var presentIds = foodItemIdListAlreadyInMenu.split(",");
 			for(var i=0; i < ids.length; i++){
 				var id = ids[i].replace("[","").replace(["]"],"").replace(" ","");
 				var name = names[i].replace("[","").replace(["]"],"").replace(" ","");
 				var mealCourse = mealCourses[i].replace("[","").replace(["]"],"").replace(" ","");
 				var image = images[i].replace("[","").replace(["]"],"").replace(" ","");
-				foodItem.addCatalog(id, name, mealCourse, image);
+				var cal = calList[i].replace("[","").replace(["]"],"").replace(" ","");
+				foodItem.addCatalog(id, name+ " ("+cal+")", mealCourse, image);
 				//alert("add " + tokens)
 				//foodItem.remove(tokens);
 				//alert("remove " + tokens)

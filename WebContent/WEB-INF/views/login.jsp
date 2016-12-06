@@ -32,34 +32,41 @@
             <label>
               Net ID<span class="req">*</span>
             </label>
-            <input name='sessionUID' autocomplete="off"/>
+            <input name='sessionUID' autocomplete="off" required/>
           </div>
           
           <div class="field-wrap">
             <label>
               Password<span class="req">*</span>
             </label>
-            <input type="password" name='sessionPassword' autocomplete="off"/>
+            <input type="password" name='sessionPassword' autocomplete="off" required/>
           </div>
-		
-		<div class="field-wrap">
-			<div style="padding:5px">
-				<label id="radioLabels">Student</label>
-				<input name="type" id="typeStudent" value="Student" type="radio" style="width:57%">
-			</div>
-
-			<div style="padding:5px">
-				<label id="radioLabels">Manager</label>	
-				<input name="type" id="typeManager" value="Manager" type="radio" style="width:57%">
-			</div>
-			
-			<div style="padding:5px">
-				<label id="radioLabels">Admin</label>
-				<input name="type" id="typeAdmin" value="Admin" type="radio" style="width:57%">
-			</div>
-		</div>
-		
           <p class="tab forgot"><a href="#forgot">Forgot Password?</a></p>
+          
+	      <div class="field-wrap">
+			<div class="container">			
+			  <ul>
+			  <li>
+			    <input type="radio" id="typeStudent" name="type" value="Student" required>
+			    <label for="typeStudent">Student</label>
+			    <div class="check"></div>
+			  </li>
+			  
+			  <li>
+			    <input type="radio" id="typeManager" name="type" value="Manager">
+			    <label for="typeManager">Manager</label>
+			    <div class="check"><div class="inside"></div></div>
+			  </li>
+			  
+			  <li>
+			    <input type="radio" id="typeAdmin" name="type" value="Admin">
+			    <label for="typeAdmin">Administrator</label>
+			    <div class="check"><div class="inside"></div></div>
+			  </li>
+			</ul>
+			</div>
+		  </div>
+          
           <button class="button button-block">Log In</button>
           </form>
         </div>
@@ -73,7 +80,7 @@
             <label>
               Email Address<span class="req">*</span>
             </label>
-            <input autocomplete="off"/>
+            <input autocomplete="off" required/>
           </div>
           
           

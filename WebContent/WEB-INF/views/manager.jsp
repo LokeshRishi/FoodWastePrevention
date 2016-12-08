@@ -50,6 +50,10 @@
 <s:else>
 <nav style="position:fixed;top:105px;box-shadow: 10px 10px 5px #888888;background-color:#18bc9c;padding:4px">
  	<h5 style="margin-left:1em">Menu Creation Deadline</h5>
+ 	<h6 style="margin-left:1em;margin-bottom:-5px;padding-left:1.3em;display:inline">Days</h6>
+ 	<h6 style="margin-left:1em;margin-bottom:-5px;padding-left:3.1em;display:inline">HH</h6>
+ 	<h6 style="margin-left:1em;margin-bottom:-5px;padding-left:2.4em;display:inline">MM</h6>
+ 	<h6 style="margin-left:1em;margin-bottom:-5px;padding-left:2.8em;display:inline">SS</h6>
  	<div id="counter"> </div>
 </nav>
 </s:else>
@@ -219,7 +223,7 @@
             </div>
            <br/>
 			<p id="errorMessage" style="text-align: center; max-width: 293px; margin: 0 427px; margin-top: 10px"></p>
-			<input type="button" value="Create Menu" onclick="valuesfunction();" class="btn btn-lg btn-block btn-warning" style="max-width: 293px; margin: 0 427px; margin-top: 10px">
+			<input type="button" value="Create Menu" onclick="valuesfunction();" class="btn btn-lg btn-block btn-success" style="max-width: 293px; margin: 0 427px; margin-top: 10px">
 			<input type="button" value="Clear Menu" onclick="clearfunction();" class="btn btn-lg btn-block btn-warning" style="max-width: 293px; margin: 0 427px; margin-top: 10px">
         
 		</s:else>
@@ -269,8 +273,8 @@
             </div>
  	        <div class="row">
                 <s:iterator value="feedbackString" var="fbString" status="stat">
-	            	<div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">	
-		            	<blockquote class="oval-quotes"><p><s:property value="fbString" /></p></blockquote>
+	            	<div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+		            	<blockquote class="oval-quotes"><p>${fbString[0]}</p><i style="font-size:0.7vw;float:right;font-family:Times New Roman">${fbString[1]}</i></blockquote>
 		            </div>
 				</s:iterator>
             </div>

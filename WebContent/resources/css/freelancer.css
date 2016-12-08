@@ -778,10 +778,10 @@ fieldset[disabled] .btn-success.active {
     background: #ffed26 none repeat scroll 0 0;
     border-radius: 400px / 350px;
     color: #000;
-    height: 146px;
+    height: 165px;
     margin: 2em auto 10px;
     position: relative;
-    width: 217px;
+    width: 230px;
 }
 .oval-quotes::before {
     color: #ffed26;
@@ -802,8 +802,7 @@ fieldset[disabled] .btn-success.active {
     z-index: 1;
 }
 .oval-quotes p {
-    font-size: 16px;
-    height: 250px;
+	font-size: 0.7vw;
     margin: 0 auto !important;
     max-width: 249px;
     padding: 50px 0 0;

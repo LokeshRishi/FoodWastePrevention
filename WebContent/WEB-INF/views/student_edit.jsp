@@ -46,6 +46,10 @@
 	<s:else>
 		<nav style="position:fixed;top:105px;box-shadow: 10px 10px 5px #888888;background-color:#18bc9c;padding:4px">
 		<h5 style="margin-left:1em">Food Selection Deadline</h5>
+		<h6 style="margin-left:1em;margin-bottom:-5px;padding-left:1.3em;display:inline">Days</h6>
+ 		<h6 style="margin-left:1em;margin-bottom:-5px;padding-left:3.1em;display:inline">HH</h6>
+ 		<h6 style="margin-left:1em;margin-bottom:-5px;padding-left:2.4em;display:inline">MM</h6>
+ 		<h6 style="margin-left:1em;margin-bottom:-5px;padding-left:2.8em;display:inline">SS</h6>
 		<div id="counter"> </div>
 		</nav>
 	</s:else>

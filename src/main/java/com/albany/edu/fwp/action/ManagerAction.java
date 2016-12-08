@@ -85,7 +85,7 @@ public class ManagerAction extends ActionSupport {
     private HttpServletRequest request;
     private FoodDateDAO foodDateDAO;
     private ConfigDAO configDAO;
-    private List<String> feedbackString;
+    private List<List<String>> feedbackString;
     private List<List<String>> reportData;
     private List<List<String>> mealCourseList;
 	
@@ -278,9 +278,15 @@ public class ManagerAction extends ActionSupport {
 		    		reportData.add(eachRow);
 		    	}
 		    	
-		    	feedbackString = new ArrayList<String>();
+		    	feedbackString = new ArrayList<List<String>>();
 		    	for (FeedBack feedBack : feedBackText){
-		    		feedbackString.add(feedBack.getDescription() +" :    "+ feedBack.getTimestamp());
+		    		List<String> eachRow = new ArrayList();
+		    		eachRow.add(feedBack.getDescription());
+					//Converting date format
+					Date formattedDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S").parse(feedBack.getTimestamp());
+					String newstring = new SimpleDateFormat("MMMMM dd, yyyy 'at' hh:mm aaa").format(formattedDate);
+		    		eachRow.add(newstring);
+		    		feedbackString.add(eachRow);
 		    	}
 		       	
 		       	
@@ -398,7 +404,7 @@ public class ManagerAction extends ActionSupport {
         return SUCCESS;
     }*/
 
-	public List<String> getFeedbackString() {
+	public List<List<String>> getFeedbackString() {
 		return feedbackString;
 	}
     public List<List<String>> getReportData() {
